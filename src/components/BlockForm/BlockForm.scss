@@ -1,0 +1,31 @@
+.action__pip {
+    max-height: 2rem;
+}
+
+.special-ability{
+    &__button{
+        transition: 1s;
+        transform-origin: 50% 0;
+        transform: translateX(0);
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 7rem;
+        filter: opacity(1);
+        padding: 0;
+        line-height: normal;
+        &--selected{
+            transform: translateX(-200%);
+            margin-bottom: -20rem;
+            filter: opacity(0);
+            line-height: 0;
+        }
+    }
+}
+
+.starter-form{
+    transition: 1s;
+    transform: translateX(0);
+    &--hidden{
+        transform: translateX(100%)
+    }
+}
