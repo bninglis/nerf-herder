@@ -9,7 +9,7 @@ import mysticImage from "../../assets/images/mystic.png";
 import { useState } from "react";
 import axios from "axios";
 
-export default function SelectionSlides({ handleSelectPlaybook, handleMovetoForm }) {
+export default function SelectionSlides({ handleSelectPlaybook, handleNextStage }) {
     const [currentPlaybook, setCurrentPlaybook] = useState(0);
     const [isSelected, setIsSelected] = useState(false);
     // console.log(apiUrl);
@@ -165,7 +165,7 @@ export default function SelectionSlides({ handleSelectPlaybook, handleMovetoForm
                                     className={`playbook-overview__text${
                                         !!isSelected ? " playbook-overview__text--selected" : ""
                                     }`}
-                                    onTransitionEnd={handleMovetoForm}
+                                    onTransitionEnd={handleNextStage}
                                 >
                                     <h2 className="playbook-overview__playbook">{book.playbook}</h2>
                                     <h3 className="playbook-overview__tagline">{book.tagline}</h3>
