@@ -1,0 +1,65 @@
+.slides {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.playbook-overview {
+    width: 334px;
+    position: absolute;
+    transform-origin: 50% 150%;
+
+    &--focus {
+        left: 50%;
+        transform: translateX(-50%) rotate3d(3, 3, 3, 0deg) scale(1);
+        filter: opacity(1);
+        transition: 1s;
+    }
+    &--next {
+        left: 50%;
+        transform: translateX(-50%) rotate3d(3, 3, 3, 90deg) scale(0.0001);
+        filter: opacity(0) blur(2rem);
+        transition: 1s;
+    }
+    &--passed {
+        left: 50%;
+        transform: translateX(-50%) rotate3d(3, 3, 3, -90deg) scale(0.0001);
+        filter: opacity(0) blur(2rem);
+        transition: 1s;
+    }
+    &--hidden {
+        display: none;
+    }
+
+    &__action {
+        width: 334px;
+        transform-origin: 50% 0;
+        filter: blur(0);
+
+        &--selected {
+            transform: perspective(20rem) rotate3d(3, 0, 0, 90deg) translateY(-100%);
+            margin-bottom: -200%;
+            // transform-origin: 50% 0;
+            transition: 0.5s linear;
+            filter: blur(2rem);
+        }
+    }
+
+    &__image {
+        height: 500px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    &__text {
+        transform: translateY(0);
+        transition: 1s;
+
+        &--selected {
+            transform: translateY(-15%);
+        }
+    }
+}
