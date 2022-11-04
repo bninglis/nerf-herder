@@ -116,6 +116,7 @@ export default function PlaybookPage() {
     const [selectedPlaybook, setSelectedPlaybook] = useState(null);
     const [refData, setRefData] = useState(testData);
     const [formStage, setFormStage] = useState(0); // TODO: set back to false
+    const [characterData, setCharacterData] = useState(null)
     const handleSelectPlaybook = (e, currentPlaybook, id) => {
         setSelectedPlaybook(currentPlaybook);
         axios.get(`${apiUrl}/ref/${id}`).then((response) => {
@@ -128,7 +129,9 @@ export default function PlaybookPage() {
     const handleBlockFinish = () => {
         window.scrollTo(0, 0);
     };
-    const handleItemSelection = (e, data) => {};
+    const handleItemSelection = (e, data) => {
+
+    };
     if (formStage === 0) {
         return (
             <>
