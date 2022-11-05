@@ -2,7 +2,7 @@ import "./PlaybookPage.scss";
 import SelectionSlides from "../../components/SelectionSlides/SelectionSlides";
 import BlockForm from "../../components/BlockForm/BlockForm";
 import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const testData = {
@@ -707,16 +707,21 @@ const testData = {
         },
     ],
 };
+const testCharacterData = {
+    actions: ["Command", "Helm", "Helm", "Rig", "Rig", "Scrap", "Study"],
+    abilityID: "cbcb111a-1cbe-4d01-abeb-a7b36ba1aee7",
+    abilityName: "Junkyard Hunter",
+};
 
 export default function PlaybookPage() {
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
     const [selectedPlaybook, setSelectedPlaybook] = useState(null);
-    const [refData, setRefData] = useState(testData);
+    const [refData, setRefData] = useState(null);
     const [formStage, setFormStage] = useState(0); // TODO: set back to false
     const [characterData, setCharacterData] = useState(null);
-    const handleSelectPlaybook = (e, currentPlaybook, id) => {
+    const handleSelectPlaybook = (e, currentPlaybook, id, playbook) => {
         setSelectedPlaybook(currentPlaybook);
         setCharacterData({ ...characterData, playbooks_id: id });
         axios.get(`${apiUrl}/ref/${id}`).then((response) => {
@@ -724,17 +729,39 @@ export default function PlaybookPage() {
             const actionsUsable = response.data.playbook[0].starting_actions.split(" ");
             setCharacterData({
                 ...characterData,
-                actions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]],
+                actions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]].sort(),
+                playbookID: id,
+                playbook: playbook,
             });
         });
     };
+
+    // testing effect
+
     const handleNextStage = () => {
+        window.scrollTo(0, 0);
         setFormStage(formStage + 1);
     };
-    const handleBlockFinish = () => {
-        window.scrollTo(0, 0);
-    };
+
     const handleItemSelection = (e, abilityID, abilityName, actions) => {
+        const actionsStrings = (array1, array2) => {
+            const buildArrayOnes = [];
+            const buildArrayTwos = [];
+            const unstringed = array1.concat(array2).sort();
+            unstringed.forEach((item, index) => {
+                if (index < unstringed.lastIndexOf(item)) {
+                    buildArrayTwos.push(item + " +2");
+                } else if (index > unstringed.indexOf(item)) {
+                    return;
+                } else {
+                    buildArrayOnes.push(item + " +1");
+                }
+            });
+            return [
+                buildArrayTwos.concat(buildArrayOnes).join(", "),
+                buildArrayTwos.concat(buildArrayOnes),
+            ];
+        };
         if (!actions) {
             setCharacterData({ ...characterData, abilityID: abilityID, abilityName: abilityName });
         } else {
@@ -743,6 +770,7 @@ export default function PlaybookPage() {
                 abilityID: abilityID,
                 abilityName: abilityName,
                 actions: [...characterData.actions, ...actions].sort(),
+                actionsStrings: actionsStrings(actions, characterData.actions),
             });
         }
     };
@@ -761,7 +789,7 @@ export default function PlaybookPage() {
             <>
                 <BlockForm
                     refData={refData}
-                    handleBlockFinish={handleBlockFinish}
+                    handleNextStage={handleNextStage}
                     handleItemSelection={handleItemSelection}
                 />
             </>

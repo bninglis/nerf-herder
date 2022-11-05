@@ -74,9 +74,9 @@ export default function SelectionSlides({ handleSelectPlaybook, handleNextStage,
     ];
 
     useEffect(() => {
-        axios.get(`${apiUrl}/ref`).then((response => {
-            setPlaybooks(response.data)
-        }))
+        axios.get(`${apiUrl}/ref`).then((response) => {
+            setPlaybooks(response.data);
+        });
     }, []);
 
     const handleNext = () => {
@@ -126,7 +126,8 @@ export default function SelectionSlides({ handleSelectPlaybook, handleNextStage,
                                             handleSelectPlaybook(
                                                 e,
                                                 currentPlaybook,
-                                                playbooks[currentPlaybook].id
+                                                playbooks[currentPlaybook].id,
+                                                playbooks[currentPlaybook].playbook
                                             );
                                         }}
                                     >

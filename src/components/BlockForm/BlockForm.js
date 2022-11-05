@@ -3,7 +3,7 @@ import pipFilled from "../../assets/icons/pip-filled.svg";
 import pipEmpty from "../../assets/icons/pip-empty.svg";
 import { useState } from "react";
 
-export default function BlockForm({ refData, handleBlockFinish, handleItemSelection }) {
+export default function BlockForm({ refData, handleNextStage, handleItemSelection }) {
     const [whichPutAway, setWhichPutAway] = useState(null);
     const {
         character_questions,
@@ -58,7 +58,7 @@ export default function BlockForm({ refData, handleBlockFinish, handleItemSelect
     return (
         <div
             className={`starter-form${!!whichPutAway ? " starter-form--hidden" : ""}`}
-            onTransitionEnd={handleBlockFinish}
+            onTransitionEnd={handleNextStage}
         >
             <div className="intro">
                 <h2>{playbook}</h2>
