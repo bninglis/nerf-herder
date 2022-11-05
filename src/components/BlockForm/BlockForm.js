@@ -44,7 +44,6 @@ export default function BlockForm({ refData, handleBlockFinish, handleItemSelect
         return { ...build, actionsArray: sortedActions, buildString: buildString };
     });
     const handleSelect = (e) => {
-        console.log(e.target)
         setWhichPutAway(e.currentTarget.id);
     };
 
@@ -145,7 +144,7 @@ export default function BlockForm({ refData, handleBlockFinish, handleItemSelect
                                 <button
                                     onClick={(e) => {
                                         handleSelect(e, build.id)
-                                        handleItemSelection(e, build.id, build.name, build.sortedActions);
+                                        handleItemSelection(e, build.special_abilities_id, build.special_ability, build.actionsArray);
                                     }}
                                     key={`b${build.id}`}
                                     id={build.id}

@@ -22,15 +22,13 @@ const testData = {
             character_questions:
                 "Did you make your own drone? How’d you learn your technical skills? Where’d you find your pet and what is it? Are you unassuming, fading into a crowd, or hard to miss, covered in tattoos?",
             starting_actions: "Rig 2, Study 1",
-            build_name:
-                "Ship mechanic. Hack +2, Scramble +1, Sway +1. Fixed.\nComputer whiz. Hack +2, Skulk +1, Sway +1. Hacker.\nBot builder. Hack +1, Scramble +1, Attune +2. Construct Whisperer.\nShip owner. Helm +2, Scrap +1, Command +1. Junkyard Hunter.",
             starting_ability: "tinker",
             starting_ability_summary:
                 "When you work on a clock with rig or hack, or when you study a schematic, fill +1 segment.",
             starting_ability_clarification:
-                "Mechanics have tools, ship parts, and their latest inventions around or on them. Although they can dress like anyone else, many mechanics prefer looks that are tough to tear, have plenty of places to stash a tool or two, and are easy to crawl through a ship duct in.",
-            items_description:
                 "You get this bonus segment regardless of whether this is a Downtime action or not. This means that bypassing security on a job or doing an emergency patch while escaping a chasing ship is easier for you than others.",
+            items_description:
+                "Mechanics have tools, ship parts, and their latest inventions around or on them. Although they can dress like anyone else, many mechanics prefer looks that are tough to tear, have plenty of places to stash a tool or two, and are easy to crawl through a ship duct in.",
             playing_advice:
                 "Playing a Mechanic is foremost about your relationship with The Ship. No one else will have the same ability to keep it flying, and when something breaks, all eyes will be on you. Look for opportunities to bring up what you’ve personally modified on The Ship. Where do you get parts when The Ship needs something repaired?\n\nHow did you become a mechanic? Were you mentored by one of your friends? Were you once a Guild trainee? Why did you leave and join the crew? Do you approach fixing The Ship as a stop-gap solution, where you’re simply trying to find a patch until the next thing breaks, or is it a matter of pride that something never fails twice?\n\nFamiliarize yourself with the crafting system. The ability for you to make new devices is very powerful, and the starting Tinker ability gives you an advantage that no one else will be able to match. Ask the rest of the crew what devices you might be able to create and get them to chip in for their development, either in extra downtimes to speed up Design or with extra cred to pay for Assembly.\n\nAction-wise, you may want to pick up skulk if you tend to lurk in the background, or Attune if you expect to be working on Ur machines or Urbots. If you also serve as the crew’s foremost computer and system expert, you’ll want to stack some hack.\n\nVeteran ability-wise, the Speaker’s Old Friends ability can play up your connections among crafters and hackers. If you want to go full mad scientist, look at the Stitch’s Dr. Strange ability.",
             xeno_advice:
@@ -85,7 +83,7 @@ const testData = {
         {
             id: "018ba9b7-193b-4661-912b-b8b43144200e",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "CONSTRUCT WHISPERER",
+            name: "construct whisperer",
             description:
                 "Machines speak to you when you study them. The first time you roll a critical while fixing or building a particular machine, you may add a simple modification to it (see Crafting).",
             clarification:
@@ -94,7 +92,7 @@ const testData = {
         {
             id: "4bd527d0-77e6-46e3-8a57-afe94ad37996",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "OVERCLOCK",
+            name: "overclock",
             description:
                 "When you spend a gambit on a rig roll to Repair or upgrade, treat the system you worked on as 1 quality higher for the remainder of The Job.",
             clarification:
@@ -103,7 +101,7 @@ const testData = {
         {
             id: "7e20cc37-bf0e-4086-8db3-53c516253cfc",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "MECHANIC’S HEART",
+            name: "mechanic’s heart",
             description:
                 "When you speak from your heart, your words can reach even the most hardened criminal, and you gain Potency.",
             clarification:
@@ -112,7 +110,7 @@ const testData = {
         {
             id: "92e7708c-635e-4e4c-bd1e-38783e642231",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "BAILING WIRE AND MECH-TAPE",
+            name: "bailing wire and mech-tape",
             description:
                 "You get an extra Downtime activity to Repair, and the Repair activity costs you 0 cred.",
             clarification:
@@ -121,7 +119,7 @@ const testData = {
         {
             id: "938cc9c2-417a-425c-9794-f9a5b65dc1c5",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "HACKER",
+            name: "hacker",
             description:
                 "You may expend your special armor to resist the Consequences of hacking, or to push yourself when hacking or gathering info electronically.",
             clarification:
@@ -130,7 +128,7 @@ const testData = {
         {
             id: "9acbd538-2ff9-4cc9-be95-a51a517bef83",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "ANALYST",
+            name: "analyst",
             description:
                 "When you hack a system, you may also ask a question about the owner or location of the system as though you had rolled a 6 on gather info. When you resist the Consequences of hacking, roll +1d.",
             clarification:
@@ -139,7 +137,7 @@ const testData = {
         {
             id: "cbcb111a-1cbe-4d01-abeb-a7b36ba1aee7",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "JUNKYARD HUNTER",
+            name: "junkyard hunter",
             description:
                 "When you acquire parts or equipment during Downtime, you may either gain two assets or one asset at +1 quality.",
             clarification:
@@ -148,62 +146,12 @@ const testData = {
         {
             id: "ef49c9f4-8591-49f5-9e84-a224556f34d4",
             playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            name: "FIXED",
+            name: "fixed",
             description:
                 "You may expend your special armor to resist a consequence from machines breaking or being damaged, or to push yourself when repairing or building a machine.",
             clarification:
                 "When you use this ability, tick the special armor box on your playbook sheet. Machines can include your ship, so you can use this as special armor for your ship if you are onboard dealing with the Damage. If you use this ability to push yourself, you get one of the benefits (+1d, +1 effect, act despite severe harm) but you don’t take 2 Stress. Your special armor is restored when you select your load at the start of a job.",
         },
-    ],
-    build_suggestions: [
-        {
-            id: "188152de-0eac-4b50-affb-bdbf3dc20032",
-            build_name: "Ship mechanic",
-            playbook: "mechanic",
-            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            special_ability: "Fixed",
-            special_abilities_id: "ef49c9f4-8591-49f5-9e84-a224556f34d4",
-            action_1: "Hack",
-            action_2: "Hack",
-            action_3: "Scramble",
-            action_4: "Sway",
-        },
-        {
-            id: "57b8f556-f782-45fd-bc7e-1f77efc5e61e",
-            build_name: "Computer whiz",
-            playbook: "mechanic",
-            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            special_ability: "Hacker",
-            special_abilities_id: "938cc9c2-417a-425c-9794-f9a5b65dc1c5",
-            action_1: "Hack",
-            action_2: "Hack",
-            action_3: "Skulk",
-            action_4: "Sway",
-        },
-        {
-            id: "2640e193-1010-4b22-adec-cd5f05f79f26",
-            build_name: "Bot builder",
-            playbook: "mechanic",
-            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            special_ability: "Construct Whisperer",
-            special_abilities_id: "018ba9b7-193b-4661-912b-b8b43144200e",
-            action_1: "Hack",
-            action_2: "Scramble",
-            action_3: "Attune",
-            action_4: "Attune",
-        },
-        {
-            id: "94197ad6-0c0c-4250-bcfd-d895824b9a96",
-            build_name: "Ship owner",
-            playbook: "mechanic",
-            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-            special_ability: "Junkyard Hunter",
-            special_abilities_id: "cbcb111a-1cbe-4d01-abeb-a7b36ba1aee7",
-            action_1: "Helm",
-            action_2: "Helm",
-            action_3: "Scrap",
-            action_4: "Command",
-        }
     ],
     friends: [
         {
@@ -244,6 +192,56 @@ const testData = {
             name: "Slice",
             description:
                 "a junkyard owner. What parts do they save for you? Or did you boost something of theirs?",
+        },
+    ],
+    build_suggestions: [
+        {
+            id: "188152de-0eac-4b50-affb-bdbf3dc20032",
+            build_suggestions: "Ship mechanic",
+            playbook: "mechanic",
+            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+            special_ability: "Fixed",
+            special_abilities_id: "ef49c9f4-8591-49f5-9e84-a224556f34d4",
+            action_1: "Hack",
+            action_2: "Hack",
+            action_3: "Scramble",
+            action_4: "Sway",
+        },
+        {
+            id: "57b8f556-f782-45fd-bc7e-1f77efc5e61e",
+            build_suggestions: "Computer whiz",
+            playbook: "mechanic",
+            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+            special_ability: "Hacker",
+            special_abilities_id: "938cc9c2-417a-425c-9794-f9a5b65dc1c5",
+            action_1: "Hack",
+            action_2: "Hack",
+            action_3: "Skulk",
+            action_4: "Sway",
+        },
+        {
+            id: "2640e193-1010-4b22-adec-cd5f05f79f26",
+            build_suggestions: "Bot builder",
+            playbook: "mechanic",
+            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+            special_ability: "Construct Whisperer",
+            special_abilities_id: "018ba9b7-193b-4661-912b-b8b43144200e",
+            action_1: "Hack",
+            action_2: "Scramble",
+            action_3: "Attune",
+            action_4: "Attune",
+        },
+        {
+            id: "94197ad6-0c0c-4250-bcfd-d895824b9a96",
+            build_suggestions: "Ship owner",
+            playbook: "mechanic",
+            playbooks_id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+            special_ability: "Junkyard Hunter",
+            special_abilities_id: "cbcb111a-1cbe-4d01-abeb-a7b36ba1aee7",
+            action_1: "Helm",
+            action_2: "Helm",
+            action_3: "Scrap",
+            action_4: "Command",
         },
     ],
     heritages: [
@@ -616,21 +614,118 @@ const testData = {
         { id: "c393aa93-eafd-4617-afb8-13c4f0cf9fc0", name: "Zan" },
         { id: "be8fa8f2-c3ca-447b-8efc-fe76fadbac76", name: "Zer" },
     ],
+    actions: [
+        {
+            id: "2d955562-0706-4c52-aa6c-6434fd637785",
+            action: "attune",
+            description:
+                "When you Attune to The Way, you open your mind to the galactic energies underlying all of existence.",
+            clarification:
+                "You might communicate with a non-sentient species or robot. You could safely handle Precursor Artifacts or remnants that tap directly into The Way. You might sense unseen danger, or killing intent (though study might be better).",
+        },
+        {
+            id: "e8135559-e633-46b8-a68e-a2847fd15ce3",
+            action: "command",
+            description: "When you Command, you compel obedience with your force of personality.",
+            clarification:
+                "You might intimidate or threaten to get what you want. You might lead an action with NPCs. You might order people to do what you want (though sway might be better).",
+        },
+        {
+            id: "649ff699-7629-4b0a-bbcf-8703f790b424",
+            action: "consort",
+            description: "When you Consort, you socialize with friends and contacts.",
+            clarification:
+                "You might gain access to resources, information, people, or places. You might make a good impression or win someone over with your charm and style. You might make new friends or connect with your heritage or background. You could try to direct your friends with social pressure (but Command might be better).",
+        },
+        {
+            id: "5fddad07-5be8-4cbc-8ef4-5329d15bd9f1",
+            action: "doctor",
+            description:
+                "When you Doctor, you attend to the needs of another by lending aid and comfort, or you look scientifically at the world.",
+            clarification:
+                "You might treat someone’s injuries. You might analyze a substance’s composition to learn how it functions. You might comfort someone in distress (but Consort might be better).",
+        },
+        {
+            id: "b6b946b1-7a66-412b-bd50-8772250e6f23",
+            action: "hack",
+            description:
+                "When you hack, you breach the security systems of computers or override their controls.",
+            clarification:
+                "You might access a data console to find a captive being held somewhere on the station. You might Scramble a drone’s control systems to keep it from firing on you. You might override a door’s controls to get it to open (though rig might be better).",
+        },
+        {
+            id: "daa14d85-6a46-438c-bc69-60691fbf2d66",
+            action: "helm",
+            description: "When you helm, you pilot a vehicle or use vehicle weapons.",
+            clarification:
+                "You might plot a jump through a dark hyperspace lane. You might dive through a canyon to escape a chasing ship. You might fire quad-lasers at hostile pirates. You might reroute power on The Ship to weather fire (though rig may be better).",
+        },
+        {
+            id: "6ceb5cde-deb5-4cf3-83eb-86d238687564",
+            action: "rig",
+            description:
+                "When you rig mechanisms, you alter how an existing mechanism works or create a new one.",
+            clarification:
+                "You might disable a trap. You might repair a damaged ship system. You might crack a safe. You might overdrive an engine. You might program a bomb to detonate later. You might force a door open (though hack might be better).",
+        },
+        {
+            id: "36866e1d-d14a-4877-8220-4bbb5482aa11",
+            action: "scramble",
+            description:
+                "When you Scramble, you lift, climb, jump, run, or swim, usually either away from or into danger.",
+            clarification:
+                "You might vault over a turnstile while escaping authorities. You might climb up the side of a cliff to approach a secret base. You might dodge blaster fire as you cross the hangar to get to your ship. You might chase after a mark you’re following (though skulk might be better).",
+        },
+        {
+            id: "f6eec4e6-0b7b-4106-b38e-fa2b52b64a68",
+            action: "scrap",
+            description:
+                "When you scrap, you engage in pitched combat with the intent to harm or neutralize your opposition.",
+            clarification:
+                "You might brawl or wrestle with your foe. You might use a melee weapon. You might storm a barricade or hold a position in battle. You might lay down blaster fire. If you’re using a vehicle or ship weapon, you should use helm instead.",
+        },
+        {
+            id: "537960fb-888d-4477-8736-ca332ca683ab",
+            action: "skulk",
+            description: "When you skulk, you move stealthily or without being noticed.",
+            clarification:
+                "You might sneak past security or hide in the shadows. You might lift a cred-stick off a mark. You might sneak up behind someone to attack them by surprise (but scrap might be better). You could try to climb up the side of a building (but Scramble might be better).",
+        },
+        {
+            id: "5d9c5d61-766e-4719-ad4c-c17549412fed",
+            action: "study",
+            description: "When you study, you scrutinize details and interpret evidence.",
+            clarification:
+                "You might gather information from documents, newspapers, and books. You might do research on an esoteric topic. You might closely analyze a person to detect lies or true feelings. You could deduce a person’s intention to kill you (but Attune might be better).",
+        },
+        {
+            id: "2f13c331-8aca-42ef-a703-bb5f41e00537",
+            action: "sway",
+            description: "When you sway, you influence someone with guile, charm, or logic.",
+            clarification:
+                "You might outright lie to someone’s face. You might persuade a sucker to believe you. You might argue the facts with an officer. You could try to trick people into affection or obedience (but Consort or Command might be better).",
+        },
+    ],
 };
 
 export default function PlaybookPage() {
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
-    const apiUrl = `http://localhost:${BACKEND_PORT}`;
+    const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
     const [selectedPlaybook, setSelectedPlaybook] = useState(null);
     const [refData, setRefData] = useState(testData);
-    const [formStage, setFormStage] = useState(1); // TODO: set back to false
+    const [formStage, setFormStage] = useState(0); // TODO: set back to false
     const [characterData, setCharacterData] = useState(null);
     const handleSelectPlaybook = (e, currentPlaybook, id) => {
         setSelectedPlaybook(currentPlaybook);
         setCharacterData({ ...characterData, playbooks_id: id });
         axios.get(`${apiUrl}/ref/${id}`).then((response) => {
             setRefData(response.data);
+            const actionsUsable = response.data.playbook[0].starting_actions.split(" ");
+            setCharacterData({
+                ...characterData,
+                actions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]],
+            });
         });
     };
     const handleNextStage = () => {
@@ -639,13 +734,25 @@ export default function PlaybookPage() {
     const handleBlockFinish = () => {
         window.scrollTo(0, 0);
     };
-    const handleItemSelection = (e, abilityID, abilityName, actions) => {};
+    const handleItemSelection = (e, abilityID, abilityName, actions) => {
+        if (!actions) {
+            setCharacterData({ ...characterData, abilityID: abilityID, abilityName: abilityName });
+        } else {
+            setCharacterData({
+                ...characterData,
+                abilityID: abilityID,
+                abilityName: abilityName,
+                actions: [...characterData.actions, ...actions].sort(),
+            });
+        }
+    };
     if (formStage === 0) {
         return (
             <>
                 <SelectionSlides
                     handleSelectPlaybook={handleSelectPlaybook}
                     handleNextStage={handleNextStage}
+                    apiUrl={apiUrl}
                 />
             </>
         );
@@ -662,7 +769,7 @@ export default function PlaybookPage() {
     } else if (formStage === 2) {
         return (
             <>
-                <GalacticIDForm refData={refData} />
+                <GalacticIDForm refData={refData} characterData={characterData} />
             </>
         );
     }

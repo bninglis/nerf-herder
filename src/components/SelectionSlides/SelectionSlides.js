@@ -6,14 +6,14 @@ import muscleImage from "../../assets/images/muscle.png";
 import stitchImage from "../../assets/images/stitch.png";
 import pilotImage from "../../assets/images/pilot.png";
 import mysticImage from "../../assets/images/mystic.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function SelectionSlides({ handleSelectPlaybook, handleNextStage }) {
+export default function SelectionSlides({ handleSelectPlaybook, handleNextStage, apiUrl }) {
     const [currentPlaybook, setCurrentPlaybook] = useState(0);
     const [isSelected, setIsSelected] = useState(false);
-    // console.log(apiUrl);
-    const tempPlaybookList = [
+    const [playbooks, setPlaybooks] = useState();
+    const playbookList = [
         {
             playbook: "mechanic",
             id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
@@ -63,35 +63,6 @@ export default function SelectionSlides({ handleSelectPlaybook, handleNextStage 
                 "Play a Stitch to deal with Science, patch people up, and be the crew’s moral compass.",
         },
     ];
-    const tempPlaybook = {
-        id: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
-        playbook: "mechanic",
-        summary:
-            "Play a Mechanic if you want to make new devices, keep your ship in good shape, or hack systems.",
-        tagline: "A gearhead and hacker",
-        overview:
-            "Whether it’s fixing up the ship’s engines or constructing a specialized safecracker to break into a Hegemonic vault, a mechanic is an invaluable asset on most jobs. You might be the mousy one who has all the fancy toys, or more hands-on, lugging your gear to The Job. Or you might prefer to literally make friends and specialize in Urbotic creation. When something breaks, you’re the one to call.",
-        xp_gain:
-            "When you play a Mechanic, you earn xp when you address challenges with technical skill or ingenuity. ",
-        xp_advice:
-            "Always look at the devices around you and be prepared to make them do what you want them to.",
-        character_questions:
-            "Did you make your own drone? How’d you learn your technical skills? Where’d you find your pet and what is it? Are you unassuming, fading into a crowd, or hard to miss, covered in tattoos?",
-        starting_actions: "Rig 2, Study 1",
-        build_suggestions:
-            "Ship mechanic. Hack +2, Scramble +1, Sway +1. Fixed.\nComputer whiz. Hack +2, Skulk +1, Sway +1. Hacker.\nBot builder. Hack +1, Scramble +1, Attune +2. Construct Whisperer.\nShip owner. Helm +2, Scrap +1, Command +1. Junkyard Hunter.",
-        starting_ability: "tinker",
-        starting_ability_summary:
-            "When you work on a clock with rig or hack, or when you study a schematic, fill +1 segment.",
-        starting_ability_clarification:
-            "Mechanics have tools, ship parts, and their latest inventions around or on them. Although they can dress like anyone else, many mechanics prefer looks that are tough to tear, have plenty of places to stash a tool or two, and are easy to crawl through a ship duct in.",
-        items_description:
-            "You get this bonus segment regardless of whether this is a Downtime action or not. This means that bypassing security on a job or doing an emergency patch while escaping a chasing ship is easier for you than others.",
-        playing_advice:
-            "Playing a Mechanic is foremost about your relationship with The Ship. No one else will have the same ability to keep it flying, and when something breaks, all eyes will be on you. Look for opportunities to bring up what you’ve personally modified on The Ship. Where do you get parts when The Ship needs something repaired?\n\nHow did you become a mechanic? Were you mentored by one of your friends? Were you once a Guild trainee? Why did you leave and join the crew? Do you approach fixing The Ship as a stop-gap solution, where you’re simply trying to find a patch until the next thing breaks, or is it a matter of pride that something never fails twice?\n\nFamiliarize yourself with the crafting system. The ability for you to make new devices is very powerful, and the starting Tinker ability gives you an advantage that no one else will be able to match. Ask the rest of the crew what devices you might be able to create and get them to chip in for their development, either in extra downtimes to speed up Design or with extra cred to pay for Assembly.\n\nAction-wise, you may want to pick up skulk if you tend to lurk in the background, or Attune if you expect to be working on Ur machines or Urbots. If you also serve as the crew’s foremost computer and system expert, you’ll want to stack some hack.\n\nVeteran ability-wise, the Speaker’s Old Friends ability can play up your connections among crafters and hackers. If you want to go full mad scientist, look at the Stitch’s Dr. Strange ability.",
-        xeno_advice:
-            "Every species has Mechanics, so when playing a xeno, consider how that xenotype relates to machines. Some xenos have an unusual relationship with technology (particularly Ur-based technology), such as the Sah’iir, while others use unusual materials, like the Mem.\n\nDoes your species have an unusual adaptation for working on machines? Are they small and fit into ventilation ducts easily? Also consider how your xeno adaptations might reflect sides of you that aren’t directly relating to machines.\n\nHow does your xeno heritage fit into the story? Have the Guilds excluded your character from certain opportunities because you aren’t human? Or have your people been embraced, perhaps because of an adaptation that The Hegemony could utilize?",
-    };
     const imageArray = [
         mechanicImage,
         muscleImage,
@@ -102,8 +73,14 @@ export default function SelectionSlides({ handleSelectPlaybook, handleNextStage 
         stitchImage,
     ];
 
+    useEffect(() => {
+        axios.get(`${apiUrl}/ref`).then((response => {
+            setPlaybooks(response.data)
+        }))
+    }, []);
+
     const handleNext = () => {
-        if (currentPlaybook < tempPlaybookList.length - 1) {
+        if (currentPlaybook < playbooks.length - 1) {
             setCurrentPlaybook(currentPlaybook + 1);
         }
     };
@@ -118,13 +95,12 @@ export default function SelectionSlides({ handleSelectPlaybook, handleNextStage 
         setIsSelected(true);
     };
 
-    console.log(tempPlaybookList[currentPlaybook].id);
     return (
         <>
             <div className="slides">
                 <button onClick={handleBack}>Back</button>
-                {tempPlaybookList &&
-                    tempPlaybookList.map((book, i) => {
+                {playbooks &&
+                    playbooks.map((book, i) => {
                         return (
                             <div
                                 className={`playbook-overview playbook-overview--${i}${
@@ -150,7 +126,7 @@ export default function SelectionSlides({ handleSelectPlaybook, handleNextStage 
                                             handleSelectPlaybook(
                                                 e,
                                                 currentPlaybook,
-                                                tempPlaybookList[currentPlaybook].id
+                                                playbooks[currentPlaybook].id
                                             );
                                         }}
                                     >
