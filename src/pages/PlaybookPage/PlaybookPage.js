@@ -708,9 +708,22 @@ const testData = {
     ],
 };
 const testCharacterData = {
-    actions: ["Command", "Helm", "Helm", "Rig", "Rig", "Scrap", "Study"],
-    abilityID: "cbcb111a-1cbe-4d01-abeb-a7b36ba1aee7",
-    abilityName: "Junkyard Hunter",
+    friend: {
+        id: " ",
+    },
+    rival: {
+        id: " ",
+    },
+    actions: ["Hack", "Hack", "Rig", "Rig", "Skulk", "Study", "Sway"],
+    playbookActions: ["Rig", "Rig", "Study"],
+    playbookID: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+    playbook: "mechanic",
+    abilityID: "938cc9c2-417a-425c-9794-f9a5b65dc1c5",
+    abilityName: "Hacker",
+    actionsStrings: [
+        "Hack +2, Rig +2, Skulk +1, Study +1, Sway +1",
+        ["Hack +2", "Rig +2", "Skulk +1", "Study +1", "Sway +1"],
+    ],
 };
 
 export default function PlaybookPage() {
@@ -718,9 +731,16 @@ export default function PlaybookPage() {
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
     const [selectedPlaybook, setSelectedPlaybook] = useState(null);
-    const [refData, setRefData] = useState(null);
-    const [formStage, setFormStage] = useState(0); // TODO: set back to false
-    const [characterData, setCharacterData] = useState(null);
+    const [refData, setRefData] = useState(testData);
+    const [formStage, setFormStage] = useState(2); // TODO: set back to false
+    // const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
+    const [characterData, setCharacterData] = useState(testCharacterData);
+    const [incompletePeople, setIncompletePeople] = useState({ friend: true, rival: true });
+    const [incompleteSections, setIncompleteSections] = useState([
+        "heritages",
+        "backgrounds",
+        "vices",
+    ]);
     const handleSelectPlaybook = (e, currentPlaybook, id, playbook) => {
         setSelectedPlaybook(currentPlaybook);
         setCharacterData({ ...characterData, playbooks_id: id });
@@ -730,6 +750,7 @@ export default function PlaybookPage() {
             setCharacterData({
                 ...characterData,
                 actions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]].sort(),
+                playbookActions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]].sort(),
                 playbookID: id,
                 playbook: playbook,
             });
@@ -763,7 +784,13 @@ export default function PlaybookPage() {
             ];
         };
         if (!actions) {
-            setCharacterData({ ...characterData, abilityID: abilityID, abilityName: abilityName });
+            setCharacterData({
+                ...characterData,
+                abilityID: abilityID,
+                abilityName: abilityName,
+                actions: [...characterData.actions].sort(),
+                actionsStrings: actionsStrings(characterData.actions, []),
+            });
         } else {
             setCharacterData({
                 ...characterData,
@@ -773,6 +800,34 @@ export default function PlaybookPage() {
                 actionsStrings: actionsStrings(actions, characterData.actions),
             });
         }
+    };
+    const handleSectionSubmission = (e, section, id, choice, singular, entry) => {
+        e.preventDefault();
+        setCharacterData({
+            ...characterData,
+            [singular]: choice,
+            [`${section}_id`]: id,
+            [`${singular}_story`]: entry,
+        });
+        setIncompleteSections(
+            incompleteSections.filter((item) => {
+                return item !== section;
+            })
+        );
+    };
+    const handleSubmitFriend = (e, id, friend, story) => {
+        e.preventDefault();
+        setCharacterData({
+            ...characterData,
+            friend: { name: friend, id: id },
+            friend_story: story,
+        });
+        setIncompletePeople({ ...incompletePeople, friend: false });
+    };
+    const handleSubmitRival = (e, id, rival, story) => {
+        e.preventDefault();
+        setCharacterData({ ...characterData, rival: { name: rival, id: id }, rival_story: story });
+        setIncompletePeople({ ...incompletePeople, rival: false });
     };
     if (formStage === 0) {
         return (
@@ -797,7 +852,15 @@ export default function PlaybookPage() {
     } else if (formStage === 2) {
         return (
             <>
-                <GalacticIDForm refData={refData} characterData={characterData} />
+                <GalacticIDForm
+                    refData={refData}
+                    characterData={characterData}
+                    handleSectionSubmission={handleSectionSubmission}
+                    incompleteSections={incompleteSections}
+                    incompletePeople={incompletePeople}
+                    handleSubmitFriend={handleSubmitFriend}
+                    handleSubmitRival={handleSubmitRival}
+                />
             </>
         );
     }

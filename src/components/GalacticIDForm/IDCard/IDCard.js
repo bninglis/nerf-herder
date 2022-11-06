@@ -2,7 +2,7 @@ import "./IDCard.scss";
 import { useState } from "react";
 
 export default function IDCard({ characterData }) {
-    const { playbook, abilityName, heritage, background, vice, friend, enemy, actionsStrings } =
+    const { playbook, abilityName, heritage, background, vice, friend, rival, actionsStrings } =
         characterData;
     return (
         <>
@@ -50,13 +50,13 @@ export default function IDCard({ characterData }) {
                         <div className="id-card__friend">
                             <p className="id-card__text">Associate:</p>
                             <p className="id-card__text">
-                                {!friend ? "" : `${friend}`}
+                                {!friend ? "" : `${friend.name}`}
                             </p>
                         </div>
                         <div className="id-card__rival">
                             <p className="id-card__text">Enemy:</p>
                             <p className="id-card__text">
-                                {!enemy ? "" : `${enemy}`}
+                                {!rival ? "" : `${rival.name}`}
                             </p>
                         </div>
                         <div className="id-card__action-values">

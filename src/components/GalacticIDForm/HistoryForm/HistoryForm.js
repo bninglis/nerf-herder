@@ -1,15 +1,19 @@
 import "./HistoryForm.scss";
 import { useState } from "react";
 
-export default function HistoryForm({ historyData, section }) {
+export default function HistoryForm({ historyData, section, handleSectionSubmission }) {
     const [selectedOption, setSelectedOption] = useState(0);
+    const [fieldSubmission, setFieldSubmission] = useState("");
     let singularSection = section.split("");
     singularSection.pop();
     singularSection = singularSection.join("");
-    console.log(singularSection);
     const data = historyData[section];
     const handleClickOption = (e, index) => {
         setSelectedOption(index);
+    };
+    const handleFieldChange = (e) => {
+        console.log(e.target.value);
+        setFieldSubmission(e.target.value);
     };
     return (
         <div>
@@ -34,7 +38,19 @@ export default function HistoryForm({ historyData, section }) {
             </div>
             <div>
                 <p>{data[selectedOption].description}</p>
-                <form className={`choices__elaboration choices__elaboration--${section}`}>
+                <form
+                    className={`choices__elaboration choices__elaboration--${section}`}
+                    onSubmit={(e) => {
+                        handleSectionSubmission(
+                            e,
+                            section,
+                            data[selectedOption].id,
+                            data[selectedOption].type,
+                            singularSection,
+                            fieldSubmission
+                        );
+                    }}
+                >
                     <label
                         htmlFor={`${section}-field`}
                         className={`choices__label choices__label--${section}`}
@@ -55,6 +71,7 @@ export default function HistoryForm({ historyData, section }) {
                     <textarea
                         name={`${section}-field`}
                         className={`choices__field choices__field--${section}`}
+                        onChange={handleFieldChange}
                     ></textarea>
                     <button type="submit" className={`choices__submit choices__submit--${section}`}>
                         <h3>
