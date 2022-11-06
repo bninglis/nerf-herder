@@ -1,10 +1,23 @@
-.people {
+.people__container {
     &--hidden {
         display: none;
     }
-    &__details {
-        &--hidden {
-            display: none;
-        }
+}
+
+.actions__container {
+    &--hidden {
+        display: none;
+    }
+}
+
+.name-form__container {
+    &--hidden {
+        display: none;
+    }
+}
+
+.history-form__container {
+    &--hidden {
+        display: none;
     }
 }

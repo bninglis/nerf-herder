@@ -1,8 +1,10 @@
 import "./ActionsForm.scss";
 import Action from "./Action/Action";
+import pipEmpty from "../../../assets/icons/pip-empty.svg";
+import pipFilled from "../../../assets/icons/pip-filled.svg";
 import { useState } from "react";
 
-export default function ActionsForm({ actions: propActions, characterData }) {
+export default function ActionsForm({ actions: propActions, characterData, handleSubmitActions }) {
     let { actions: characterActions } = characterData;
     const tabulateActions = (array1, array2) => {
         const lowercaseArray = array1.map((item) => {
@@ -17,6 +19,17 @@ export default function ActionsForm({ actions: propActions, characterData }) {
         });
         return actionList;
     };
+    const createMappingArray = (value) => {
+        const empty = 4 - value;
+        let tempArray = [];
+        for (let i = 0; i < value; i++) {
+            tempArray.push("unspent");
+        }
+        for (let i = 0; i < empty; i++) {
+            tempArray.push("empty");
+        }
+        return tempArray;
+    };
     const [actions, setActions] = useState(propActions);
     const currentPointsInit = tabulateActions(characterActions, actions);
     const playbookPointsInit = tabulateActions(characterData.playbookActions, actions);
@@ -25,12 +38,14 @@ export default function ActionsForm({ actions: propActions, characterData }) {
         current: currentPointsInit,
         playbook: playbookPointsInit,
         pointsPool: availablePointsInit,
+        pointsPoolMap: createMappingArray(availablePointsInit),
     });
     const handleToggleFilled = (e, action, sentPoints, index, mappingArray, setMappingArray) => {
         if (sentPoints.current > sentPoints.playbook) {
             let tempPoints = points;
             tempPoints["current"][action] = tempPoints["current"][action] - 1;
             tempPoints.pointsPool = tempPoints.pointsPool - -1;
+            tempPoints.pointsPoolMap = createMappingArray(tempPoints.pointsPool);
             setPoints(tempPoints);
             let tempArray = mappingArray;
             tempArray.splice(index, 1, "empty");
@@ -43,6 +58,7 @@ export default function ActionsForm({ actions: propActions, characterData }) {
             let tempPoints = points;
             tempPoints["current"][action] = tempPoints["current"][action] - -1;
             tempPoints.pointsPool = tempPoints.pointsPool - 1;
+            tempPoints.pointsPoolMap = createMappingArray(tempPoints.pointsPool);
             setPoints(tempPoints);
             let tempArray = mappingArray;
             tempArray.pop();
@@ -54,6 +70,41 @@ export default function ActionsForm({ actions: propActions, characterData }) {
     };
     return (
         <div>
+            <div>
+                <h2>Assign 4 action pips:</h2>
+                <p>
+                    Assign one that you feel relates to your heritage, one that you feel relates to
+                    your background, and two as you desire. Action pips cannot exceed two per action
+                    for new characters.
+                </p>
+                <div>
+                    <h3>Pips Remaining:</h3>
+                    <div>
+                        {points.pointsPoolMap &&
+                            points.pointsPoolMap.map((value, index) => {
+                                if (value === "unspent") {
+                                    return (
+                                        <img
+                                            src={pipFilled}
+                                            alt="filled pip icon"
+                                            className="pip pip--filled"
+                                            key={`poolpip${index}`}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <img
+                                            src={pipEmpty}
+                                            alt="filled pip icon"
+                                            className="pip pip--empty"
+                                            key={`poolpip${index}`}
+                                        />
+                                    );
+                                }
+                            })}
+                    </div>
+                </div>
+            </div>
             <ul>
                 {actions &&
                     actions.map((action) => {
@@ -85,6 +136,9 @@ export default function ActionsForm({ actions: propActions, characterData }) {
                         );
                     })}
             </ul>
+            <div>
+                <button className="actions__submit" onClick={(e) => { handleSubmitActions(e,points.current) }}>Submit Action Selection</button>
+            </div>
         </div>
     );
 }

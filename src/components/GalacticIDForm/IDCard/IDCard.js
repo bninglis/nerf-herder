@@ -18,10 +18,15 @@ export default function IDCard({ characterData }) {
             </div>
             <div className="id-card">
                 <div className="id-card__basic-info">
-                    <svg></svg>
-                    <p>First Name</p>
-                    <p>Last Name</p>
-                    <p>Alias</p>
+                    <p>
+                        First Name:{" "}
+                        {!characterData.firstName ? "First Name" : characterData.firstName}
+                    </p>
+                    <p>
+                        Last Name: {!characterData.lastName ? "Last Name" : characterData.lastName}
+                    </p>
+                    <p>Alias: {!characterData.alias ? "Alias" : characterData.alias}</p>
+                    <p>Description: {!characterData.look ? "Appearance" : characterData.look}</p>
                 </div>
                 <div className="id-card__main">
                     <h2>Galactic ID</h2>
@@ -29,35 +34,25 @@ export default function IDCard({ characterData }) {
                         <p className="id-card__text">{playbook.playbook}</p>
                         <div className="id-card__heritage">
                             <p className="id-card__text">Heritage:</p>
-                            <p className="id-card__text">
-                                {!heritage ? "" : `${heritage}`}
-                            </p>
+                            <p className="id-card__text">{!heritage ? "" : `${heritage}`}</p>
                         </div>
                         <div className="id-card__background">
                             <p className="id-card__text">Background:</p>
-                            <p className="id-card__text">
-                                {!background ? "" : `${background}`}
-                            </p>
+                            <p className="id-card__text">{!background ? "" : `${background}`}</p>
                         </div>
                         <div className="id-card__vice">
                             <p className="id-card__text">Vice:</p>
-                            <p className="id-card__text">
-                                {!vice ? "" : `${vice}`}
-                            </p>
+                            <p className="id-card__text">{!vice ? "" : `${vice}`}</p>
                         </div>
                     </div>
                     <div className="id-card__current">
                         <div className="id-card__friend">
                             <p className="id-card__text">Associate:</p>
-                            <p className="id-card__text">
-                                {!friend ? "" : `${friend.name}`}
-                            </p>
+                            <p className="id-card__text">{!friend ? "" : `${friend.name}`}</p>
                         </div>
                         <div className="id-card__rival">
                             <p className="id-card__text">Enemy:</p>
-                            <p className="id-card__text">
-                                {!rival ? "" : `${rival.name}`}
-                            </p>
+                            <p className="id-card__text">{!rival ? "" : `${rival.name}`}</p>
                         </div>
                         <div className="id-card__action-values">
                             {actionsStrings[1] &&

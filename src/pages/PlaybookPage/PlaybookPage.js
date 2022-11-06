@@ -2,6 +2,7 @@ import "./PlaybookPage.scss";
 import SelectionSlides from "../../components/SelectionSlides/SelectionSlides";
 import BlockForm from "../../components/BlockForm/BlockForm";
 import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
+import CharacterSheet from "../../components/CharacterSheet/CharacterSheet";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -725,6 +726,48 @@ const testCharacterData = {
         ["Hack +2", "Rig +2", "Skulk +1", "Study +1", "Sway +1"],
     ],
 };
+const tempCharacterData = {
+    friend: { name: "Nisa", id: "be837e95-80eb-48ac-9d19-b77aced14572" },
+    rival: { name: "Len", id: "4dc37057-71e2-4d6b-8b20-09b257534167" },
+    actions: ["Rig", "Rig", "Study"],
+    playbookActions: ["Rig", "Rig", "Study"],
+    playbookID: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+    playbook: "mechanic",
+    abilityID: "ef49c9f4-8591-49f5-9e84-a224556f34d4",
+    abilityName: "fixed",
+    actionsStrings: ["Rig +2, Study +1", ["Rig +2", "Study +1"]],
+    firstName: "Shillie",
+    lastName: "Alen",
+    alias: "Link",
+    look: "Shillie has a long face, with blonde hair and soft blue eyes. He wears a black jumpsuit and carries a semi-automatic pistol. Shillie is proud and daring.",
+    heritage: "colonist",
+    heritages_id: "c68a9712-79c6-446b-b30a-ca1985eacd62",
+    heritage_story:
+        "Born to a religious family in an underwater hideout, he was enslaved as a child\nbefore getting involved with politics.",
+    background: "Cult",
+    backgrounds_id: "2d530e5f-3bf8-4471-a5cb-2eedcbb22c5e",
+    background_story:
+        "Born to a religious family in an underwater hideout, he was enslaved as a child\nbefore getting involved with politics.",
+    vice: "Faith",
+    vices_id: "d109c67c-46d9-47d5-adbd-72a69d4b0138",
+    vice_story:
+        "Born to a religious family in an underwater hideout, he was enslaved as a child\nbefore getting involved with politics.",
+    actionsArray: ["rig", "rig", "study"],
+    actionsObject: {
+        attune: 0,
+        command: 0,
+        consort: 0,
+        doctor: 0,
+        hack: 2,
+        helm: 2,
+        rig: 2,
+        scramble: 0,
+        scrap: 0,
+        skulk: 0,
+        study: 1,
+        sway: 0,
+    },
+};
 
 export default function PlaybookPage() {
     const BACKEND_URL = process.env.REACT_APP_URL;
@@ -732,15 +775,21 @@ export default function PlaybookPage() {
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
     const [selectedPlaybook, setSelectedPlaybook] = useState(null);
     const [refData, setRefData] = useState(testData);
-    const [formStage, setFormStage] = useState(2); // TODO: set back to false
+    const [formStage, setFormStage] = useState(3); // TODO: set back to false
     // const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
-    const [characterData, setCharacterData] = useState(testCharacterData);
+    const [characterData, setCharacterData] = useState(tempCharacterData);
     const [incompletePeople, setIncompletePeople] = useState({ friend: true, rival: true });
     const [incompleteSections, setIncompleteSections] = useState([
         "heritages",
         "backgrounds",
         "vices",
     ]);
+    const [idCompletion, setIdCompletion] = useState({
+        name: false,
+        history: false,
+        people: false,
+        actions: false,
+    });
     const handleSelectPlaybook = (e, currentPlaybook, id, playbook) => {
         setSelectedPlaybook(currentPlaybook);
         setCharacterData({ ...characterData, playbooks_id: id });
@@ -814,6 +863,9 @@ export default function PlaybookPage() {
                 return item !== section;
             })
         );
+        if (incompleteSections.length === 0) {
+            setIdCompletion({ ...idCompletion, history: true });
+        }
     };
     const handleSubmitFriend = (e, id, friend, story) => {
         e.preventDefault();
@@ -823,11 +875,42 @@ export default function PlaybookPage() {
             friend_story: story,
         });
         setIncompletePeople({ ...incompletePeople, friend: false });
+        if (incompletePeople.rival === false) {
+            setIdCompletion({ ...idCompletion, people: true });
+        }
     };
     const handleSubmitRival = (e, id, rival, story) => {
         e.preventDefault();
         setCharacterData({ ...characterData, rival: { name: rival, id: id }, rival_story: story });
         setIncompletePeople({ ...incompletePeople, rival: false });
+        if (incompletePeople.friend === false) {
+            setIdCompletion({ ...idCompletion, people: true });
+        }
+    };
+    const handleSubmitActions = (e, actions) => {
+        let tempArray = Object.entries(actions);
+        const actionsArray = [];
+        tempArray.forEach((item, index) => {
+            if (item[1] > 0) {
+                for (let i = 0; i < item[1]; i++) {
+                    actionsArray.push(item[0]);
+                }
+            }
+        });
+        setCharacterData({ ...characterData, actionsArray: actionsArray, actionsObject: actions });
+        setIdCompletion({ ...idCompletion, actions: true });
+    };
+    const handleNameSubmit = (e, names) => {
+        e.preventDefault();
+        console.log(names);
+        setCharacterData({
+            ...characterData,
+            firstName: names.first,
+            lastName: names.last,
+            alias: names.alias,
+            look: names.look,
+        });
+        setIdCompletion({ ...idCompletion, name: true });
     };
     if (formStage === 0) {
         return (
@@ -860,8 +943,18 @@ export default function PlaybookPage() {
                     incompletePeople={incompletePeople}
                     handleSubmitFriend={handleSubmitFriend}
                     handleSubmitRival={handleSubmitRival}
+                    handleSubmitActions={handleSubmitActions}
+                    handleNameSubmit={handleNameSubmit}
+                    idCompletion={idCompletion}
+                    handleNextStage={handleNextStage}
                 />
             </>
+        );
+    } else if (formStage === 3) {
+        return (
+            <div>
+                <CharacterSheet characterData={characterData} refData={refData} />;
+            </div>
         );
     }
 }
