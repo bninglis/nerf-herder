@@ -3,10 +3,9 @@ import pipFilled from "../../assets/icons/pip-filled.svg";
 import pipEmpty from "../../assets/icons/pip-empty.svg";
 import { useState } from "react";
 
-export default function BlockForm({ refData, handleBlockFinish }) {
+export default function BlockForm({ refData, handleNextStage, handleItemSelection }) {
     const [whichPutAway, setWhichPutAway] = useState(null);
     const {
-        build_suggestions,
         character_questions,
         id,
         items_description,
@@ -23,41 +22,55 @@ export default function BlockForm({ refData, handleBlockFinish }) {
         xp_advice,
         xp_gain,
     } = refData.playbook[0];
-    const { special_abilities } = refData;
-    console.log(refData.playbook);
-    const buildArray = [
-        ["Ship mechanic", ["Hack +2", "Scramble +1", "Sway +1"], "Fixed"],
-        ["Computer whiz", ["Hack +2", "Skulk +1", "Sway +1"], "Hacker"],
-        ["Bot builder", ["Hack +1", "Scramble +1", "Attune +2"], "Construct Whisperer"],
-        ["Ship owner", ["Helm +2", "Scrap +1", "Command +1"], "Junkyard Hunter"],
-    ];
-    const handleAbilitySelect = (e) => {
+    const { special_abilities, build_suggestions } = refData;
+    const sortedBuilds = build_suggestions.map((build) => {
+        const sortedActions = [
+            build.action_1.toLowerCase(),
+            build.action_2.toLowerCase(),
+            build.action_3.toLowerCase(),
+            build.action_4.toLowerCase(),
+        ].sort();
+        const buildArray = [];
+        sortedActions.forEach((action, index) => {
+            if (index < sortedActions.lastIndexOf(action)) {
+                buildArray.unshift(action + " +2");
+            } else if (index > sortedActions.indexOf(action)) {
+                return;
+            } else {
+                buildArray.push(action + " +1");
+            }
+        });
+        const buildString = buildArray.join(", ");
+        return { ...build, actionsArray: sortedActions, buildString: buildString };
+    });
+    const handleSelect = (e) => {
         setWhichPutAway(e.currentTarget.id);
     };
-    const handleBuildSelect = () => {};
 
     const actionsArray = starting_actions.split(",");
     const actions1 = actionsArray[0].split(" ");
     const actions2 = actionsArray[1].split(" ");
     const actionWords = [actions1[0], actions2[1]];
 
-    console.log(build_suggestions);
     while (!starting_actions) {
         return <p>Please wait</p>;
     }
     return (
         <div
             className={`starter-form${!!whichPutAway ? " starter-form--hidden" : ""}`}
-            onTransitionEnd={handleBlockFinish}
+            onTransitionEnd={handleNextStage}
         >
             <div className="intro">
                 <h2>{playbook}</h2>
                 <h3>{tagline}</h3>
                 <p>{overview}</p>
+                <p>{character_questions}</p>
                 <p>
                     <span>{xp_gain}</span>
                     {xp_advice}
                 </p>
+                <h4>Playing a {playbook}</h4>
+                <p>{playing_advice}</p>
             </div>
             <div className="starting-features">
                 <h2>Starting Features</h2>
@@ -108,7 +121,19 @@ export default function BlockForm({ refData, handleBlockFinish }) {
                                     }`}
                                     id={ability.id}
                                     key={`b${ability.id}`}
-                                    onClick={handleAbilitySelect}
+                                    onClick={(e) => {
+                                        handleSelect(e, ability.id);
+                                        handleItemSelection(
+                                            e,
+                                            ability.id,
+                                            ability.name,
+                                            ability.description,
+                                            ability.clarification,
+                                            starting_ability,
+                                            starting_ability_summary,
+                                            starting_ability_clarification
+                                        );
+                                    }}
                                 >
                                     <li className="special-ability" key={`i${ability.id}`}>
                                         <h4>{ability.name}</h4>
@@ -121,15 +146,41 @@ export default function BlockForm({ refData, handleBlockFinish }) {
                             );
                         })}
                 </ul>
-                <ul className="build-list">
-                    {buildArray &&
-                        buildArray.map((build) => {
+                <ul className="builds">
+                    {sortedBuilds &&
+                        sortedBuilds.map((build) => {
                             return (
-                                <button onClick={handleBuildSelect} key={`b${build[0]}`}>
-                                    <li key={`i${build[0]}`}>
-                                        <h4>{build[0]}</h4>
-                                        <p>{`${build[1][0]} ${build[1][1]} ${build[1][2]}`}</p>
-                                        <p>{build[2]}</p>
+                                <button
+                                    onClick={(e) => {
+                                        handleSelect(e, build.id);
+                                        handleItemSelection(
+                                            e,
+                                            build.special_abilities_id,
+                                            build.special_ability,
+                                            special_abilities.find((item) => {
+                                                return (item.special_abilities_id =
+                                                    build.special_abilities_id);
+                                            })["special_ability_description"],
+                                            special_abilities.find((item) => {
+                                                return (item.special_abilities_id =
+                                                    build.special_abilities_id);
+                                            })["special_ability_clarification"],
+                                            starting_ability,
+                                            starting_ability_summary,
+                                            starting_ability_clarification,
+                                            build.actionsArray
+                                        );
+                                    }}
+                                    key={`b${build.id}`}
+                                    id={build.id}
+                                    className={`builds__button${
+                                        whichPutAway === build.id ? " builds__button--selected" : ""
+                                    }`}
+                                >
+                                    <li key={`i${build.id}`}>
+                                        <h4>{build.build_name}</h4>
+                                        <p>{build.buildString}</p>
+                                        <p>{build.special_ability}</p>
                                     </li>
                                 </button>
                             );

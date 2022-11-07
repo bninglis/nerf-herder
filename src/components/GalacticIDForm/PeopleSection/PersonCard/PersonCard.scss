@@ -1,0 +1,10 @@
+.person {
+    &--hidden {
+        display: none;
+    }
+    &__button {
+        &--hidden {
+            display: none;
+        }
+    }
+}

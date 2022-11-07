@@ -5,19 +5,12 @@
 .special-ability{
     &__button{
         transition: 1s;
-        transform-origin: 50% 0;
         transform: translateX(0);
-        margin-top: 0;
-        margin-bottom: 0;
-        height: 7rem;
         filter: opacity(1);
-        padding: 0;
-        line-height: normal;
         &--selected{
+            z-index: 10;
             transform: translateX(-200%);
-            margin-bottom: -20rem;
             filter: opacity(0);
-            line-height: 0;
         }
     }
 }
@@ -27,5 +20,18 @@
     transform: translateX(0);
     &--hidden{
         transform: translateX(100%)
+    }
+}
+
+.builds{
+    &__button{
+        transition: 1s;
+        transform: translateX(0);
+        filter: opacity(1);
+        &--selected{
+            z-index: 10;
+            transform: translateX(-600%);
+            filter: opacity(0);
+        }
     }
 }
