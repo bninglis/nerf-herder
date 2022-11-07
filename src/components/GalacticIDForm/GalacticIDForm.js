@@ -9,13 +9,12 @@ import AcceptWindow from "./AcceptWindow/AcceptWindow";
 export default function GalacticIDForm({
     refData,
     characterData,
+    setCharacterData,
     handleHistorySectionSubmission,
     incompleteSections,
-    incompletePeople,
     handleSubmitPerson,
     handleSubmitActions,
     handleNameSubmit,
-    idCompletion,
     handleNextStage,
     formErrors,
     handleEdit,
@@ -36,17 +35,20 @@ export default function GalacticIDForm({
         <>
             <IDCard
                 characterData={characterData}
-                idCompletion={idCompletion}
                 handleEdit={handleEdit}
+                incompleteSections={incompleteSections}
             />
-            <AcceptWindow handleNextStage={handleNextStage} idCompletion={idCompletion} />
+            <AcceptWindow
+                handleNextStage={handleNextStage}
+                incompleteSections={incompleteSections}
+            />
             <NameForm
                 handleNameSubmit={handleNameSubmit}
                 first={first_names}
                 last={last_names}
                 alias={aliases}
                 look={signature}
-                idCompletion={idCompletion}
+                incompleteSections={incompleteSections}
             />
             <Histories
                 historyData={historyData}
@@ -55,7 +57,7 @@ export default function GalacticIDForm({
                 incompleteSections={incompleteSections}
             />
             <PeopleSection
-                incompletePeople={incompletePeople}
+                incompleteSections={incompleteSections}
                 characterData={characterData}
                 friends={friends}
                 handleSubmitPerson={handleSubmitPerson}
@@ -64,9 +66,10 @@ export default function GalacticIDForm({
             <ActionsForm
                 actions={actions}
                 characterData={characterData}
+                setCharacterData={setCharacterData}
                 handleSubmitActions={handleSubmitActions}
                 formErrors={formErrors}
-                idCompletion={idCompletion}
+                incompleteSections={incompleteSections}
             />
         </>
     );

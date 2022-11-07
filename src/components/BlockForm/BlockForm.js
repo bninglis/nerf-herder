@@ -25,10 +25,10 @@ export default function BlockForm({ refData, handleNextStage, handleItemSelectio
     const { special_abilities, build_suggestions } = refData;
     const sortedBuilds = build_suggestions.map((build) => {
         const sortedActions = [
-            build.action_1,
-            build.action_2,
-            build.action_3,
-            build.action_4,
+            build.action_1.toLowerCase(),
+            build.action_2.toLowerCase(),
+            build.action_3.toLowerCase(),
+            build.action_4.toLowerCase(),
         ].sort();
         const buildArray = [];
         sortedActions.forEach((action, index) => {

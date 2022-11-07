@@ -4,7 +4,7 @@ import PersonDetails from "./PersonDetails/PersonDetails";
 import { useState } from "react";
 
 export default function PeopleSection({
-    incompletePeople,
+    incompleteSections,
     characterData,
     friends,
     handleSubmitPerson,
@@ -40,19 +40,19 @@ export default function PeopleSection({
             });
         }
     };
-    if (incompletePeople.friend === false && incompletePeople.rival === false) {
+    if (incompleteSections.people.friend === false && incompleteSections.people.rival === false) {
         return;
     } else {
         return (
             <div className="people">
                 <div>
                     <h4>As a {characterData.playbook} you've made some</h4>
-                    <h3>{friends[0].type}</h3>
+                    <h3>{friends[0].type.toLowerCase()}</h3>
                     <h4>Choose one to be your ally and one to be your rival:</h4>
                     <PersonDetails
                         relationship={"friend"}
                         selectedPeople={selectedPeople}
-                        incompletePeople={incompletePeople}
+                        incompleteSections={incompleteSections}
                         peopleStories={peopleStories}
                         setPeopleStories={setPeopleStories}
                         handleSubmitPerson={handleSubmitPerson}
@@ -65,7 +65,7 @@ export default function PeopleSection({
                                     id={friend.id}
                                     person={friend}
                                     key={friend.id}
-                                    incompletePeople={incompletePeople}
+                                    incompleteSections={incompleteSections}
                                     selectedPeople={selectedPeople}
                                     friend={
                                         characterData.friend.id === undefined
@@ -86,7 +86,7 @@ export default function PeopleSection({
                     <PersonDetails
                         relationship={"rival"}
                         selectedPeople={selectedPeople}
-                        incompletePeople={incompletePeople}
+                        incompleteSections={incompleteSections}
                         peopleStories={peopleStories}
                         setPeopleStories={setPeopleStories}
                         handleSubmitPerson={handleSubmitPerson}

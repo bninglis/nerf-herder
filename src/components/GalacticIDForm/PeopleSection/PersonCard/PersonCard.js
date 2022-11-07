@@ -2,7 +2,7 @@ import "./PersonCard.scss";
 
 export default function PersonCard({
     person,
-    incompletePeople,
+    incompleteSections,
     handleSelectFriend,
     handleSelectRival,
     selectedPeople,
@@ -22,7 +22,7 @@ export default function PersonCard({
         >
             <button
                 className={`person__button person__button--friend${
-                    !!incompletePeople.friend ? "" : " person__button--hidden"
+                    !!incompleteSections.people.friend ? "" : " person__button--hidden"
                 }`}
                 onClick={(e) => {
                     handleSelectFriend(
@@ -41,7 +41,7 @@ export default function PersonCard({
             <p>{person.elaboration}</p>
             <button
                 className={`person__button person__button--rival${
-                    !!incompletePeople.rival ? "" : " person__button--rival"
+                    !!incompleteSections.people.rival ? "" : " person__button--rival"
                 }`}
                 onClick={(e) => {
                     handleSelectRival(

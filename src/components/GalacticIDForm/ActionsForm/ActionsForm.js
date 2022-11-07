@@ -7,9 +7,10 @@ import { useState } from "react";
 export default function ActionsForm({
     actions: propActions,
     characterData,
+    setCharacterData,
     handleSubmitActions,
     formErrors,
-    idCompletion,
+    incompleteSections,
 }) {
     let { actions: characterActions } = characterData;
     const tabulateActions = (array1, array2) => {
@@ -74,7 +75,7 @@ export default function ActionsForm({
             setActions([...actions]);
         }
     };
-    if (idCompletion.actions === false) {
+    if (incompleteSections.actions === true) {
         return (
             <div
                 className={`"actions-form"${

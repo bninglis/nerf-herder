@@ -1,7 +1,7 @@
 import "./IDCard.scss";
 import { useState } from "react";
 
-export default function IDCard({ characterData, idCompletion, handleEdit}) {
+export default function IDCard({ characterData, handleEdit, incompleteSections }) {
     const { playbook, abilityName, heritage, background, vice, friend, rival, actionsStrings } =
         characterData;
     return (
@@ -28,6 +28,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                     <p>Alias: {!characterData.alias ? "Alias" : characterData.alias}</p>
                     <p>Description: {!characterData.look ? "Appearance" : characterData.look}</p>
                     <button
+                        className={`id-card__edit${
+                            incompleteSections.name === true ? " id-card__edit--hidden" : ""
+                        }`}
                         onClick={(e) => {
                             handleEdit(e, "name");
                         }}
@@ -44,7 +47,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                             <p className="id-card__text">{!heritage ? "Blank" : `${heritage}`}</p>
                             <button
                                 className={`id-card__edit${
-                                    idCompletion.name === false ? " id-card__edit--hidden" : ""
+                                    incompleteSections.history.heritages === true
+                                        ? " id-card__edit--hidden"
+                                        : ""
                                 }`}
                                 onClick={(e) => {
                                     handleEdit(e, "history", "heritages");
@@ -60,7 +65,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                             </p>
                             <button
                                 className={`id-card__edit${
-                                    idCompletion.history === false ? " id-card__edit--hidden" : ""
+                                    incompleteSections.history.backgrounds === true
+                                        ? " id-card__edit--hidden"
+                                        : ""
                                 }`}
                                 onClick={(e) => {
                                     handleEdit(e, "history", "backgrounds");
@@ -74,7 +81,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                             <p className="id-card__text">{!vice ? "Blank" : `${vice}`}</p>
                             <button
                                 className={`id-card__edit${
-                                    idCompletion.history === false ? " id-card__edit--hidden" : ""
+                                    incompleteSections.history.vices === true
+                                        ? " id-card__edit--hidden"
+                                        : ""
                                 }`}
                                 onClick={(e) => {
                                     handleEdit(e, "history", "vices");
@@ -90,7 +99,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                             <p className="id-card__text">{!friend ? "" : `${friend.name}`}</p>
                             <button
                                 className={`id-card__edit${
-                                    idCompletion.people === false ? " id-card__edit--hidden" : ""
+                                    incompleteSections.people.friend === true
+                                        ? " id-card__edit--hidden"
+                                        : ""
                                 }`}
                                 onClick={(e) => {
                                     handleEdit(e, "people", "friend");
@@ -104,7 +115,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                             <p className="id-card__text">{!rival ? "" : `${rival.name}`}</p>
                             <button
                                 className={`id-card__edit${
-                                    idCompletion.people === false ? " id-card__edit--hidden" : ""
+                                    incompleteSections.people.rival === true
+                                        ? " id-card__edit--hidden"
+                                        : ""
                                 }`}
                                 onClick={(e) => {
                                     handleEdit(e, "people", "rival");
@@ -120,7 +133,9 @@ export default function IDCard({ characterData, idCompletion, handleEdit}) {
                                 })}
                             <button
                                 className={`id-card__edit${
-                                    idCompletion.actions === false ? " id-card__edit--hidden" : ""
+                                    incompleteSections.actions === true
+                                        ? " id-card__edit--hidden"
+                                        : ""
                                 }`}
                                 onClick={(e) => {
                                     handleEdit(e, "actions");

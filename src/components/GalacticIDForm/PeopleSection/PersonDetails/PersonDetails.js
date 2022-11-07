@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function PersonDetails({
     relationship,
     selectedPeople,
-    incompletePeople,
+    incompleteSections,
     peopleStories,
     setPeopleStories,
     handleSubmitPerson,
@@ -17,7 +17,7 @@ export default function PersonDetails({
             setPeopleStories({ ...peopleStories, rival: e.target.value });
         }
     };
-    if (selectedPeople[relationship] !== false && incompletePeople[relationship] !== false) {
+    if (selectedPeople[relationship] !== false && incompleteSections["people"][relationship] !== false) {
         return (
             <div>
                 <div className="people__details">

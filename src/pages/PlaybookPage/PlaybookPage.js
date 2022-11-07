@@ -3,7 +3,7 @@ import SelectionSlides from "../../components/SelectionSlides/SelectionSlides";
 import BlockForm from "../../components/BlockForm/BlockForm";
 import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
 import CharacterSheet from "../../components/CharacterSheet/CharacterSheet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const testData = {
@@ -726,7 +726,7 @@ const testCharacterData = {
         ["Hack +2", "Rig +2", "Skulk +1", "Study +1", "Sway +1"],
     ],
 };
-const tempCharacterData = {
+const tempChgsdfgsdaracterData = {
     friend: { name: "Nisa", id: "be837e95-80eb-48ac-9d19-b77aced14572" },
     rival: { name: "Len", id: "4dc37057-71e2-4d6b-8b20-09b257534167" },
     actions: ["Rig", "Rig", "Study"],
@@ -773,14 +773,11 @@ export default function PlaybookPage() {
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
-    const [selectedPlaybook, setSelectedPlaybook] = useState(null);
     const [refData, setRefData] = useState(null);
-    const [formStage, setFormStage] = useState(0); // TODO: set back to false
+    const [formStage, setFormStage] = useState(0);
     const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
-    // const [characterData, setCharacterData] = useState(tempCharacterData);
-    const [incompletePeople, setIncompletePeople] = useState({ friend: true, rival: true });
     const [incompleteSections, setIncompleteSections] = useState({
-        name: { first: true, last: true, alias: true, look: true },
+        name: true,
         history: {
             heritages: true,
             backgrounds: true,
@@ -801,27 +798,139 @@ export default function PlaybookPage() {
         rival: false,
         actions: false,
     });
-    const [idCompletion, setIdCompletion] = useState({
-        name: false,
-        history: false,
-        people: false,
-        actions: false,
-    });
+
+    const generateActionsStrings = (array1, array2) => {
+        const buildArrayOnes = [];
+        const buildArrayTwos = [];
+        const unstringed = array1.concat(array2).sort();
+        unstringed.forEach((item, index) => {
+            if (index < unstringed.lastIndexOf(item)) {
+                buildArrayTwos.push(item + " +2");
+            } else if (index > unstringed.indexOf(item)) {
+                return;
+            } else {
+                buildArrayOnes.push(item + " +1");
+            }
+        });
+        return [
+            buildArrayTwos.concat(buildArrayOnes).join(", "),
+            buildArrayTwos.concat(buildArrayOnes),
+        ];
+    };
+
+    useEffect(() => {
+        let tempRef = {};
+        const isLoadedCharacter = localStorage.getItem("loadCharacter");
+        if (isLoadedCharacter) {
+            setFormStage(3);
+        }
+        const playbookID = localStorage.getItem("playbooks_id");
+        axios.get(`${apiUrl}/ref/${playbookID}`).then((response) => {
+            setRefData(response.data);
+            tempRef = response.data;
+            console.log(tempRef);
+            let tempCharacterData = null;
+            tempCharacterData = {
+                friend: { name: localStorage.getItem("close_friend") },
+                rival: { name: localStorage.getItem("rival") },
+                playbookActions: localStorage.getItem("playbook_actions").split("|"),
+                playbookID: localStorage.getItem("playbooks_id"),
+                playbook: localStorage.getItem("playbook"),
+                abilityID: localStorage.getItem("special_abilities_id"),
+            };
+            //tempCharacterData.actions = // TODO: Return
+            // actionsStrings
+            const tempSpecialAbility = tempRef.special_abilities.find((item) => {
+                return (item.id = tempCharacterData.abilityID);
+            });
+            tempCharacterData = {
+                ...tempCharacterData,
+                abilityName: tempSpecialAbility.name,
+                firstName: localStorage.getItem("first_name"),
+                lastName: localStorage.getItem("last_name"),
+                alias: localStorage.getItem("alias"),
+                look: localStorage.getItem("look"),
+                heritages_id: localStorage.getItem("heritages_id"),
+                backgrounds_id: localStorage.getItem("backgrounds_id"),
+                vices_id: localStorage.getItem("vices_id"),
+            };
+            const tempHeritage = tempRef.heritages.find((item) => {
+                return (item.id = tempCharacterData.heritages_id);
+            });
+            const tempBackground = tempRef.backgrounds.find((item) => {
+                return (item.id = tempCharacterData.backgrounds_id);
+            });
+            const tempVice = tempRef.vices.find((item) => {
+                return (item.id = tempCharacterData.vices_id);
+            });
+            console.log(tempHeritage);
+            tempCharacterData = {
+                ...tempCharacterData,
+                heritage: tempHeritage.type,
+                heritage_story: localStorage.getItem("heritage_story"),
+                background: tempBackground.type,
+                background_story: localStorage.getItem("background_story"),
+                vice: tempVice.type,
+                vice_story: localStorage.getItem("vice_story"),
+                actionsObject: {
+                    attune: localStorage.getItem("attune"),
+                    command: localStorage.getItem("command"),
+                    consort: localStorage.getItem("consort"),
+                    doctor: localStorage.getItem("doctor"),
+                    hack: localStorage.getItem("hack"),
+                    helm: localStorage.getItem("helm"),
+                    rig: localStorage.getItem("rig"),
+                    scramble: localStorage.getItem("scramble"),
+                    scrap: localStorage.getItem("scrap"),
+                    skulk: localStorage.getItem("skulk"),
+                    study: localStorage.getItem("study"),
+                    sway: localStorage.getItem("sway"),
+                },
+                
+            };
+            const tempObject = tempCharacterData.actionsObject;
+            const tempKeys = Object.keys(tempObject);
+            const actionsArray = [];
+            tempKeys.forEach((key) => {
+                for (let i = 0; i < tempObject[key]; i++) {
+                    actionsArray.push(key);
+                }
+            });
+            console.log(actionsArray);
+            tempCharacterData = {
+                ...tempCharacterData,
+                actionsArray: actionsArray,
+                actions: actionsArray,
+                actionsStrings: generateActionsStrings(actionsArray, []),
+            };
+            setCharacterData(tempCharacterData);
+            // tempCharacterData = {...tempCharacterData, actionsStrings: generateActionsStrings(tempCharacterData., actionsObject}
+        });
+    }, []);
+
     const handleSelectPlaybook = (e, currentPlaybook, id, playbook) => {
-        setSelectedPlaybook(currentPlaybook);
         setCharacterData({ ...characterData, playbooks_id: id });
         axios.get(`${apiUrl}/ref/${id}`).then((response) => {
             setRefData(response.data);
             const actionsUsable = response.data.playbook[0].starting_actions.split(" ");
             setCharacterData({
                 ...characterData,
-                actions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]].sort(),
-                playbookActions: [actionsUsable[0], actionsUsable[0], actionsUsable[2]].sort(),
+                actions: [
+                    actionsUsable[0].toLowerCase(),
+                    actionsUsable[0].toLowerCase(),
+                    actionsUsable[2].toLowerCase(),
+                ].sort(),
+                playbookActions: [
+                    actionsUsable[0].toLowerCase(),
+                    actionsUsable[0].toLowerCase(),
+                    actionsUsable[2].toLowerCase(),
+                ].sort(),
                 playbookID: id,
                 playbook: playbook,
             });
         });
     };
+
     const handleNextStage = () => {
         window.scrollTo(0, 0);
         setFormStage(formStage + 1);
@@ -838,24 +947,6 @@ export default function PlaybookPage() {
         startingAbilityClarification,
         actions
     ) => {
-        const actionsStrings = (array1, array2) => {
-            const buildArrayOnes = [];
-            const buildArrayTwos = [];
-            const unstringed = array1.concat(array2).sort();
-            unstringed.forEach((item, index) => {
-                if (index < unstringed.lastIndexOf(item)) {
-                    buildArrayTwos.push(item + " +2");
-                } else if (index > unstringed.indexOf(item)) {
-                    return;
-                } else {
-                    buildArrayOnes.push(item + " +1");
-                }
-            });
-            return [
-                buildArrayTwos.concat(buildArrayOnes).join(", "),
-                buildArrayTwos.concat(buildArrayOnes),
-            ];
-        };
         if (!actions) {
             setCharacterData({
                 ...characterData,
@@ -867,7 +958,7 @@ export default function PlaybookPage() {
                 startingAbilitySummary: startingAbilitySummary,
                 startingAbilityClarification: startingAbilityClarification,
                 actions: [...characterData.actions].sort(),
-                actionsStrings: actionsStrings(characterData.actions, []),
+                actionsStrings: generateActionsStrings(characterData.actions, []),
             });
         } else {
             setCharacterData({
@@ -880,10 +971,11 @@ export default function PlaybookPage() {
                 startingAbilitySummary: startingAbilitySummary,
                 startingAbilityClarification: startingAbilityClarification,
                 actions: [...characterData.actions, ...actions].sort(),
-                actionsStrings: actionsStrings(actions, characterData.actions),
+                actionsStrings: generateActionsStrings(actions, characterData.actions),
             });
         }
     };
+
     const handleNameSubmit = (e, names) => {
         e.preventDefault();
         const setErrors = (testObject, testKey) => {
@@ -899,8 +991,16 @@ export default function PlaybookPage() {
                 alias: names.alias,
                 look: names.look,
             });
-            setFormErrors({ ...formErrors, first: false, last: false, alias: false, look: false });
-            setIdCompletion({ ...idCompletion, name: true });
+            setFormErrors({
+                ...formErrors,
+                first: false,
+                last: false,
+                alias: false,
+                look: false,
+            });
+            let tempSections = incompleteSections;
+            tempSections.name = false;
+            // setIdComple/tion({ ...idComp/letion, name: true });
         } else {
             let tempFormErrors = formErrors;
             Object.keys(names).forEach((key) => {
@@ -909,6 +1009,7 @@ export default function PlaybookPage() {
             setFormErrors(tempFormErrors);
         }
     };
+
     const handleHistorySectionSubmission = (e, section, id, choice, singular, entry) => {
         e.preventDefault();
         if (!!entry) {
@@ -921,19 +1022,13 @@ export default function PlaybookPage() {
             let tempSections = incompleteSections;
             tempSections["history"][section] = false;
             setIncompleteSections(tempSections);
-            if (
-                !incompleteSections.history.heritages &&
-                !incompleteSections.history.backgrounds &&
-                !incompleteSections.history.vices
-            ) {
-                setIdCompletion({ ...idCompletion, history: true });
-            }
             setFormErrors({ ...formErrors, [section]: false });
         } else {
             e["target"][`${section}-field`]["placeholder"] = "Cannot be blank";
             setFormErrors({ ...formErrors, [section]: true });
         }
     };
+
     const handleSubmitPerson = (e, relationship, id, person, story) => {
         e.preventDefault();
         const opposite = relationship === "friend" ? "rival" : "friend";
@@ -943,16 +1038,16 @@ export default function PlaybookPage() {
                 [relationship]: { name: person, id: id },
                 [`${relationship}_story`]: story,
             });
-            setIncompletePeople({ ...incompletePeople, [relationship]: false });
+            let tempSections = incompleteSections;
+            tempSections["people"][relationship] = false;
             setFormErrors({ ...formErrors, [relationship]: false });
-            if (incompletePeople[opposite] === false) {
-                setIdCompletion({ ...idCompletion, people: true });
-            }
+            setIncompleteSections(tempSections);
         } else {
             e["target"][`${relationship}field`]["placeholder"] = "Cannot be blank";
             setFormErrors({ ...formErrors, [relationship]: true });
         }
     };
+
     const handleSubmitActions = (e, actions, pool) => {
         if (pool === 0) {
             let tempArray = Object.entries(actions);
@@ -964,19 +1059,24 @@ export default function PlaybookPage() {
                     }
                 }
             });
+            const strings = generateActionsStrings(actionsArray, []);
             setCharacterData({
                 ...characterData,
-                actionsArray: actionsArray,
+                actions: actionsArray,
+                actionsStrings: strings,
                 actionsObject: actions,
             });
-            setIdCompletion({ ...idCompletion, actions: true });
+            let tempSections = incompleteSections;
+            tempSections.actions = false;
+            setIncompleteSections(tempSections);
         } else {
             setFormErrors({ ...formErrors, actions: true });
         }
     };
-    const handleEdit = (e, idCompletion, sectionOrPerson) => {
-        if (idCompletion === "history") {
-            setIncompleteSections([...incompleteSections]);
+
+    const handleEdit = (e, primaryKey, secondaryKey) => {
+        if (!secondaryKey) {
+            setIncompleteSections({ ...incompleteSections, [primaryKey]: true });
         }
     };
 
@@ -1006,22 +1106,28 @@ export default function PlaybookPage() {
                 <GalacticIDForm
                     refData={refData}
                     characterData={characterData}
+                    setCharacterData={setCharacterData}
                     handleHistorySectionSubmission={handleHistorySectionSubmission}
                     incompleteSections={incompleteSections}
-                    incompletePeople={incompletePeople}
                     handleSubmitPerson={handleSubmitPerson}
                     handleSubmitActions={handleSubmitActions}
                     handleNameSubmit={handleNameSubmit}
-                    idCompletion={idCompletion}
                     handleNextStage={handleNextStage}
                     formErrors={formErrors}
+                    handleEdit={handleEdit}
                 />
             </>
         );
-    } else if (formStage === 3) {
+    } else if (formStage === 3 && refData !== null) {
+        console.log(refData);
         return (
             <div>
-                <CharacterSheet characterData={characterData} refData={refData} />;
+                <CharacterSheet
+                    characterData={characterData}
+                    refData={refData}
+                    setFormStage={setFormStage}
+                />
+                ;
             </div>
         );
     }

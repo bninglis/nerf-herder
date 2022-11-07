@@ -1,11 +1,14 @@
 import "./AcceptWindow.scss";
 
-export default function AcceptWindow({ handleNextStage, idCompletion }) {
+export default function AcceptWindow({ handleNextStage, incompleteSections }) {
     if (
-        idCompletion.name === true &&
-        idCompletion.history === true &&
-        idCompletion.people === true &&
-        idCompletion.actions === true
+        incompleteSections.name === false &&
+        incompleteSections.history.heritages === false &&
+        incompleteSections.history.backgrounds === false &&
+        incompleteSections.history.vices === false &&
+        incompleteSections.people.friend === false &&
+        incompleteSections.people.rival === false &&
+        incompleteSections.actions === false
     ) {
         return (
             <div className="accept-id">

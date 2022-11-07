@@ -8,7 +8,7 @@ export default function HistoryForm({
     formErrors,
 }) {
     const [selectedOption, setSelectedOption] = useState(0);
-    console.log(section)
+    console.log(section);
     const [fieldSubmission, setFieldSubmission] = useState("");
     let singularSection = section.split("");
     singularSection.pop();
@@ -36,7 +36,7 @@ export default function HistoryForm({
                                     handleClickOption(e, index);
                                 }}
                             >
-                                <h3>{data.type}</h3>
+                                <h3>{data.type.toLowerCase()}</h3>
                             </button>
                         );
                     })}
@@ -50,7 +50,7 @@ export default function HistoryForm({
                             e,
                             section,
                             data[selectedOption].id,
-                            data[selectedOption].type,
+                            data[selectedOption].type.toLowerCase(),
                             singularSection,
                             fieldSubmission
                         );
@@ -67,10 +67,10 @@ export default function HistoryForm({
                               } ${data[selectedOption].type}`
                             : ""}
                         {section === "backgrounds"
-                            ? `your ${data[selectedOption].type} background`
+                            ? `your ${data[selectedOption].type.toLowerCase()} background`
                             : ""}
                         {section === "vices"
-                            ? `how you satisfy your urge for ${data[selectedOption].type}`
+                            ? `how you satisfy your urge for ${data[selectedOption].type.toLowerCase()}`
                             : ""}
                     </label>
                     <textarea

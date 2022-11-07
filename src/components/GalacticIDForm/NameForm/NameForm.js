@@ -1,7 +1,14 @@
 import "./NameForm.scss";
 import { useState } from "react";
 
-export default function NameForm({ handleNameSubmit, first, last, alias, look, idCompletion }) {
+export default function NameForm({
+    handleNameSubmit,
+    first,
+    last,
+    alias,
+    look,
+    incompleteSections,
+}) {
     const initialNameValues = { first: "", last: "", alias: "", look: "" };
     const [nameFormValues, setNameFormValues] = useState(initialNameValues);
     const handleRandomSuggestion = (e) => {
@@ -25,7 +32,7 @@ export default function NameForm({ handleNameSubmit, first, last, alias, look, i
         const fixedName = e.target.name.slice(4);
         setNameFormValues({ ...nameFormValues, [fixedName]: e.target.value });
     };
-    if (idCompletion.name === false) {
+    if (incompleteSections.name === true) {
         return (
             <div className="name-form">
                 <h3>Enter Character Name and Short Physical Description</h3>
