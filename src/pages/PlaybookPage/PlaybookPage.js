@@ -3,7 +3,7 @@ import SelectionSlides from "../../components/SelectionSlides/SelectionSlides";
 import BlockForm from "../../components/BlockForm/BlockForm";
 import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
 import CharacterSheet from "../../components/CharacterSheet/CharacterSheet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const testData = {
@@ -774,16 +774,33 @@ export default function PlaybookPage() {
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
     const [selectedPlaybook, setSelectedPlaybook] = useState(null);
-    const [refData, setRefData] = useState(testData);
-    const [formStage, setFormStage] = useState(3); // TODO: set back to false
-    // const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
-    const [characterData, setCharacterData] = useState(tempCharacterData);
+    const [refData, setRefData] = useState(null);
+    const [formStage, setFormStage] = useState(0); // TODO: set back to false
+    const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
+    // const [characterData, setCharacterData] = useState(tempCharacterData);
     const [incompletePeople, setIncompletePeople] = useState({ friend: true, rival: true });
-    const [incompleteSections, setIncompleteSections] = useState([
-        "heritages",
-        "backgrounds",
-        "vices",
-    ]);
+    const [incompleteSections, setIncompleteSections] = useState({
+        name: { first: true, last: true, alias: true, look: true },
+        history: {
+            heritages: true,
+            backgrounds: true,
+            vices: true,
+        },
+        people: { friend: true, rival: true },
+        actions: true,
+    });
+    const [formErrors, setFormErrors] = useState({
+        first: false,
+        last: false,
+        alias: false,
+        look: false,
+        heritages: false,
+        backgrounds: false,
+        vices: false,
+        friend: false,
+        rival: false,
+        actions: false,
+    });
     const [idCompletion, setIdCompletion] = useState({
         name: false,
         history: false,
@@ -805,15 +822,22 @@ export default function PlaybookPage() {
             });
         });
     };
-
-    // testing effect
-
     const handleNextStage = () => {
         window.scrollTo(0, 0);
         setFormStage(formStage + 1);
     };
 
-    const handleItemSelection = (e, abilityID, abilityName, actions) => {
+    const handleItemSelection = (
+        e,
+        abilityID,
+        abilityName,
+        abilityDescription,
+        abilityClarification,
+        startingAbility,
+        startingAbilitySummary,
+        startingAbilityClarification,
+        actions
+    ) => {
         const actionsStrings = (array1, array2) => {
             const buildArrayOnes = [];
             const buildArrayTwos = [];
@@ -837,6 +861,11 @@ export default function PlaybookPage() {
                 ...characterData,
                 abilityID: abilityID,
                 abilityName: abilityName,
+                abilityDescription: abilityDescription,
+                abilityClarification: abilityClarification,
+                startingAbility: startingAbility,
+                startingAbilitySummary: startingAbilitySummary,
+                startingAbilityClarification: startingAbilityClarification,
                 actions: [...characterData.actions].sort(),
                 actionsStrings: actionsStrings(characterData.actions, []),
             });
@@ -845,73 +874,112 @@ export default function PlaybookPage() {
                 ...characterData,
                 abilityID: abilityID,
                 abilityName: abilityName,
+                abilityDescription: abilityDescription,
+                abilityClarification: abilityClarification,
+                startingAbility: startingAbility,
+                startingAbilitySummary: startingAbilitySummary,
+                startingAbilityClarification: startingAbilityClarification,
                 actions: [...characterData.actions, ...actions].sort(),
                 actionsStrings: actionsStrings(actions, characterData.actions),
             });
         }
     };
-    const handleSectionSubmission = (e, section, id, choice, singular, entry) => {
-        e.preventDefault();
-        setCharacterData({
-            ...characterData,
-            [singular]: choice,
-            [`${section}_id`]: id,
-            [`${singular}_story`]: entry,
-        });
-        setIncompleteSections(
-            incompleteSections.filter((item) => {
-                return item !== section;
-            })
-        );
-        if (incompleteSections.length === 0) {
-            setIdCompletion({ ...idCompletion, history: true });
-        }
-    };
-    const handleSubmitFriend = (e, id, friend, story) => {
-        e.preventDefault();
-        setCharacterData({
-            ...characterData,
-            friend: { name: friend, id: id },
-            friend_story: story,
-        });
-        setIncompletePeople({ ...incompletePeople, friend: false });
-        if (incompletePeople.rival === false) {
-            setIdCompletion({ ...idCompletion, people: true });
-        }
-    };
-    const handleSubmitRival = (e, id, rival, story) => {
-        e.preventDefault();
-        setCharacterData({ ...characterData, rival: { name: rival, id: id }, rival_story: story });
-        setIncompletePeople({ ...incompletePeople, rival: false });
-        if (incompletePeople.friend === false) {
-            setIdCompletion({ ...idCompletion, people: true });
-        }
-    };
-    const handleSubmitActions = (e, actions) => {
-        let tempArray = Object.entries(actions);
-        const actionsArray = [];
-        tempArray.forEach((item, index) => {
-            if (item[1] > 0) {
-                for (let i = 0; i < item[1]; i++) {
-                    actionsArray.push(item[0]);
-                }
-            }
-        });
-        setCharacterData({ ...characterData, actionsArray: actionsArray, actionsObject: actions });
-        setIdCompletion({ ...idCompletion, actions: true });
-    };
     const handleNameSubmit = (e, names) => {
         e.preventDefault();
-        console.log(names);
-        setCharacterData({
-            ...characterData,
-            firstName: names.first,
-            lastName: names.last,
-            alias: names.alias,
-            look: names.look,
-        });
-        setIdCompletion({ ...idCompletion, name: true });
+        const setErrors = (testObject, testKey) => {
+            if (testObject[testKey] === "") {
+                return true;
+            }
+        };
+        if (names.first !== "" && names.last !== "" && names.alias !== "" && names.look !== "") {
+            setCharacterData({
+                ...characterData,
+                firstName: names.first,
+                lastName: names.last,
+                alias: names.alias,
+                look: names.look,
+            });
+            setFormErrors({ ...formErrors, first: false, last: false, alias: false, look: false });
+            setIdCompletion({ ...idCompletion, name: true });
+        } else {
+            let tempFormErrors = formErrors;
+            Object.keys(names).forEach((key) => {
+                tempFormErrors = { ...tempFormErrors, [key]: setErrors(names, key) };
+            });
+            setFormErrors(tempFormErrors);
+        }
     };
+    const handleHistorySectionSubmission = (e, section, id, choice, singular, entry) => {
+        e.preventDefault();
+        if (!!entry) {
+            setCharacterData({
+                ...characterData,
+                [singular]: choice,
+                [`${section}_id`]: id,
+                [`${singular}_story`]: entry,
+            });
+            let tempSections = incompleteSections;
+            tempSections["history"][section] = false;
+            setIncompleteSections(tempSections);
+            if (
+                !incompleteSections.history.heritages &&
+                !incompleteSections.history.backgrounds &&
+                !incompleteSections.history.vices
+            ) {
+                setIdCompletion({ ...idCompletion, history: true });
+            }
+            setFormErrors({ ...formErrors, [section]: false });
+        } else {
+            e["target"][`${section}-field`]["placeholder"] = "Cannot be blank";
+            setFormErrors({ ...formErrors, [section]: true });
+        }
+    };
+    const handleSubmitPerson = (e, relationship, id, person, story) => {
+        e.preventDefault();
+        const opposite = relationship === "friend" ? "rival" : "friend";
+        if (story !== "") {
+            setCharacterData({
+                ...characterData,
+                [relationship]: { name: person, id: id },
+                [`${relationship}_story`]: story,
+            });
+            setIncompletePeople({ ...incompletePeople, [relationship]: false });
+            setFormErrors({ ...formErrors, [relationship]: false });
+            if (incompletePeople[opposite] === false) {
+                setIdCompletion({ ...idCompletion, people: true });
+            }
+        } else {
+            e["target"][`${relationship}field`]["placeholder"] = "Cannot be blank";
+            setFormErrors({ ...formErrors, [relationship]: true });
+        }
+    };
+    const handleSubmitActions = (e, actions, pool) => {
+        if (pool === 0) {
+            let tempArray = Object.entries(actions);
+            const actionsArray = [];
+            tempArray.forEach((item, index) => {
+                if (item[1] > 0) {
+                    for (let i = 0; i < item[1]; i++) {
+                        actionsArray.push(item[0]);
+                    }
+                }
+            });
+            setCharacterData({
+                ...characterData,
+                actionsArray: actionsArray,
+                actionsObject: actions,
+            });
+            setIdCompletion({ ...idCompletion, actions: true });
+        } else {
+            setFormErrors({ ...formErrors, actions: true });
+        }
+    };
+    const handleEdit = (e, idCompletion, sectionOrPerson) => {
+        if (idCompletion === "history") {
+            setIncompleteSections([...incompleteSections]);
+        }
+    };
+
     if (formStage === 0) {
         return (
             <>
@@ -938,15 +1006,15 @@ export default function PlaybookPage() {
                 <GalacticIDForm
                     refData={refData}
                     characterData={characterData}
-                    handleSectionSubmission={handleSectionSubmission}
+                    handleHistorySectionSubmission={handleHistorySectionSubmission}
                     incompleteSections={incompleteSections}
                     incompletePeople={incompletePeople}
-                    handleSubmitFriend={handleSubmitFriend}
-                    handleSubmitRival={handleSubmitRival}
+                    handleSubmitPerson={handleSubmitPerson}
                     handleSubmitActions={handleSubmitActions}
                     handleNameSubmit={handleNameSubmit}
                     idCompletion={idCompletion}
                     handleNextStage={handleNextStage}
+                    formErrors={formErrors}
                 />
             </>
         );

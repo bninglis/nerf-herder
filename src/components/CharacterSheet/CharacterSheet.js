@@ -17,7 +17,12 @@ export default function CharacterSheet({ characterData, refData }) {
         friend,
         rival,
         abilityName,
+        abilityDescription,
+        abilityClarification,
         actionsObject,
+        startingAbility,
+        startingAbilitySummary,
+        startingAbilityClarification,
     } = characterData;
     const { playbook: playbookArray } = refData;
     const actionsArray = Object.entries(actionsObject);
@@ -90,14 +95,14 @@ export default function CharacterSheet({ characterData, refData }) {
             <div>
                 <h3>Abilities</h3>
                 <div>
-                    <h4>{playbook.starting_ability}</h4>
-                    <p>{playbook.starting_ability_summary}</p>
-                    <p>{playbook.starting_ability_clarification}</p>
+                    <h4>{startingAbility}</h4>
+                    <p>{startingAbilitySummary}</p>
+                    <p>{startingAbilityClarification}</p>
                 </div>
                 <div>
                     <h4>{abilityName}</h4>
-                    {/* <p>{abilityDescription}</p>
-                    <p>{abilityClarification}</p> */}
+                    <p>{abilityDescription}</p>
+                    <p>{abilityClarification}</p>
                 </div>
             </div>
             <div>

@@ -123,7 +123,16 @@ export default function BlockForm({ refData, handleNextStage, handleItemSelectio
                                     key={`b${ability.id}`}
                                     onClick={(e) => {
                                         handleSelect(e, ability.id);
-                                        handleItemSelection(e, ability.id, ability.name);
+                                        handleItemSelection(
+                                            e,
+                                            ability.id,
+                                            ability.name,
+                                            ability.description,
+                                            ability.clarification,
+                                            starting_ability,
+                                            starting_ability_summary,
+                                            starting_ability_clarification
+                                        );
                                     }}
                                 >
                                     <li className="special-ability" key={`i${ability.id}`}>
@@ -143,8 +152,24 @@ export default function BlockForm({ refData, handleNextStage, handleItemSelectio
                             return (
                                 <button
                                     onClick={(e) => {
-                                        handleSelect(e, build.id)
-                                        handleItemSelection(e, build.special_abilities_id, build.special_ability, build.actionsArray);
+                                        handleSelect(e, build.id);
+                                        handleItemSelection(
+                                            e,
+                                            build.special_abilities_id,
+                                            build.special_ability,
+                                            special_abilities.find((item) => {
+                                                return (item.special_abilities_id =
+                                                    build.special_abilities_id);
+                                            })["special_ability_description"],
+                                            special_abilities.find((item) => {
+                                                return (item.special_abilities_id =
+                                                    build.special_abilities_id);
+                                            })["special_ability_clarification"],
+                                            starting_ability,
+                                            starting_ability_summary,
+                                            starting_ability_clarification,
+                                            build.actionsArray
+                                        );
                                     }}
                                     key={`b${build.id}`}
                                     id={build.id}

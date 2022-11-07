@@ -1,7 +1,7 @@
 import "./IDCard.scss";
 import { useState } from "react";
 
-export default function IDCard({ characterData }) {
+export default function IDCard({ characterData, idCompletion, handleEdit}) {
     const { playbook, abilityName, heritage, background, vice, friend, rival, actionsStrings } =
         characterData;
     return (
@@ -27,6 +27,13 @@ export default function IDCard({ characterData }) {
                     </p>
                     <p>Alias: {!characterData.alias ? "Alias" : characterData.alias}</p>
                     <p>Description: {!characterData.look ? "Appearance" : characterData.look}</p>
+                    <button
+                        onClick={(e) => {
+                            handleEdit(e, "name");
+                        }}
+                    >
+                        Edit
+                    </button>
                 </div>
                 <div className="id-card__main">
                     <h2>Galactic ID</h2>
@@ -34,31 +41,93 @@ export default function IDCard({ characterData }) {
                         <p className="id-card__text">{playbook.playbook}</p>
                         <div className="id-card__heritage">
                             <p className="id-card__text">Heritage:</p>
-                            <p className="id-card__text">{!heritage ? "" : `${heritage}`}</p>
+                            <p className="id-card__text">{!heritage ? "Blank" : `${heritage}`}</p>
+                            <button
+                                className={`id-card__edit${
+                                    idCompletion.name === false ? " id-card__edit--hidden" : ""
+                                }`}
+                                onClick={(e) => {
+                                    handleEdit(e, "history", "heritages");
+                                }}
+                            >
+                                Edit
+                            </button>
                         </div>
                         <div className="id-card__background">
                             <p className="id-card__text">Background:</p>
-                            <p className="id-card__text">{!background ? "" : `${background}`}</p>
+                            <p className="id-card__text">
+                                {!background ? "Blank" : `${background}`}
+                            </p>
+                            <button
+                                className={`id-card__edit${
+                                    idCompletion.history === false ? " id-card__edit--hidden" : ""
+                                }`}
+                                onClick={(e) => {
+                                    handleEdit(e, "history", "backgrounds");
+                                }}
+                            >
+                                Edit
+                            </button>
                         </div>
                         <div className="id-card__vice">
                             <p className="id-card__text">Vice:</p>
-                            <p className="id-card__text">{!vice ? "" : `${vice}`}</p>
+                            <p className="id-card__text">{!vice ? "Blank" : `${vice}`}</p>
+                            <button
+                                className={`id-card__edit${
+                                    idCompletion.history === false ? " id-card__edit--hidden" : ""
+                                }`}
+                                onClick={(e) => {
+                                    handleEdit(e, "history", "vices");
+                                }}
+                            >
+                                Edit
+                            </button>
                         </div>
                     </div>
                     <div className="id-card__current">
                         <div className="id-card__friend">
                             <p className="id-card__text">Associate:</p>
                             <p className="id-card__text">{!friend ? "" : `${friend.name}`}</p>
+                            <button
+                                className={`id-card__edit${
+                                    idCompletion.people === false ? " id-card__edit--hidden" : ""
+                                }`}
+                                onClick={(e) => {
+                                    handleEdit(e, "people", "friend");
+                                }}
+                            >
+                                Edit
+                            </button>
                         </div>
                         <div className="id-card__rival">
                             <p className="id-card__text">Enemy:</p>
                             <p className="id-card__text">{!rival ? "" : `${rival.name}`}</p>
+                            <button
+                                className={`id-card__edit${
+                                    idCompletion.people === false ? " id-card__edit--hidden" : ""
+                                }`}
+                                onClick={(e) => {
+                                    handleEdit(e, "people", "rival");
+                                }}
+                            >
+                                Edit
+                            </button>
                         </div>
                         <div className="id-card__action-values">
                             {actionsStrings[1] &&
                                 actionsStrings[1].map((action) => {
                                     return <p key={action}>{action}</p>;
                                 })}
+                            <button
+                                className={`id-card__edit${
+                                    idCompletion.actions === false ? " id-card__edit--hidden" : ""
+                                }`}
+                                onClick={(e) => {
+                                    handleEdit(e, "actions");
+                                }}
+                            >
+                                Edit
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,14 @@
 import "./HistoryForm.scss";
 import { useState } from "react";
 
-export default function HistoryForm({ historyData, section, handleSectionSubmission }) {
+export default function HistoryForm({
+    historyData,
+    section,
+    handleHistorySectionSubmission,
+    formErrors,
+}) {
     const [selectedOption, setSelectedOption] = useState(0);
+    console.log(section)
     const [fieldSubmission, setFieldSubmission] = useState("");
     let singularSection = section.split("");
     singularSection.pop();
@@ -12,7 +18,6 @@ export default function HistoryForm({ historyData, section, handleSectionSubmiss
         setSelectedOption(index);
     };
     const handleFieldChange = (e) => {
-        console.log(e.target.value);
         setFieldSubmission(e.target.value);
     };
     return (
@@ -41,7 +46,7 @@ export default function HistoryForm({ historyData, section, handleSectionSubmiss
                 <form
                     className={`choices__elaboration choices__elaboration--${section}`}
                     onSubmit={(e) => {
-                        handleSectionSubmission(
+                        handleHistorySectionSubmission(
                             e,
                             section,
                             data[selectedOption].id,
@@ -70,8 +75,11 @@ export default function HistoryForm({ historyData, section, handleSectionSubmiss
                     </label>
                     <textarea
                         name={`${section}-field`}
-                        className={`choices__field choices__field--${section}`}
+                        className={`choices__field choices__field--${section}${
+                            !!formErrors[section] ? " choices__field--error" : ""
+                        }`}
                         onChange={handleFieldChange}
+                        placeholder="Please enter here..."
                     ></textarea>
                     <button type="submit" className={`choices__submit choices__submit--${section}`}>
                         <h3>
