@@ -3,22 +3,22 @@ import pipFilled from "../../assets/icons/pip-filled.svg";
 import pipEmpty from "../../assets/icons/pip-empty.svg";
 import { useState } from "react";
 
-export default function BlockForm({ refData, handleNextStage, handleItemSelection }) {
+export default function BlockForm({
+    refData,
+    handleNextStage,
+    handleItemSelection,
+    handleChangePlaybook,
+}) {
     const [whichPutAway, setWhichPutAway] = useState(null);
     const {
         character_questions,
-        id,
-        items_description,
         overview,
         playbook,
-        playing_advice,
         starting_ability,
         starting_ability_clarification,
         starting_ability_summary,
         starting_actions,
-        summary,
         tagline,
-        xeno_advice,
         xp_advice,
         xp_gain,
     } = refData.playbook[0];
@@ -61,7 +61,9 @@ export default function BlockForm({ refData, handleNextStage, handleItemSelectio
             onTransitionEnd={handleNextStage}
         >
             <div className="intro">
-                <h2>{playbook}</h2>
+                <button onClick={handleChangePlaybook}>
+                    <h2>{playbook}</h2>
+                </button>
                 <h3>{tagline}</h3>
                 <p>{overview}</p>
                 <p>{character_questions}</p>
@@ -69,8 +71,6 @@ export default function BlockForm({ refData, handleNextStage, handleItemSelectio
                     <span>{xp_gain}</span>
                     {xp_advice}
                 </p>
-                <h4>Playing a {playbook}</h4>
-                <p>{playing_advice}</p>
             </div>
             <div className="starting-features">
                 <h2>Starting Features</h2>

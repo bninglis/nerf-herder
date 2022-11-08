@@ -6,14 +6,13 @@ export default function Histories({
     handleHistorySectionSubmission,
     formErrors,
     incompleteSections,
+    characterData,
 }) {
-    console.log(incompleteSections);
     const historyArray = Object.keys(incompleteSections.history).map((key) => {
         if (incompleteSections["history"][key] === true) {
             return key;
         }
     });
-    console.log(historyArray);
     if (
         incompleteSections.history.heritages === true ||
         incompleteSections.history.backgrounds === true ||
@@ -31,6 +30,7 @@ export default function Histories({
                                     key={`${section}form`}
                                     handleHistorySectionSubmission={handleHistorySectionSubmission}
                                     formErrors={formErrors}
+                                    characterData={characterData}
                                 />
                             );
                         }

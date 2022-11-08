@@ -17,7 +17,11 @@ export default function PersonDetails({
             setPeopleStories({ ...peopleStories, rival: e.target.value });
         }
     };
-    if (selectedPeople[relationship] !== false && incompleteSections["people"][relationship] !== false) {
+    // const peopleStoriesInit = peopleStories;
+    if (
+        selectedPeople[relationship] !== false &&
+        incompleteSections["people"][relationship] !== false
+    ) {
         return (
             <div>
                 <div className="people__details">
@@ -48,6 +52,7 @@ export default function PersonDetails({
                             name={`${relationship}field`}
                             onChange={handlePersonStory}
                             placeholder="Please enter here..."
+                            value={peopleStories[relationship]}
                         ></textarea>
                         <button className={`people__submit people__submit--${relationship}`}>
                             Submit {selectedPeople[relationship]["name"]} as {relationship}

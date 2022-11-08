@@ -1,3 +1,6 @@
+import "./Header.scss";
+import LinkOrName from "./LinkOrName/LinkOrName";
+
 export default function Header() {
     return (
         <>
@@ -48,6 +51,9 @@ export default function Header() {
                         </g>
                     </svg>
                 </button>
+            </div>
+            <div>
+                <LinkOrName />
             </div>
         </>
     );

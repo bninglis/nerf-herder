@@ -1,7 +1,7 @@
 import "./PeopleSection.scss";
 import PersonCard from "./PersonCard/PersonCard";
 import PersonDetails from "./PersonDetails/PersonDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PeopleSection({
     incompleteSections,
@@ -10,8 +10,39 @@ export default function PeopleSection({
     handleSubmitPerson,
     formErrors,
 }) {
+    const isLoaded = localStorage.getItem("loadCharacter");
     const [selectedPeople, setSelectedPeople] = useState({ friend: false, rival: false });
     const [peopleStories, setPeopleStories] = useState({ friend: "", rival: "" });
+    useEffect(() => {
+        if (!!isLoaded) {
+            let tempPeople = null;
+            const friend = friends.find((person) => {
+                return person.name === localStorage.getItem("close_friend");
+            });
+            const rival = friends.find((person) => {
+                return person.name === localStorage.getItem("rival");
+            });
+            setSelectedPeople({
+                ...selectedPeople,
+                friend: {
+                    id: friend.id,
+                    name: friend.name,
+                    description: friend.description,
+                    elaboration: friend.elaboration,
+                },
+                rival: {
+                    id: rival.id,
+                    name: rival.name,
+                    description: rival.description,
+                    elaboration: rival.elaboration,
+                },
+            });
+            setPeopleStories({
+                friend: localStorage.getItem("close_friend_story"),
+                rival: localStorage.getItem("rival_story"),
+            });
+        }
+    }, []);
     const handleSelectFriend = (e, id, name, description, elaboration) => {
         if (id === selectedPeople.rival.id) {
             setSelectedPeople({

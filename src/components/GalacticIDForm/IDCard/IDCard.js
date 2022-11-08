@@ -1,16 +1,22 @@
 import "./IDCard.scss";
 import { useState } from "react";
 
-export default function IDCard({ characterData, handleEdit, incompleteSections }) {
+export default function IDCard({
+    characterData,
+    handleEdit,
+    incompleteSections,
+    handleChangeAbility,
+    handleChangePlaybook,
+}) {
     const { playbook, abilityName, heritage, background, vice, friend, rival, actionsStrings } =
         characterData;
     return (
         <>
             <div>
-                <button>
+                <button onClick={handleChangePlaybook}>
                     <h2>{playbook}</h2>
                 </button>
-                <button>
+                <button onClick={handleChangeAbility}>
                     <div>
                         <h3>{abilityName}</h3>
                     </div>

@@ -18,6 +18,8 @@ export default function GalacticIDForm({
     handleNextStage,
     formErrors,
     handleEdit,
+    handleChangeAbility,
+    handleChangePlaybook
 }) {
     const {
         heritages,
@@ -37,6 +39,8 @@ export default function GalacticIDForm({
                 characterData={characterData}
                 handleEdit={handleEdit}
                 incompleteSections={incompleteSections}
+                handleChangeAbility={handleChangeAbility}
+                handleChangePlaybook={handleChangePlaybook}
             />
             <AcceptWindow
                 handleNextStage={handleNextStage}
@@ -49,12 +53,14 @@ export default function GalacticIDForm({
                 alias={aliases}
                 look={signature}
                 incompleteSections={incompleteSections}
+                refData={refData}
             />
             <Histories
                 historyData={historyData}
                 handleHistorySectionSubmission={handleHistorySectionSubmission}
                 formErrors={formErrors}
                 incompleteSections={incompleteSections}
+                characterData={characterData}
             />
             <PeopleSection
                 incompleteSections={incompleteSections}
@@ -62,6 +68,7 @@ export default function GalacticIDForm({
                 friends={friends}
                 handleSubmitPerson={handleSubmitPerson}
                 formErrors={formErrors}
+                refData={refData}
             />
             <ActionsForm
                 actions={actions}
