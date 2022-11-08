@@ -1,0 +1,293 @@
+@use "../../../styles/styles" as *;
+
+.projector {
+    &__container {
+        position: fixed;
+        top: 7.5rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+    }
+
+    &__beam {
+        height: 25rem;
+        width: 30rem;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 75%);
+        // background: radial-gradient(at bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+        transform-origin: 50% 100%;
+        animation: 3s beam-entry ease-out;
+
+        &--position2 {
+            transform: scaleY(-30%);
+            transition: 2s;
+        }
+
+        &--container {
+            filter: blur(0.15rem);
+            transform-origin: 50% 50%;
+            animation: beam-pulse 3s infinite linear;
+        }
+    }
+}
+
+@keyframes source-pulse {
+    0% {
+        filter: blur(1rem);
+    }
+    25% {
+        filter: blur(1.1rem);
+    }
+    50% {
+        filter: blur(1rem);
+    }
+    75% {
+        filter: blur(0.9rem);
+    }
+    100% {
+        filter: blur(1rem);
+    }
+    100% {
+        filter: blur(1rem);
+    }
+}
+
+@keyframes beam-pulse {
+    0% {
+        filter: blur(.2rem);
+    }
+    25% {
+        filter: blur(.3rem);
+    }
+    50% {
+        filter: blur(.2rem);
+    }
+    75% {
+        filter: blur(.1rem);
+    }
+    100% {
+        filter: blur(.2rem);
+    }
+}
+
+@keyframes beam-entry {
+    0% {
+        clip-path: polygon(50% 100%, 50% 0%, 50% 0%);
+    }
+    95% {
+        clip-path: polygon(50% 100%, 50% 0%, 50% 0%);
+    }
+    100% {
+        clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+    }
+}
+
+@keyframes source-entry {
+    0% {
+        transform: scale(0) translate(-50%, -50%);
+        transform-origin: top left;
+        // left: 50%;
+    }
+    90% {
+        transform: scale(0) translate(-50%, -50%);
+        transform-origin: top left;
+        // left: 50%;
+    }
+    100% {
+        transform: scale(1) translate(-50%, -50%);
+        transform-origin: top left;
+        // left: 50%;
+    }
+}
+
+@keyframes projector-entry {
+    0% {
+        transform: scale(100%) translatey(0rem);
+    }
+    100% {
+        transform: scale(100%) translatey(2rem);
+    }
+}
+
+.projector {
+    &__source {
+        position: absolute;
+        width: 5rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: white;
+        filter: blur(1rem);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: left;
+        animation: 2.5s source-entry ease-out;
+        animation: source-pulse 2s infinite linear;
+    }
+
+    &__lights {
+        position: absolute;
+        width: 30rem;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 5rem;
+
+        &--position2 {
+            bottom: calc(100% - 3rem);
+            transition: 2s;
+        }
+    }
+
+    &__circles {
+        position: absolute;
+        height: 13rem;
+        left: 50%;
+        transform: translate(-50%, -6rem);
+        transition: 1s;
+        bottom: -12rem;
+
+        &--position2 {
+            bottom: calc(100% - 12rem);
+            transition: 2s;
+        }
+
+        &--position3 {
+            transform: translateY(6rem);
+            transition: 1s;
+        }
+    }
+
+    &__ellipse {
+        border: 0.1rem $CYAN solid;
+        border-radius: 50%;
+        position: absolute;
+        transform: scaleY(100%) translateY(2rem);
+        transition: 1s;
+
+        &--1 {
+            width: 18rem;
+            height: 3.5rem;
+            top: 0rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 2s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--2 {
+            width: 22rem;
+            height: 5.5rem;
+            top: 0.1625rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.9s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--3 {
+            width: 24rem;
+            height: 7rem;
+            top: 0.325rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.8s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--4 {
+            width: 25rem;
+            height: 9rem;
+            top: 0.75rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.7s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--5 {
+            width: 25.5rem;
+            height: 10rem;
+            top: 1.5rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.6s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--6 {
+            width: 25rem;
+            height: 9rem;
+            top: 3rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.5s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--7 {
+            width: 24rem;
+            height: 7rem;
+            top: 5.25rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.4s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--8 {
+            width: 22rem;
+            height: 5.5rem;
+            top: 7.25rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.3s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+
+        &--9 {
+            width: 18rem;
+            height: 3.5rem;
+            top: 9.125rem;
+            left: 50%;
+            transform: translate(-50%);
+            animation: 1.2s beam-entry ease-out;
+
+            &--position2 {
+                transition: 2s;
+                transform: translate(-50%) scaleY(-100%);
+            }
+        }
+    }
+}

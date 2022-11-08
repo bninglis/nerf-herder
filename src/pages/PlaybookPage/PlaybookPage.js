@@ -3,6 +3,7 @@ import SelectionSlides from "../../components/SelectionSlides/SelectionSlides";
 import BlockForm from "../../components/BlockForm/BlockForm";
 import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
 import CharacterSheet from "../../components/CharacterSheet/CharacterSheet";
+import Projector from "../../components/SelectionSlides/Projector/Projector";
 import Header from "../../components/Header/Header";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -13,6 +14,7 @@ export default function PlaybookPage({ sendState }) {
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
     const [refData, setRefData] = useState(null);
+    const [projectorPosition, setProjectorPosition] = useState(false);
     const [formStage, setFormStage] = useState(sendState);
     const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
     const [incompleteSections, setIncompleteSections] = useState({
@@ -325,10 +327,15 @@ export default function PlaybookPage({ sendState }) {
         return (
             <div className="character-container">
                 <Header />
+                <Projector
+                    projectorPosition={projectorPosition}
+                    handleNextStage={handleNextStage}
+                />
                 <SelectionSlides
                     handleSelectPlaybook={handleSelectPlaybook}
                     handleNextStage={handleNextStage}
                     apiUrl={apiUrl}
+                    setProjectorPosition={setProjectorPosition}
                 />
             </div>
         );
@@ -336,6 +343,7 @@ export default function PlaybookPage({ sendState }) {
         return (
             <div className="character-container">
                 <Header />
+                <Projector projectorPosition={true} />
                 <BlockForm
                     refData={refData}
                     handleNextStage={handleNextStage}

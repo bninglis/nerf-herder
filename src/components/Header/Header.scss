@@ -8,6 +8,8 @@
     border: 0.2rem solid $CYAN;
     padding: 2rem;
     @include boxglow;
+    @include anim-box-pulse;
+    user-select: none;
 
     &__menu-icon {
         height: 3rem;

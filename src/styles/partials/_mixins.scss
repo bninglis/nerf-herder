@@ -1,5 +1,5 @@
 @mixin boxglow {
-    box-shadow: 0 0 .5rem #78cce2, inset 0 0 .3rem #78cce2;
+    box-shadow: 0 0 0.5rem #78cce2, inset 0 0 0.3rem #78cce2;
 }
 
 @mixin pathglow {
@@ -19,4 +19,84 @@
     font-style: normal;
     font-weight: 900;
     font-size: 2rem;
+}
+
+@mixin anim-box-pulse {
+    animation: box-pulse 3s infinite linear;
+}
+
+@mixin keys-box-pulse {
+    @keyframes box-pulse {
+        0% {
+            box-shadow: 0 0 0.5rem #78cce2, inset 0 0 0.15rem #78cce2;
+        }
+        10% {
+            box-shadow: 0 0 0.6rem #78cce2, inset 0 0 0.3rem #78cce2;
+        }
+        20% {
+            box-shadow: 0 0 0.75rem #78cce2, inset 0 0 0.5rem #78cce2;
+        }
+        30% {
+            box-shadow: 0 0 0.6rem #78cce2, inset 0 0 0.3rem #78cce2;
+        }
+        40% {
+            box-shadow: 0 0 0.5rem #78cce2, inset 0 0 0.15rem #78cce2;
+        }
+        50% {
+            box-shadow: 0 0 0.4rem #78cce2, inset 0 0 0.3rem #78cce2;
+        }
+        60% {
+            box-shadow: 0 0 0.3rem #78cce2, inset 0 0 0.5rem #78cce2;
+        }
+        70% {
+            box-shadow: 0 0 0.25rem #78cce2, inset 0 0 0.3rem #78cce2;
+        }
+        80% {
+            box-shadow: 0 0 0.3rem #78cce2, inset 0 0 0.5rem #78cce2;
+        }
+        90% {
+            box-shadow: 0 0 0.4rem #78cce2, inset 0 0 0.3rem #78cce2;
+        }
+        100% {
+            box-shadow: 0 0 0.5rem #78cce2, inset 0 0 0.3rem #78cce2;
+        }
+    }
+}
+
+@mixin anim-path-pulse {
+    animation: path-pulse 3s infinite linear;
+}
+
+@mixin keys-path-pulse-fine {
+    @keyframes path-pulse {
+        0% {
+            filter: drop-shadow(0 0 0.075rem #78cce2);
+        }
+        25% {
+            filter: drop-shadow(0 0 0.1rem #78cce2);
+        }
+        50% {
+            filter: drop-shadow(0 0 0.15rem #78cce2);
+        }
+        100% {
+            filter: drop-shadow(0 0 0.1rem #78cce2);
+        }
+    }
+}
+
+@mixin keys-path-pulse-broad {
+    @keyframes path-pulse {
+        0% {
+            filter: drop-shadow(0 0 0.1rem #78cce2);
+        }
+        25% {
+            filter: drop-shadow(0 0 0.2rem #78cce2);
+        }
+        50% {
+            filter: drop-shadow(0 0 0.3rem #78cce2);
+        }
+        100% {
+            filter: drop-shadow(0 0 0.2rem #78cce2);
+        }
+    }
 }

@@ -1,0 +1,39 @@
+@use "../../../styles/styles" as *;
+
+.arrow {
+    height: 2rem;
+    fill: $CYAN;
+    @include anim-path-pulse;
+
+    &--exit {
+        transform: rotate(-120deg) scale(100%) translate(-4rem, -4rem);
+    }
+
+    &--next {
+        transform: rotate(-120deg);
+        transition: 0.5s;
+
+        &.arrow--exit {
+            transform: rotate(-120deg) scale(100%) translate(-4rem, 4rem);
+        }
+
+        &.arrow__filled {
+            transform: rotate(-120deg) scale(120%) translate(-1rem, 1rem);
+        }
+    }
+
+    &--back {
+        transform: rotate(30deg);
+        transition: 0.5s;
+
+        &.arrow--exit {
+            transform: rotate(30deg) scale(100%) translate(-4rem, 4rem);
+        }
+
+        &.arrow__filled {
+            transform: rotate(30deg) scale(120%) translate(-1rem, 1rem);
+        }
+    }
+}
+
+@include keys-path-pulse-broad;
