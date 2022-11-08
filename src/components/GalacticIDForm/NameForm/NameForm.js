@@ -1,5 +1,5 @@
 import "./NameForm.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function NameForm({
     handleNameSubmit,
@@ -9,8 +9,20 @@ export default function NameForm({
     look,
     incompleteSections,
 }) {
+    const isLoaded = localStorage.getItem("loadCharacter");
     const initialNameValues = { first: "", last: "", alias: "", look: "" };
     const [nameFormValues, setNameFormValues] = useState(initialNameValues);
+    useEffect(() => {
+        if (!!isLoaded) {
+            const formFromLoaded = {
+                first: localStorage.getItem("first_name"),
+                last: localStorage.getItem("last_name"),
+                alias: localStorage.getItem("alias"),
+                look: localStorage.getItem("look"),
+            };
+            setNameFormValues(formFromLoaded);
+        }
+    }, []);
     const handleRandomSuggestion = (e) => {
         const idValue = e.target.id;
         const tables = { first: first, last: last, alias: alias, look: look };
@@ -83,7 +95,7 @@ export default function NameForm({
                     <button id="look" type="button" item="item" onClick={handleRandomSuggestion}>
                         R
                     </button>
-                    <button></button>
+                    <button>Submit</button>
                 </form>
             </div>
         );

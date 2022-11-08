@@ -1,14 +1,15 @@
 import "./HistoryForm.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function HistoryForm({
     historyData,
     section,
     handleHistorySectionSubmission,
     formErrors,
+    characterData,
 }) {
+    const isLoaded = localStorage.getItem("loadCharacter");
     const [selectedOption, setSelectedOption] = useState(0);
-    console.log(section);
     const [fieldSubmission, setFieldSubmission] = useState("");
     let singularSection = section.split("");
     singularSection.pop();
@@ -20,6 +21,11 @@ export default function HistoryForm({
     const handleFieldChange = (e) => {
         setFieldSubmission(e.target.value);
     };
+    useEffect(() => {
+        if (!!isLoaded) {
+            setFieldSubmission(characterData[`${singularSection}_story`]);
+        }
+    }, []);
     return (
         <div>
             <div className="choices">
@@ -31,7 +37,7 @@ export default function HistoryForm({
                                     selectedOption === index ? " choices__choice--selected" : ""
                                 }`}
                                 id={data.id}
-                                key={data.id}
+                                key={`${section}-${data.id}`}
                                 onClick={(e) => {
                                     handleClickOption(e, index);
                                 }}
@@ -70,7 +76,9 @@ export default function HistoryForm({
                             ? `your ${data[selectedOption].type.toLowerCase()} background`
                             : ""}
                         {section === "vices"
-                            ? `how you satisfy your urge for ${data[selectedOption].type.toLowerCase()}`
+                            ? `how you satisfy your urge for ${data[
+                                  selectedOption
+                              ].type.toLowerCase()}`
                             : ""}
                     </label>
                     <textarea
@@ -80,6 +88,7 @@ export default function HistoryForm({
                         }`}
                         onChange={handleFieldChange}
                         placeholder="Please enter here..."
+                        value={fieldSubmission}
                     ></textarea>
                     <button type="submit" className={`choices__submit choices__submit--${section}`}>
                         <h3>

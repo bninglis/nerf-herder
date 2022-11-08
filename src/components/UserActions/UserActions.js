@@ -1,9 +1,11 @@
 import "./UserActions.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { v4 as uuid } from "uuid";
 
 export default function UserActions({ userChoice, setLoggedInUser }) {
+    const navigate = useNavigate();
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
@@ -15,11 +17,11 @@ export default function UserActions({ userChoice, setLoggedInUser }) {
             const userKeys = Object.keys(response.data[0]);
             userKeys.shift();
             localStorage.setItem("users_id", response.data[0].id);
-            console.log(response.data[0]);
             setLoggedInUser(response.data[0].id);
             userKeys.forEach((key) => {
                 localStorage.setItem(key, response.data[0][key]);
             });
+            navigate("/user");
         });
     };
     const handleUsernameEntry = (e) => {

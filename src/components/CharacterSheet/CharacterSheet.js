@@ -3,14 +3,16 @@ import pipFilled from "../../assets/icons/pip-filled.svg";
 import pipEmpty from "../../assets/icons/pip-empty.svg";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginDisplay from "./LoginDisplay/LoginDisplay";
+import { useNavigate } from "react-router-dom";
 
-export default function CharacterSheet({ characterData, refData, setFormStage }) {
+export default function CharacterSheet({ characterData, refData, setFormStage, setCharacterData }) {
+    const navigate = useNavigate();
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
-    const {
+    let {
         firstName,
         lastName,
         alias,
@@ -36,44 +38,9 @@ export default function CharacterSheet({ characterData, refData, setFormStage })
     const playbook = playbookArray[0];
     const actionsArray = Object.entries(actionsObject);
     const actionNames = Object.keys(actionsObject);
-    const newId = uuid();
+
     const [loginDisplayToggle, setLoginDisplayToggle] = useState(false);
-
-    const characterSubmission = {
-        id: newId,
-        users_id: userId,
-        playbooks_id: playbook.id,
-        special_abilities_id: characterData.abilityID,
-        heritages_id: characterData.heritages_id,
-        heritage_story: characterData.heritage_story,
-        backgrounds_id: characterData.backgrounds_id,
-        background_story: characterData.background_story,
-        close_friend: characterData.friend.name,
-        close_friend_story: characterData.friend_story,
-        rival: characterData.rival.name,
-        rival_story: characterData.rival_story,
-        vices_id: characterData.vices_id,
-        vice_story: characterData.vice_story,
-        first_name: characterData.firstName,
-        last_name: characterData.lastName,
-        alias: characterData.alias,
-        look: characterData.look,
-        playbook_actions: characterData.playbookActions.join("|"),
-        attune: characterData.actionsObject.attune,
-        command: characterData.actionsObject.command,
-        consort: characterData.actionsObject.consort,
-        doctor: characterData.actionsObject.doctor,
-        hack: characterData.actionsObject.hack,
-        helm: characterData.actionsObject.helm,
-        rig: characterData.actionsObject.rig,
-        scramble: characterData.actionsObject.scramble,
-        scrap: characterData.actionsObject.scrap,
-        skulk: characterData.actionsObject.skulk,
-        study: characterData.actionsObject.study,
-        sway: characterData.actionsObject.sway,
-        playbook: characterData.playbook,
-    };
-
+    const [characterSubmission, setCharacterSubmission] = useState(null);
     const makeMappingArray = (array) => {
         let tempObject = {};
         array.forEach((item) => {
@@ -90,7 +57,61 @@ export default function CharacterSheet({ characterData, refData, setFormStage })
         return tempObject;
     };
     const mappingArray = makeMappingArray(actionsArray);
-
+    const isLoaded = localStorage.getItem("loadCharacter");
+    useEffect(() => {
+        let newId = null;
+        if (!!isLoaded) {
+            const special = refData.special_abilities.find((ability) => {
+                return ability.id === localStorage.getItem("special_abilities_id");
+            });
+            setCharacterData({
+                ...characterData,
+                startingAbility: refData.playbook[0].starting_ability,
+                startingAbilitySummary: refData.playbook[0].starting_ability_summary,
+                startingAbilityClarification: refData.playbook[0].starting_ability_clarification,
+                abilityName: special.name,
+                abilityDescription: special.description,
+                abilityClarification: special.clarification,
+            });
+            newId = localStorage.getItem("id");
+        } else {
+            newId = uuid();
+        }
+        setCharacterSubmission({
+            id: newId,
+            users_id: userId,
+            playbooks_id: playbook.id,
+            special_abilities_id: characterData.abilityID,
+            heritages_id: characterData.heritages_id,
+            heritage_story: characterData.heritage_story,
+            backgrounds_id: characterData.backgrounds_id,
+            background_story: characterData.background_story,
+            close_friend: characterData.friend.name,
+            close_friend_story: characterData.friend_story,
+            rival: characterData.rival.name,
+            rival_story: characterData.rival_story,
+            vices_id: characterData.vices_id,
+            vice_story: characterData.vice_story,
+            first_name: characterData.firstName,
+            last_name: characterData.lastName,
+            alias: characterData.alias,
+            look: characterData.look,
+            playbook_actions: characterData.playbookActions.join("|"),
+            attune: characterData.actionsObject.attune,
+            command: characterData.actionsObject.command,
+            consort: characterData.actionsObject.consort,
+            doctor: characterData.actionsObject.doctor,
+            hack: characterData.actionsObject.hack,
+            helm: characterData.actionsObject.helm,
+            rig: characterData.actionsObject.rig,
+            scramble: characterData.actionsObject.scramble,
+            scrap: characterData.actionsObject.scrap,
+            skulk: characterData.actionsObject.skulk,
+            study: characterData.actionsObject.study,
+            sway: characterData.actionsObject.sway,
+            playbook: characterData.playbook,
+        });
+    }, []);
     const handleSave = () => {
         if (!userId) {
             setLoginDisplayToggle(!loginDisplayToggle);
@@ -105,6 +126,7 @@ export default function CharacterSheet({ characterData, refData, setFormStage })
             localStorage.clear();
             localStorage.setItem("users_id", tempUser[0]);
             localStorage.setItem("username", tempUser[1]);
+            navigate("/user");
         });
     };
 
