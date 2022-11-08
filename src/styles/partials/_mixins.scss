@@ -1,6 +1,13 @@
-@mixin glowboth {
-    box-shadow: inset 0px 0px 8px $CYAN;
-    filter: drop-shadow(0px 0px 4px $CYAN);
+@mixin boxglow {
+    box-shadow: 0 0 .5rem #78cce2, inset 0 0 .3rem #78cce2;
+}
+
+@mixin pathglow {
+    filter: drop-shadow(0 0 0.1rem #78cce2);
+}
+
+@mixin textglow {
+    text-shadow: 0 0 0.4rem #78cce2;
 }
 
 @mixin box-border {
@@ -12,6 +19,4 @@
     font-style: normal;
     font-weight: 900;
     font-size: 2rem;
-    line-height: 2.5rem;
 }
-

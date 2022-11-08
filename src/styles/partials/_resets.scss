@@ -1,5 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
     font-size: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 ul {
@@ -9,4 +18,17 @@ ul {
 
 li {
     list-style: none;
+}
+
+button {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    appearance: none;
+    color: inherit;
 }

@@ -1,0 +1,21 @@
+@use "../../styles/styles" as *;
+
+.header {
+    background-color: rgba($SEA, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.2rem solid $CYAN;
+    padding: 2rem;
+    @include boxglow;
+
+    &__menu-icon {
+        height: 3rem;
+        fill: $CYAN;
+        @include pathglow;
+    }
+
+    &__title {
+        margin: 0;
+    }
+}

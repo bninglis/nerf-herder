@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <>
             <div className="header">
-                <h1>Nerf Herder</h1>
+                <h1 className="header__title">Nerf Herder</h1>
                 <button className="header__menu-button">
                     <svg
                         className="header__menu-icon"

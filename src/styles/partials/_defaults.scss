@@ -1,4 +1,13 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+h1,
 h2 {
     @include headline;
+    @include textglow;
+    color: $CYAN;
 }
 
+p {
+    font-family: "Turret Road";
+}

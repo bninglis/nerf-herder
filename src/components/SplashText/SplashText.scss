@@ -1,4 +1,7 @@
+@use "../../styles/styles" as *;
+
 .splash {
+    color: $CYAN;
     &--hidden {
         display: none;
     }

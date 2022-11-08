@@ -323,18 +323,18 @@ export default function PlaybookPage({ sendState }) {
 
     if (formStage === 0) {
         return (
-            <>
+            <div className="character-container">
                 <Header />
                 <SelectionSlides
                     handleSelectPlaybook={handleSelectPlaybook}
                     handleNextStage={handleNextStage}
                     apiUrl={apiUrl}
                 />
-            </>
+            </div>
         );
     } else if (formStage === 1) {
         return (
-            <>
+            <div className="character-container">
                 <Header />
                 <BlockForm
                     refData={refData}
@@ -342,11 +342,11 @@ export default function PlaybookPage({ sendState }) {
                     handleItemSelection={handleItemSelection}
                     handleChangePlaybook={handleChangePlaybook}
                 />
-            </>
+            </div>
         );
     } else if (formStage === 2) {
         return (
-            <>
+            <div className="character-container">
                 <Header />
                 <GalacticIDForm
                     refData={refData}
@@ -363,11 +363,11 @@ export default function PlaybookPage({ sendState }) {
                     handleChangeAbility={handleChangeAbility}
                     handleChangePlaybook={handleChangePlaybook}
                 />
-            </>
+            </div>
         );
     } else if (formStage === 3 && refData !== null) {
         return (
-            <div>
+            <div className="character-container">
                 <Header />
                 <CharacterSheet
                     characterData={characterData}
@@ -375,7 +375,6 @@ export default function PlaybookPage({ sendState }) {
                     setFormStage={setFormStage}
                     setCharacterData={setCharacterData}
                 />
-                ;
             </div>
         );
     }

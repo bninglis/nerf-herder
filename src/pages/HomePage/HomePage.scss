@@ -1,0 +1,107 @@
+@use "../../styles/styles" as *;
+
+.splash {
+    &__tagline {
+        font-size: 5rem;
+        line-height: auto;
+        height: auto;
+        margin: 0;
+        font-weight: 400;
+        margin-right: 2rem;
+        margin-left: 2rem;
+        position: fixed;
+
+        &--upper {
+            top: 20%;
+        }
+        &--lower {
+            display: flex;
+            text-align: right;
+            justify-content: right;
+            bottom: 20rem;
+            width: 100%;
+            margin-right: 0;
+            padding-right: 5rem;
+        }
+    }
+
+    &__button {
+        cursor: pointer;
+    }
+    &__button-text {
+        position: absolute;
+        right: 1rem;
+        top: 0;
+        color: $CYAN;
+        transition: 0.3s;
+        transform: translate(0);
+
+        &--hover {
+            transition: 0.1s;
+            transform: scale(150%) translateY(0);
+            color: $WHITE;
+            text-shadow: 0.1rem 0.1rem 0 $WHITE;
+        }
+    }
+
+    &__actions {
+        margin-left: 2rem;
+        position: fixed;
+        bottom: 5rem;
+    }
+
+    &__login {
+        color: $CYAN;
+        font-size: 1.6rem;
+        margin-left: 2rem;
+        &__link.home {
+            margin-left: 0;
+            color: $CYAN;
+        }
+    }
+}
+
+.button-div {
+    background-color: rgba($SEA, 0.5);
+    display: flex;
+    border: 0.2rem solid $CYAN;
+    @include boxglow;
+
+    &--hover {
+        background-color: rgba($CYAN, 1);
+    }
+
+    &--short {
+        width: 2rem;
+        height: 4rem;
+    }
+
+    &--long {
+        width: 19rem;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        width: 24rem;
+        transform: skew(-15deg);
+        transition: 0.2s;
+
+        &--hover {
+            transition: 0.2s;
+            transform: scaleX(110%) scaleY(80%);
+        }
+    }
+}
+
+.home-container {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("../../assets/images/scum-and-villainy-bg.jpg");
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: cover;
+    background-position: 25%;
+}
