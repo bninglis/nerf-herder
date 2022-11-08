@@ -4,7 +4,6 @@ import { useState } from "react";
 import HomePage from "./pages/HomePage/HomePage";
 import PlaybookPage from "./pages/PlaybookPage/PlaybookPage";
 import UsersPage from "./pages/UsersPage/UsersPage";
-import Header from "./components/Header/Header";
 
 function App() {
     const [sendState, setSendState] = useState(0);
@@ -12,7 +11,6 @@ function App() {
         <>
             <BrowserRouter>
                 <div className="page-container">
-                    <Header />
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/character" element={<PlaybookPage sendState={sendState} />} />

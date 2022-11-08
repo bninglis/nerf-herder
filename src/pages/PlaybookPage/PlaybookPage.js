@@ -3,12 +3,11 @@ import SelectionSlides from "../../components/SelectionSlides/SelectionSlides";
 import BlockForm from "../../components/BlockForm/BlockForm";
 import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
 import CharacterSheet from "../../components/CharacterSheet/CharacterSheet";
-import { useParams } from "react-router-dom";
+import Header from "../../components/Header/Header";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function PlaybookPage({ sendState }) {
-    const initialState = useParams();
     const isLoadedCharacter = localStorage.getItem("loadCharacter");
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
@@ -325,6 +324,7 @@ export default function PlaybookPage({ sendState }) {
     if (formStage === 0) {
         return (
             <>
+                <Header />
                 <SelectionSlides
                     handleSelectPlaybook={handleSelectPlaybook}
                     handleNextStage={handleNextStage}
@@ -335,6 +335,7 @@ export default function PlaybookPage({ sendState }) {
     } else if (formStage === 1) {
         return (
             <>
+                <Header />
                 <BlockForm
                     refData={refData}
                     handleNextStage={handleNextStage}
@@ -346,6 +347,7 @@ export default function PlaybookPage({ sendState }) {
     } else if (formStage === 2) {
         return (
             <>
+                <Header />
                 <GalacticIDForm
                     refData={refData}
                     characterData={characterData}
@@ -366,6 +368,7 @@ export default function PlaybookPage({ sendState }) {
     } else if (formStage === 3 && refData !== null) {
         return (
             <div>
+                <Header />
                 <CharacterSheet
                     characterData={characterData}
                     refData={refData}

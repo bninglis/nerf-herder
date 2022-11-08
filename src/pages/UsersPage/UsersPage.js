@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import UserActions from "../../components/UserActions/UserActions";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import axios from "axios";
+import Header from "../../components/Header/Header";
 
 export default function UsersPage({ setSendState }) {
     const BACKEND_URL = process.env.REACT_APP_URL;
@@ -43,6 +44,7 @@ export default function UsersPage({ setSendState }) {
     if (!user) {
         return (
             <div>
+                <Header />
                 <UserActions userChoice={userChoice} setLoggedInUser={setLoggedInUser} />
                 <button
                     onClick={(e) => {
@@ -63,6 +65,7 @@ export default function UsersPage({ setSendState }) {
     } else {
         return (
             <div>
+                <Header />
                 <DeleteModal
                     isDeleteVisible={isDeleteVisible}
                     setIsDeleteVisible={setIsDeleteVisible}

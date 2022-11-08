@@ -1,0 +1,17 @@
+@mixin glowboth {
+    box-shadow: inset 0px 0px 8px $CYAN;
+    filter: drop-shadow(0px 0px 4px $CYAN);
+}
+
+@mixin box-border {
+    border: 2px solid $CYAN;
+}
+
+@mixin headline {
+    font-family: "Orbitron";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+

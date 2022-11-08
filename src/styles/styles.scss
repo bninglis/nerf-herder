@@ -1,0 +1,11 @@
+@forward "./partials/typography";
+@forward "./partials/variables";
+@forward "./partials/mixins";
+@forward "./partials/resets";
+@forward "./partials/global";
+
+@use "./partials/typography" as *;
+@use "./partials/variables" as *;
+@use "./partials/mixins" as *;
+@use "./partials/reset" as *;
+@use "./partials/global" as *;
