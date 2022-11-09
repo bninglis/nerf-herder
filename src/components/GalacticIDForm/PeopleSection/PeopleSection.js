@@ -10,6 +10,16 @@ export default function PeopleSection({
     handleSubmitPerson,
     formErrors,
 }) {
+    const randomPortrait = () => {
+        return String(Math.floor(Math.random() * 99) + 3).padStart(2, "0");
+    };
+    const [portraitValues, setPortraitValues] = useState([
+        randomPortrait(),
+        randomPortrait(),
+        randomPortrait(),
+        randomPortrait(),
+        randomPortrait(),
+    ]);
     const isLoaded = localStorage.getItem("loadCharacter");
     const [selectedPeople, setSelectedPeople] = useState({ friend: false, rival: false });
     const [peopleStories, setPeopleStories] = useState({ friend: "", rival: "" });
@@ -43,31 +53,55 @@ export default function PeopleSection({
             });
         }
     }, []);
-    const handleSelectFriend = (e, id, name, description, elaboration) => {
+    const handleSelectFriend = (e, id, name, description, elaboration, portraitPath) => {
         if (id === selectedPeople.rival.id) {
             setSelectedPeople({
                 ...selectedPeople,
                 rival: false,
-                friend: { id: id, name: name, description: description, elaboration: elaboration },
+                friend: {
+                    id: id,
+                    name: name,
+                    description: description,
+                    elaboration: elaboration,
+                    portraitPath: portraitPath,
+                },
             });
         } else {
             setSelectedPeople({
                 ...selectedPeople,
-                friend: { id: id, name: name, description: description, elaboration: elaboration },
+                friend: {
+                    id: id,
+                    name: name,
+                    description: description,
+                    elaboration: elaboration,
+                    portraitPath: portraitPath,
+                },
             });
         }
     };
-    const handleSelectRival = (e, id, name, description, elaboration) => {
+    const handleSelectRival = (e, id, name, description, elaboration, portraitPath) => {
         if (id === selectedPeople.friend.id) {
             setSelectedPeople({
                 ...selectedPeople,
                 friend: false,
-                rival: { id: id, name: name, description: description, elaboration: elaboration },
+                rival: {
+                    id: id,
+                    name: name,
+                    description: description,
+                    elaboration: elaboration,
+                    portraitPath: portraitPath,
+                },
             });
         } else {
             setSelectedPeople({
                 ...selectedPeople,
-                rival: { id: id, name: name, description: description, elaboration: elaboration },
+                rival: {
+                    id: id,
+                    name: name,
+                    description: description,
+                    elaboration: elaboration,
+                    portraitPath: portraitPath,
+                },
             });
         }
     };
@@ -76,54 +110,59 @@ export default function PeopleSection({
     } else {
         return (
             <div className="people">
-                <div>
-                    <h4>As a {characterData.playbook} you've made some</h4>
-                    <h3>{friends[0].type.toLowerCase()}</h3>
-                    <h4>Choose one to be your ally and one to be your rival:</h4>
-                    <PersonDetails
-                        relationship={"friend"}
-                        selectedPeople={selectedPeople}
-                        incompleteSections={incompleteSections}
-                        peopleStories={peopleStories}
-                        setPeopleStories={setPeopleStories}
-                        handleSubmitPerson={handleSubmitPerson}
-                        formErrors={formErrors}
-                    />
-                    <ul className="people__list">
-                        {friends.map((friend) => {
-                            return (
-                                <PersonCard
-                                    id={friend.id}
-                                    person={friend}
-                                    key={friend.id}
-                                    incompleteSections={incompleteSections}
-                                    selectedPeople={selectedPeople}
-                                    friend={
-                                        characterData.friend.id === undefined
-                                            ? ""
-                                            : characterData.friend.id
-                                    }
-                                    rival={
-                                        characterData.rival.id === undefined
-                                            ? ""
-                                            : characterData.rival.id
-                                    }
-                                    handleSelectFriend={handleSelectFriend}
-                                    handleSelectRival={handleSelectRival}
-                                />
-                            );
-                        })}
-                    </ul>
-                    <PersonDetails
-                        relationship={"rival"}
-                        selectedPeople={selectedPeople}
-                        incompleteSections={incompleteSections}
-                        peopleStories={peopleStories}
-                        setPeopleStories={setPeopleStories}
-                        handleSubmitPerson={handleSubmitPerson}
-                        formErrors={formErrors}
-                    />
+                <div className="people__intro">
+                    <h4 className="people__preamble">
+                        As a {characterData.playbook} you've made some
+                    </h4>
+                    <h3 className="people__headline">{friends[0].type.toLowerCase()}</h3>
+                    <p className="people__elaboration">
+                        Choose one to be your ally and one to be your rival:
+                    </p>
                 </div>
+                <PersonDetails
+                    relationship={"friend"}
+                    selectedPeople={selectedPeople}
+                    incompleteSections={incompleteSections}
+                    peopleStories={peopleStories}
+                    setPeopleStories={setPeopleStories}
+                    handleSubmitPerson={handleSubmitPerson}
+                    formErrors={formErrors}
+                />
+                <ul className="people__list">
+                    {friends.map((friend, index) => {
+                        return (
+                            <PersonCard
+                                id={friend.id}
+                                person={friend}
+                                key={friend.id}
+                                incompleteSections={incompleteSections}
+                                selectedPeople={selectedPeople}
+                                friend={
+                                    characterData.friend.id === undefined
+                                        ? ""
+                                        : characterData.friend.id
+                                }
+                                rival={
+                                    characterData.rival.id === undefined
+                                        ? ""
+                                        : characterData.rival.id
+                                }
+                                handleSelectFriend={handleSelectFriend}
+                                handleSelectRival={handleSelectRival}
+                                portraitValue={portraitValues[index]}
+                            />
+                        );
+                    })}
+                </ul>
+                <PersonDetails
+                    relationship={"rival"}
+                    selectedPeople={selectedPeople}
+                    incompleteSections={incompleteSections}
+                    peopleStories={peopleStories}
+                    setPeopleStories={setPeopleStories}
+                    handleSubmitPerson={handleSubmitPerson}
+                    formErrors={formErrors}
+                />
             </div>
         );
     }

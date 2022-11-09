@@ -1,7 +1,141 @@
+@use "../../../../styles/styles" as *;
+
+.history {
+    @include box-border;
+    @include boxglow;
+    display: flex;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
 .choices {
+    display: flex;
+    flex-direction: column;
+    min-width: 40%;
+    &__field {
+        width: 100%;
+        &--error {
+            border-color: $ERROR;
+            @include boxglow-error;
+        }
+    }
+
+    &__subheader {
+        color: $CYAN;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    &__bullet {
+        fill: $CYAN;
+        @include pathglow;
+        width: 2rem;
+        margin-right: 0.5rem;
+        transform: rotate(0) scale(100%);
+        transition: 0.7s;
+
+        &--selected {
+            transform: rotate(70deg) scale(110%);
+            transition: 0.7s;
+            @include pathglow-xl;
+        }
+    }
+
+    &__path01 {
+        transform: rotate(0) scale(100%);
+        transition: 0.7s;
+        transform-origin: 50%;
+
+        &--selected {
+            transform: rotate(-180deg) scale(110%);
+            transition: 0.7s;
+            @include pathglow-xl;
+        }
+    }
+
+    &__choice {
+        text-transform: capitalize;
+        font-family: "orbitron";
+        @include textglow;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: 1.3rem;
+            left: 0.6rem;
+            width: 0.7rem;
+            height: 0.7rem;
+            background-color: $CYAN;
+            border-radius: 50%;
+            transition: 0.5s;
+            transform: scale(0.01);
+        }
+
+        &--selected {
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: 1.3rem;
+                left: 0.6rem;
+                width: 0.7rem;
+                height: 0.7rem;
+                background-color: $CYAN;
+                border-radius: 50%;
+                transition: 0.5s;
+                transform: scale(1);
+            }
+        }
+    }
+
+    &__text {
+        color: $WHITE;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__elaboration {
+        font-family: "orbitron";
+        color: $WHITE;
+        font-weight: 800;
+    }
+
     &__field {
         &--error {
-            background-color: red;
+            @include error-state;
         }
+    }
+
+    &__details {
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-family: "orbitron";
+        text-transform: uppercase;
+        padding: 0;
+        font-size: 1rem;
+        max-height: 3rem;
+        min-height: 3rem;
+        background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+        border: $CYAN solid 0.2rem;
+        @include boxglow;
+    }
+
+    &__button-text {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
     }
 }

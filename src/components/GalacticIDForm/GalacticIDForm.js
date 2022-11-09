@@ -35,33 +35,33 @@ export default function GalacticIDForm({
     const historyData = { heritages: heritages, backgrounds: backgrounds, vices: vices };
     return (
         <>
-            <IDCard
+            {/* <IDCard
                 characterData={characterData}
                 handleEdit={handleEdit}
                 incompleteSections={incompleteSections}
                 handleChangeAbility={handleChangeAbility}
                 handleChangePlaybook={handleChangePlaybook}
-            />
+            /> */}
             <AcceptWindow
                 handleNextStage={handleNextStage}
                 incompleteSections={incompleteSections}
             />
-            <NameForm
+            {/* <NameForm
                 handleNameSubmit={handleNameSubmit}
                 first={first_names}
                 last={last_names}
                 alias={aliases}
                 look={signature}
                 incompleteSections={incompleteSections}
-                refData={refData}
-            />
-            <Histories
+                formErrors={formErrors}
+            /> */}
+            {/* <Histories
                 historyData={historyData}
                 handleHistorySectionSubmission={handleHistorySectionSubmission}
                 formErrors={formErrors}
                 incompleteSections={incompleteSections}
                 characterData={characterData}
-            />
+            /> */}
             <PeopleSection
                 incompleteSections={incompleteSections}
                 characterData={characterData}

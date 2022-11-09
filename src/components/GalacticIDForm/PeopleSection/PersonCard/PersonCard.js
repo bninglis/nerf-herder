@@ -1,4 +1,5 @@
 import "./PersonCard.scss";
+import { useState } from "react";
 
 export default function PersonCard({
     person,
@@ -8,6 +9,7 @@ export default function PersonCard({
     selectedPeople,
     friend,
     rival,
+    portraitValue
 }) {
     return (
         <li
@@ -30,15 +32,17 @@ export default function PersonCard({
                         person.id,
                         person.name,
                         person.description,
-                        person.elaboration
+                        person.elaboration,
+                        `portraits/portrait${portraitValue}.png`
                     );
                 }}
             >
                 Friend
             </button>
-            <h4>{person.name}</h4>
-            <p>{person.description}</p>
-            <p>{person.elaboration}</p>
+            <img className="person__portrait" src={`portraits/portrait${portraitValue}.png`} alt={`portrait of ${person.name}`} />
+            <h4 className="person__name">{person.name}</h4>
+            <p className="person__job">{person.description}</p>
+            <p className="person__elaboration">{person.elaboration}</p>
             <button
                 className={`person__button person__button--rival${
                     !!incompleteSections.people.rival ? "" : " person__button--rival"
@@ -49,7 +53,8 @@ export default function PersonCard({
                         person.id,
                         person.name,
                         person.description,
-                        person.elaboration
+                        person.elaboration,
+                        `portraits/portrait${portraitValue}.png`
                     );
                 }}
             >

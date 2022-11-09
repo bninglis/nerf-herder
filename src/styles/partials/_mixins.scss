@@ -4,6 +4,10 @@
     box-shadow: 0 0 0.5rem #78cce2, inset 0 0 0.3rem #78cce2;
 }
 
+@mixin boxglow-error {
+    box-shadow: 0 0 0.5rem $ERROR, inset 0 0 0.3rem $ERROR;
+}
+
 @mixin pathglow {
     filter: drop-shadow(0 0 0.1rem #78cce2);
 }
@@ -11,7 +15,6 @@
 @mixin pathglow-xl {
     filter: drop-shadow(0 0 0.3rem #78cce2);
 }
-
 
 @mixin textglow {
     text-shadow: 0 0 0.4rem #78cce2;
@@ -43,6 +46,43 @@
     display: flex;
     align-items: center;
     justify-content: left;
+}
+
+@mixin personcard {
+    &__portrait {
+        width: 10rem;
+        border-radius: 4rem;
+        @include box-border;
+        @include boxglow;
+        filter: opacity(80%);
+        animation: portraits-pulse 2s infinite;
+        margin-top: 2rem;
+    }
+
+    &__name {
+        font-family: "orbitron";
+        color: $CYAN;
+        font-size: 2rem;
+    }
+
+    &__job {
+        color: $CYAN;
+        font-weight: bold;
+    }
+
+    &__elaboration {
+        text-align: center;
+        color: $WHITE;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+@mixin better-box {
+    background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+    border: $CYAN solid 0.2rem;
+    @include boxglow;
 }
 
 @mixin abilityandbuild {
@@ -85,6 +125,11 @@
             transform: scale(110%);
         }
     }
+}
+
+@mixin error-state {
+    border-color: #cc0000;
+    @include boxglow-error;
 }
 
 @mixin blockform-subheader {

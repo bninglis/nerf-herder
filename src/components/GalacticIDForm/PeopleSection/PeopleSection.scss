@@ -1,0 +1,29 @@
+@use "../../../styles/styles" as *;
+
+.people {
+    padding: 1rem;
+    &__list {
+        list-style-type: none;
+        padding-inline: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__preamble {
+        color: $WHITE;
+        font-family: "orbitron";
+    }
+
+    &__headline {
+        color: $CYAN;
+        font-family: "orbitron";
+        font-size: 1.8rem;
+        text-transform: capitalize;
+        margin-bottom: 0;
+    }
+
+    &__elaboration {
+        color: $WHITE;
+    }
+}

@@ -1,0 +1,64 @@
+@use "../../../../styles/styles" as *;
+
+.people {
+    &__details {
+        display: flex;
+        align-items: center;
+    }
+
+    &__label {
+        color: $WHITE;
+        font-family: "turret road";
+    }
+
+    &__field {
+        width: 100%;
+
+        &--error {
+            border-color: $ERROR;
+            @include boxglow-error;
+        }
+    }
+
+    &__submit {
+        font-family: "orbitron";
+        color: $WHITE;
+        @include box-border;
+        @include boxglow;
+    }
+}
+
+.details {
+    &__portrait {
+        width: 10rem;
+        border-radius: 4rem;
+        @include box-border;
+        @include boxglow;
+        filter: opacity(80%);
+        animation: portraits-pulse 2s infinite;
+        margin-top: 2rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    &__name {
+        margin: 0;
+    }
+
+    &__job {
+        margin: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__job {
+        font-family: "orbitron";
+    }
+
+    @include personcard;
+}

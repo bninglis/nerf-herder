@@ -1,0 +1,74 @@
+@use "../../../styles/styles" as *;
+
+.name-form {
+    padding: 2rem;
+    &__title {
+        font-family: "Orbitron";
+        color: $CYAN;
+        font-size: 1.6rem;
+    }
+
+    &__text {
+        color: $CYAN;
+    }
+
+    &__label {
+        color: $WHITE;
+        font-family: "turret road";
+        margin-left: 1rem;
+        margin-top: 1rem;
+    }
+
+    &__unit {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__input {
+        width: 100%;
+
+        &--error {
+            border-color: #cc0000;
+            @include boxglow-error;
+        }
+
+        &--description {
+            height: 5rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__submit {
+        @include headline-box;
+        @include headline;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    &__final {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    &__form {
+        margin-top: 1rem;
+    }
+
+    &__unit {
+        position: relative;
+    }
+
+    &__random {
+        position: absolute;
+        right: 0.25rem;
+        bottom: 0.25rem;
+        &--description {
+            bottom: 3rem;
+        }
+    }
+}

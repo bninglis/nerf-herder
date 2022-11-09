@@ -16,3 +16,21 @@ p {
 .bold {
     font-weight: bold;
 }
+
+input,
+textarea {
+    appearance: none;
+    background: rgba($DARK, 0.4);
+    border: solid 0.2rem $CYAN;
+    @include pathglow;
+    @include anim-path-pulse;
+    resize: none;
+    color: $CYAN;
+    font-family: "turret road";
+    min-height: 3rem;
+    outline: none;
+
+    &::placeholder {
+        color: $GRAYBLUE;
+    }
+}

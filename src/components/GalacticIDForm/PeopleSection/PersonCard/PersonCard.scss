@@ -1,10 +1,100 @@
+@use "../../../../styles/styles" as *;
+
 .person {
+    @include box-border;
+    @include boxglow;
+    margin-block: 0;
+    padding-inline: 0;
+    width: calc(50% - 0.5rem);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &:nth-of-type(2n) {
+        margin-left: 1rem;
+    }
+
     &--hidden {
         display: none;
     }
+
     &__button {
+        @include better-box;
+        @include boxglow;
+        width: 100%;
+        height: 3rem;
+        font-family: "orbitron";
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &--friend {
+            &:hover {
+                transform: translateY(-1rem);
+                transition: 0.2s;
+            }
+        }
+
+        &--rival {
+            &:hover {
+                transform: translateY(1rem);
+                transition: 0.2s;
+            }
+        }
+
         &--hidden {
             display: none;
         }
+    }
+
+    @include personcard;
+    // &__portrait {
+    //     width: 10rem;
+    //     border-radius: 4rem;
+    //     @include box-border;
+    //     @include boxglow;
+    //     filter: opacity(80%);
+    //     animation: portraits-pulse 2s infinite;
+    //     margin-top: 2rem;
+    // }
+
+    // &__name {
+    //     font-family: "orbitron";
+    //     color: $CYAN;
+    //     font-size: 2rem;
+    //     margin: 1rem;
+    // }
+
+    // &__job {
+    //     color: $CYAN;
+    //     font-weight: bold;
+    // }
+
+    // &__elaboration {
+    //     text-align: center;
+    //     color: $WHITE;
+    //     padding-left: 1rem;
+    //     padding-right: 1rem;
+    //     padding-bottom: 1rem;
+    // }
+}
+
+@keyframes portraits-pulse {
+    0% {
+        filter: opacity(80%);
+    }
+    25% {
+        filter: opacity(85%);
+    }
+    50% {
+        filter: opacity(80%);
+    }
+    75% {
+        filter: opacity(75%);
+    }
+    100% {
+        filter: opacity(80%);
     }
 }

@@ -1,4 +1,5 @@
 import "./NameForm.scss";
+import RandomButton from "./RandomButton/RandomButton";
 import { useState, useEffect } from "react";
 
 export default function NameForm({
@@ -8,10 +9,23 @@ export default function NameForm({
     alias,
     look,
     incompleteSections,
+    formErrors,
 }) {
+    const [randomHovers, setRandomHovers] = useState({
+        first: false,
+        last: false,
+        alias: false,
+        look: false,
+    });
     const isLoaded = localStorage.getItem("loadCharacter");
     const initialNameValues = { first: "", last: "", alias: "", look: "" };
     const [nameFormValues, setNameFormValues] = useState(initialNameValues);
+    const handleMouseEnter = (e, input) => {
+        setRandomHovers({ ...randomHovers, [input]: true });
+    };
+    const handleMouseLeave = (e, input) => {
+        setRandomHovers({ ...randomHovers, [input]: false });
+    };
     useEffect(() => {
         if (!!isLoaded) {
             const formFromLoaded = {
@@ -47,55 +61,155 @@ export default function NameForm({
     if (incompleteSections.name === true) {
         return (
             <div className="name-form">
-                <h3>Enter Character Name and Short Physical Description</h3>
-                <p>Press the button to the side for suggestions</p>
+                <div className="name-form__preamble">
+                    <h3 className="name-form__title">
+                        Enter Character Name and a Short Physical Description
+                    </h3>
+                    <p className="name-form__text">
+                        or press the button to the side for suggestions
+                    </p>
+                </div>
                 <form
-                    className="name-form"
+                    className="name-form__form"
                     onSubmit={(e) => {
                         handleNameSubmit(e, nameFormValues);
                     }}
                 >
-                    <label className="name-form__label" htmlFor="namefirst"></label>
-                    <input
-                        className="name-form__input"
-                        name="namefirst"
-                        value={nameFormValues.first}
-                        onChange={handleNameChange}
-                    />
-                    <button id="first" type="button" item="name" onClick={handleRandomSuggestion}>
-                        R
-                    </button>
-                    <label className="name-form__label" htmlFor="namelast"></label>
-                    <input
-                        className="name-form__input"
-                        name="namelast"
-                        value={nameFormValues.last}
-                        onChange={handleNameChange}
-                    />
-                    <button id="last" type="button" item="name" onClick={handleRandomSuggestion}>
-                        R
-                    </button>
-                    <label className="name-form__label" htmlFor="namealias"></label>
-                    <input
-                        className="name-form__input"
-                        name="namealias"
-                        value={nameFormValues.alias}
-                        onChange={handleNameChange}
-                    />
-                    <button id="alias" type="button" item="alias" onClick={handleRandomSuggestion}>
-                        R
-                    </button>
-                    <label className="name-form__label" htmlFor="namelook"></label>
-                    <textarea
-                        className="name-form__input"
-                        name="namelook"
-                        value={nameFormValues.look}
-                        onChange={handleNameChange}
-                    />
-                    <button id="look" type="button" item="item" onClick={handleRandomSuggestion}>
-                        R
-                    </button>
-                    <button>Submit</button>
+                    <div className="name-form__column">
+                        <div className="name-form__first name-form__unit">
+                            <label className="name-form__label" htmlFor="namefirst">
+                                First Name:
+                            </label>
+                            <input
+                                className={`name-form__input${
+                                    formErrors.first ? " name-form__input--error" : ""
+                                }`}
+                                name="namefirst"
+                                value={nameFormValues.first}
+                                onChange={handleNameChange}
+                            />
+                            <button
+                                id="first"
+                                type="button"
+                                item="name"
+                                onClick={handleRandomSuggestion}
+                                onMouseEnter={(e) => {
+                                    handleMouseEnter(e, "first");
+                                }}
+                                onMouseLeave={(e) => {
+                                    handleMouseLeave(e, "first");
+                                }}
+                                className="name-form__random"
+                            >
+                                <RandomButton
+                                    input={"first"}
+                                    randomHovers={randomHovers}
+                                    error={formErrors.first ? true : false}
+                                />
+                            </button>
+                        </div>
+                        <div className="name-form__last name-form__unit">
+                            <label className="name-form__label" htmlFor="namelast">
+                                Last Name:
+                            </label>
+                            <input
+                                className={`name-form__input${
+                                    formErrors.last ? " name-form__input--error" : ""
+                                }`}
+                                name="namelast"
+                                value={nameFormValues.last}
+                                onChange={handleNameChange}
+                            />
+                            <button
+                                id="last"
+                                type="button"
+                                item="name"
+                                onClick={handleRandomSuggestion}
+                                onMouseEnter={(e) => {
+                                    handleMouseEnter(e, "last");
+                                }}
+                                onMouseLeave={(e) => {
+                                    handleMouseLeave(e, "last");
+                                }}
+                                className="name-form__random"
+                            >
+                                <RandomButton
+                                    input={"last"}
+                                    randomHovers={randomHovers}
+                                    error={formErrors.last ? true : false}
+                                />
+                            </button>
+                        </div>
+                        <div className="name-form__alias name-form__unit">
+                            <label className="name-form__label" htmlFor="namealias">
+                                Alias:
+                            </label>
+                            <input
+                                className={`name-form__input${
+                                    formErrors.alias ? " name-form__input--error" : ""
+                                }`}
+                                name="namealias"
+                                value={nameFormValues.alias}
+                                onChange={handleNameChange}
+                            />
+                            <button
+                                id="alias"
+                                type="button"
+                                item="alias"
+                                onClick={handleRandomSuggestion}
+                                onMouseEnter={(e) => {
+                                    handleMouseEnter(e, "alias");
+                                }}
+                                onMouseLeave={(e) => {
+                                    handleMouseLeave(e, "alias");
+                                }}
+                                className="name-form__random"
+                            >
+                                <RandomButton
+                                    input={"alias"}
+                                    randomHovers={randomHovers}
+                                    error={formErrors.alias ? true : false}
+                                />
+                            </button>
+                        </div>
+                    </div>
+                    <div className="name-form__look name-form__unit">
+                        <label className="name-form__label" htmlFor="namelook">
+                            Description:
+                        </label>
+                        <textarea
+                            className={`name-form__input name-form__input--description${
+                                formErrors.first ? " name-form__input--error" : ""
+                            }`}
+                            name="namelook"
+                            value={nameFormValues.look}
+                            onChange={handleNameChange}
+                        />
+                        <button
+                            id="look"
+                            type="button"
+                            item="item"
+                            onClick={handleRandomSuggestion}
+                            onMouseEnter={(e) => {
+                                handleMouseEnter(e, "look");
+                            }}
+                            onMouseLeave={(e) => {
+                                handleMouseLeave(e, "look");
+                            }}
+                            className="name-form__random name-form__random--description"
+                        >
+                            <RandomButton
+                                input="look"
+                                randomHovers={randomHovers}
+                                error={formErrors.look ? true : false}
+                            />
+                        </button>
+                    </div>
+                    <div className="name-form__final">
+                        <button className="name-form__submit" type="submit">
+                            Submit Name
+                        </button>
+                    </div>
                 </form>
             </div>
         );
