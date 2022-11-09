@@ -46,7 +46,7 @@ export default function GalacticIDForm({
                 handleNextStage={handleNextStage}
                 incompleteSections={incompleteSections}
             />
-            {/* <NameForm
+            <NameForm
                 handleNameSubmit={handleNameSubmit}
                 first={first_names}
                 last={last_names}
@@ -54,22 +54,22 @@ export default function GalacticIDForm({
                 look={signature}
                 incompleteSections={incompleteSections}
                 formErrors={formErrors}
-            /> */}
-            {/* <Histories
+            />
+            <Histories
                 historyData={historyData}
                 handleHistorySectionSubmission={handleHistorySectionSubmission}
                 formErrors={formErrors}
                 incompleteSections={incompleteSections}
                 characterData={characterData}
-            /> */}
-            {/* <PeopleSection
+            />
+            <PeopleSection
                 incompleteSections={incompleteSections}
                 characterData={characterData}
                 friends={friends}
                 handleSubmitPerson={handleSubmitPerson}
                 formErrors={formErrors}
                 refData={refData}
-            /> */}
+            />
             <ActionsForm
                 actions={actions}
                 characterData={characterData}
