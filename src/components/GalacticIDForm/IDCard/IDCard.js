@@ -10,29 +10,44 @@ export default function IDCard({
 }) {
     const { playbook, abilityName, heritage, background, vice, friend, rival, actionsStrings } =
         characterData;
+    console.log(characterData);
     return (
         <>
-            <div>
-                <button onClick={handleChangePlaybook}>
-                    <h2>{playbook}</h2>
+            <div className="starter-form">
+                <button className="intro__reset" onClick={handleChangePlaybook}>
+                    <h2 className="intro__playbook">{playbook}</h2>
                 </button>
-                <button onClick={handleChangeAbility}>
+                <button className="intro__ability" onClick={handleChangeAbility}>
                     <div>
-                        <h3>{abilityName}</h3>
+                        <h3 className="intro__ability--text">{abilityName}</h3>
                     </div>
                 </button>
             </div>
             <div className="id-card">
                 <div className="id-card__basic-info">
-                    <p>
-                        First Name:{" "}
+                    <svg
+                        className="id-card__pfp"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="1 0.5 338 338"
+                    >
+                        <path d="m169,.5a169,169 0 1,0 2,0zm0,86a76,76 0 1 1-2,0zM57,287q27-35 67-35h92q40,0 67,35a164,164 0 0,1-226,0"></path>
+                    </svg>
+                    <p className="id-card__text bold">First Name: </p>
+                    <p className="id-card__text id-card__text--data">
                         {!characterData.firstName ? "First Name" : characterData.firstName}
                     </p>
-                    <p>
-                        Last Name: {!characterData.lastName ? "Last Name" : characterData.lastName}
+                    <p className="id-card__text bold">Last Name:</p>
+                    <p className="id-card__text id-card__text--data">
+                        {!characterData.lastName ? "Last Name" : characterData.lastName}
                     </p>
-                    <p>Alias: {!characterData.alias ? "Alias" : characterData.alias}</p>
-                    <p>Description: {!characterData.look ? "Appearance" : characterData.look}</p>
+                    <p className="id-card__text bold">Alias:</p>
+                    <p className="id-card__text id-card__text--data">
+                        {!characterData.alias ? "Alias" : characterData.alias}
+                    </p>
+                    <p className="id-card__text bold">Description:</p>
+                    <p className="id-card__text id-card__text--data">
+                        {!characterData.look ? "Appearance" : characterData.look}
+                    </p>
                     <button
                         className={`id-card__edit${
                             incompleteSections.name === true ? " id-card__edit--hidden" : ""
@@ -45,9 +60,9 @@ export default function IDCard({
                     </button>
                 </div>
                 <div className="id-card__main">
-                    <h2>Galactic ID</h2>
+                    <h2 className="id-card__title">Galactic ID</h2>
                     <div className="id-card__history">
-                        <p className="id-card__text">{playbook.playbook}</p>
+                        <p className="id-card__text id-card__playbook">{characterData.playbook}</p>
                         <div className="id-card__heritage">
                             <p className="id-card__text">Heritage:</p>
                             <p className="id-card__text">{!heritage ? "Blank" : `${heritage}`}</p>
@@ -132,10 +147,15 @@ export default function IDCard({
                                 Edit
                             </button>
                         </div>
-                        <div className="id-card__action-values">
+                        <div className="id-card__action-values id-card__text">
+                            <p className="id-card__text">Actions:</p>
                             {actionsStrings[1] &&
                                 actionsStrings[1].map((action) => {
-                                    return <p key={action}>{action}</p>;
+                                    return (
+                                        <p className="id-card__text id-card__action" key={action}>
+                                            {action}
+                                        </p>
+                                    );
                                 })}
                             <button
                                 className={`id-card__edit${

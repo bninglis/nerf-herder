@@ -58,7 +58,7 @@ export default function BlockForm({
     }
     return (
         <div className={`starter-form${!!whichPutAway ? " starter-form--hidden" : ""}`}>
-            {/* <button className="intro__reset" onClick={handleChangePlaybook}>
+            <button className="intro__reset" onClick={handleChangePlaybook}>
                 <h2 className="intro__playbook">{playbook}</h2>
             </button>
             <div className="intro">
@@ -69,20 +69,20 @@ export default function BlockForm({
                     <span className="bold">{xp_gain}</span>
                     {xp_advice}
                 </p>
-            </div> */}
+            </div>
             <div className="starting-features">
                 <div className="starting-ability__block">
                     <h2 className="starting-ability__headline">Starting Features</h2>
                 </div>
                 <div className="starting-ability">
-                    {/* <div>
+                    <div>
                         <h3 className="starting-ability__subheader">Starting Ability</h3>
                         <h4 className="starting-ability__ability">{starting_ability}</h4>
                         <p className="starting-ability__description">
                             <span className="bold"> {starting_ability_summary} </span>
                             {starting_ability_clarification}
                         </p>
-                    </div> */}
+                    </div>
                     <div className="actions__container">
                         <h3 className="actions__subheader">Actions</h3>
                         <div className="actions">

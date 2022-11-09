@@ -2,7 +2,7 @@
     position: absolute;
     overflow: scroll;
     overflow-x: hidden;
-    top: 7rem;
+    top: 8rem;
     height: calc(100% - 7rem);
     &__container {
         background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),

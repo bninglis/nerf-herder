@@ -712,6 +712,26 @@ const testData = {
         },
     ],
 };
+const testCharacter = {
+    friend: { id: "" },
+    rival: { id: "" },
+    actions: ["rig", "rig", "study"],
+    playbookActions: ["rig", "rig", "study"],
+    playbookID: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
+    playbook: "mechanic",
+    abilityID: "018ba9b7-193b-4661-912b-b8b43144200e",
+    abilityName: "construct whisperer",
+    abilityDescription:
+        "Machines speak to you when you study them. The first time you roll a critical while fixing or building a particular machine, you may add a simple modification to it (see Crafting).",
+    abilityClarification:
+        "How do machines whisper their secrets to you? Is it intuitive? Do you feel what they feel? You do not gain the modification if you improve the result with cred.",
+    startingAbility: "tinker",
+    startingAbilitySummary:
+        "When you work on a clock with rig or hack, or when you study a schematic, fill +1 segment.",
+    startingAbilityClarification:
+        "You get this bonus segment regardless of whether this is a Downtime action or not. This means that bypassing security on a job or doing an emergency patch while escaping a chasing ship is easier for you than others.",
+    actionsStrings: ["rig +2, study +1", ["rig +2", "study +1"]],
+};
 
 export default function PlaybookPage({ sendState }) {
     const isLoadedCharacter = localStorage.getItem("loadCharacter");
@@ -722,8 +742,9 @@ export default function PlaybookPage({ sendState }) {
     const [refData, setRefData] = useState(testData);
     const [projectorPosition, setProjectorPosition] = useState(false);
     // const [formStage, setFormStage] = useState(sendState);
-    const [formStage, setFormStage] = useState(0);
-    const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
+    const [formStage, setFormStage] = useState(2);
+    const [characterData, setCharacterData] = useState(testCharacter);
+    // const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
     const [incompleteSections, setIncompleteSections] = useState({
         name: true,
         history: {
@@ -890,6 +911,7 @@ export default function PlaybookPage({ sendState }) {
         actions
     ) => {
         if (!actions) {
+            console.log(characterData.actions);
             setCharacterData({
                 ...characterData,
                 abilityID: abilityID,
@@ -1062,34 +1084,38 @@ export default function PlaybookPage({ sendState }) {
     } else if (formStage === 2) {
         return (
             <div className="character__container">
-                <Header />
-                <GalacticIDForm
-                    refData={refData}
-                    characterData={characterData}
-                    setCharacterData={setCharacterData}
-                    handleHistorySectionSubmission={handleHistorySectionSubmission}
-                    incompleteSections={incompleteSections}
-                    handleSubmitPerson={handleSubmitPerson}
-                    handleSubmitActions={handleSubmitActions}
-                    handleNameSubmit={handleNameSubmit}
-                    handleNextStage={handleNextStage}
-                    formErrors={formErrors}
-                    handleEdit={handleEdit}
-                    handleChangeAbility={handleChangeAbility}
-                    handleChangePlaybook={handleChangePlaybook}
-                />
+                <Projector projectorPosition={true} />
+                <div className="character">
+                    <GalacticIDForm
+                        refData={refData}
+                        characterData={characterData}
+                        setCharacterData={setCharacterData}
+                        handleHistorySectionSubmission={handleHistorySectionSubmission}
+                        incompleteSections={incompleteSections}
+                        handleSubmitPerson={handleSubmitPerson}
+                        handleSubmitActions={handleSubmitActions}
+                        handleNameSubmit={handleNameSubmit}
+                        handleNextStage={handleNextStage}
+                        formErrors={formErrors}
+                        handleEdit={handleEdit}
+                        handleChangeAbility={handleChangeAbility}
+                        handleChangePlaybook={handleChangePlaybook}
+                    />
+                </div>
             </div>
         );
     } else if (formStage === 3 && refData !== null) {
         return (
             <div className="character__container">
-                <Header />
-                <CharacterSheet
-                    characterData={characterData}
-                    refData={refData}
-                    setFormStage={setFormStage}
-                    setCharacterData={setCharacterData}
-                />
+                <Projector projectorPosition={true} />
+                <div className="character">
+                    <CharacterSheet
+                        characterData={characterData}
+                        refData={refData}
+                        setFormStage={setFormStage}
+                        setCharacterData={setCharacterData}
+                    />
+                </div>
             </div>
         );
     }
