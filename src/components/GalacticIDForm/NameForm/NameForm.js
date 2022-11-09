@@ -38,8 +38,9 @@ export default function NameForm({
         }
     }, []);
     const handleRandomSuggestion = (e) => {
-        const idValue = e.target.id;
+        const idValue = e.currentTarget.id;
         const tables = { first: first, last: last, alias: alias, look: look };
+
         const pickRandomChangeValue = (tableName, tableData) => {
             const tableItem =
                 tableName === "first"
@@ -52,6 +53,7 @@ export default function NameForm({
             const randomNumber = Math.floor(Math.random() * tableData[tableName].length);
             return tableData[tableName][randomNumber][tableItem];
         };
+
         setNameFormValues({ ...nameFormValues, [idValue]: pickRandomChangeValue(idValue, tables) });
     };
     const handleNameChange = (e) => {

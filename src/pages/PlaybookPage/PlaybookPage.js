@@ -713,24 +713,56 @@ const testData = {
     ],
 };
 const testCharacter = {
-    friend: { id: "" },
-    rival: { id: "" },
-    actions: ["rig", "rig", "study"],
+    friend: { name: "Nisa", id: "be837e95-80eb-48ac-9d19-b77aced14572" },
+    rival: { name: "Stev", id: "9bb9a26c-5d08-4606-ae05-f6295a861e0d" },
+    actions: ["command", "helm", "helm", "rig", "rig", "scrap", "study"],
     playbookActions: ["rig", "rig", "study"],
     playbookID: "4d7f5b63-fb0a-4d09-a18f-e99a97781aef",
     playbook: "mechanic",
-    abilityID: "018ba9b7-193b-4661-912b-b8b43144200e",
-    abilityName: "construct whisperer",
+    abilityID: "cbcb111a-1cbe-4d01-abeb-a7b36ba1aee7",
+    abilityName: "Junkyard Hunter",
     abilityDescription:
-        "Machines speak to you when you study them. The first time you roll a critical while fixing or building a particular machine, you may add a simple modification to it (see Crafting).",
+        "When you acquire parts or equipment during Downtime, you may either gain two assets or one asset at +1 quality.",
     abilityClarification:
-        "How do machines whisper their secrets to you? Is it intuitive? Do you feel what they feel? You do not gain the modification if you improve the result with cred.",
+        "Your junkyard contacts can get what you need refurbished or on special offer. If you gain two assets, they both have the same quality as your roll.",
     startingAbility: "tinker",
     startingAbilitySummary:
         "When you work on a clock with rig or hack, or when you study a schematic, fill +1 segment.",
     startingAbilityClarification:
         "You get this bonus segment regardless of whether this is a Downtime action or not. This means that bypassing security on a job or doing an emergency patch while escaping a chasing ship is easier for you than others.",
-    actionsStrings: ["rig +2, study +1", ["rig +2", "study +1"]],
+    actionsStrings: [
+        "helm +2, rig +2, command +1, scrap +1, study +1",
+        ["helm +2", "rig +2", "command +1", "scrap +1", "study +1"],
+    ],
+    friend_story: "fadfadf",
+    rival_story: "asdfasdf",
+    vice: "faith",
+    vices_id: "d109c67c-46d9-47d5-adbd-72a69d4b0138",
+    vice_story: "asfasdf",
+    background: "academic",
+    backgrounds_id: "0ad31b2c-ac6e-423c-8bc9-07c453ad57da",
+    background_story: "asfasdfad",
+    heritage: "imperial",
+    heritages_id: "1e8dbfa5-2124-489a-846d-1fd520c0e1f0",
+    heritage_story: "asdfasdfasdf",
+    firstName: "Gurney",
+    lastName: "Acon",
+    alias: "Cosmo",
+    look: "Wide Belt",
+    actionsObject: {
+        attune: 0,
+        command: 1,
+        consort: 0,
+        doctor: 0,
+        hack: 0,
+        helm: 2,
+        rig: 2,
+        scramble: 0,
+        scrap: 1,
+        skulk: 0,
+        study: 1,
+        sway: 0,
+    },
 };
 
 export default function PlaybookPage({ sendState }) {
@@ -742,7 +774,7 @@ export default function PlaybookPage({ sendState }) {
     const [refData, setRefData] = useState(testData);
     const [projectorPosition, setProjectorPosition] = useState(false);
     // const [formStage, setFormStage] = useState(sendState);
-    const [formStage, setFormStage] = useState(2);
+    const [formStage, setFormStage] = useState(3);
     const [characterData, setCharacterData] = useState(testCharacter);
     // const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
     const [incompleteSections, setIncompleteSections] = useState({

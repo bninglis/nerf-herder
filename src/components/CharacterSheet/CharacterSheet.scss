@@ -1,2 +1,108 @@
+@use "../../styles/styles" as *;
+
 .profile__placeholder {
+}
+
+.final-id {
+    @include box-border;
+    margin: 3rem;
+    padding: 3rem;
+    font-size: 1.2rem;
+    @include boxglow;
+    position: relative;
+
+    &__pfp {
+        @include pathglow-xl;
+        fill: $CYAN;
+        width: 20rem;
+    }
+
+    &__text {
+        color: $WHITE;
+    }
+
+    &__subheader {
+        color: $WHITE;
+        font-family: "turret road";
+        text-transform: capitalize;
+        font-weight: 800;
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+
+        &--special-ability {
+            margin-top: 1rem;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &__item-text {
+        color: $WHITE;
+    }
+
+    &__extras {
+        padding: 3rem;
+        padding-top: 0;
+    }
+
+    &__group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &__segment {
+        margin-bottom: 1rem;
+    }
+
+    &__data {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    &__button {
+        @include better-box;
+        font-size: 1rem;
+        padding: 1rem;
+        font-family: "orbitron";
+        margin-top: 1rem;
+    }
+
+    &__choices {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__profile {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    &__title {
+        position: absolute;
+        top: 0;
+    }
+
+    &__item-list {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    &__item {
+        width: 50%;
+        padding: 0.5rem;
+    }
+}
+
+.cyan {
+    color: $CYAN;
 }

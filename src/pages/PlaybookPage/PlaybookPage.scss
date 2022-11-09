@@ -3,7 +3,7 @@
     overflow: scroll;
     overflow-x: hidden;
     top: 8rem;
-    height: calc(100% - 7rem);
+    height: calc(100% - 8rem);
     &__container {
         background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
             url("../../assets/images/space01.jpg");

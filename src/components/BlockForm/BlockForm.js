@@ -48,6 +48,7 @@ export default function BlockForm({
         setWhichPutAway(e.currentTarget.id);
     };
 
+    
     const actionsArray = starting_actions.split(",");
     const actions1 = actionsArray[0].split(" ");
     const actions2 = actionsArray[1].split(" ");
@@ -87,15 +88,87 @@ export default function BlockForm({
                         <h3 className="actions__subheader">Actions</h3>
                         <div className="actions">
                             <div className="action">
-                                <img className="action__pip" src={pipFilled} alt="" />
-                                <img className="action__pip" src={pipFilled} alt="" />
-                                <img className="action__pip" src={pipEmpty} alt="" />
+                                <svg
+                                    className="action__pip"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 606.9 509.94"
+                                >
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="Layer_1-2" data-name="Layer 1">
+                                            <path
+                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg
+                                    className="action__pip"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 606.9 509.94"
+                                >
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="Layer_1-2" data-name="Layer 1">
+                                            <path
+                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg
+                                    className="action__pip"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 606.9 509.94"
+                                >
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="Layer_1-2" data-name="Layer 1">
+                                            <path
+                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
                                 <h4 className="action__name">{actionWords[0]}</h4>
                             </div>
                             <div className="action">
-                                <img className="action__pip" src={pipFilled} alt="" />
-                                <img className="action__pip" src={pipEmpty} alt="" />
-                                <img className="action__pip" src={pipEmpty} alt="" />
+                                <svg
+                                    className="action__pip"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 606.9 509.94"
+                                >
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="Layer_1-2" data-name="Layer 1">
+                                            <path
+                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg
+                                    className="action__pip"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 606.9 509.94"
+                                >
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="Layer_1-2" data-name="Layer 1">
+                                            <path
+                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg
+                                    className="action__pip"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 606.9 509.94"
+                                >
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="Layer_1-2" data-name="Layer 1">
+                                            <path
+                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
                                 <h4 className="action__name">{actionWords[1]}</h4>
                             </div>
                         </div>

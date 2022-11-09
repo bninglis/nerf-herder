@@ -19,7 +19,7 @@ export default function GalacticIDForm({
     formErrors,
     handleEdit,
     handleChangeAbility,
-    handleChangePlaybook
+    handleChangePlaybook,
 }) {
     const {
         heritages,
@@ -35,13 +35,13 @@ export default function GalacticIDForm({
     const historyData = { heritages: heritages, backgrounds: backgrounds, vices: vices };
     return (
         <>
-            {/* <IDCard
+            <IDCard
                 characterData={characterData}
                 handleEdit={handleEdit}
                 incompleteSections={incompleteSections}
                 handleChangeAbility={handleChangeAbility}
                 handleChangePlaybook={handleChangePlaybook}
-            /> */}
+            />
             <AcceptWindow
                 handleNextStage={handleNextStage}
                 incompleteSections={incompleteSections}
