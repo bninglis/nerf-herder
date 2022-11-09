@@ -1,11 +1,20 @@
-.character-container {
-    background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-        url("../../assets/images/space01.jpg");
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-size: cover;
-    background-position: center;
+.character {
+    position: absolute;
+    overflow: scroll;
+    overflow-x: hidden;
+    top: 7rem;
+    height: calc(100% - 7rem);
+    &__container {
+        background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+            url("../../assets/images/space01.jpg");
+        background-color: black;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-size: cover;
+        background-position: center;
+        overflow:visible;
+    }
 }

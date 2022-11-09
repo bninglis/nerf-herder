@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 @mixin boxglow {
     box-shadow: 0 0 0.5rem #78cce2, inset 0 0 0.3rem #78cce2;
 }
@@ -23,6 +25,67 @@
 
 @mixin anim-box-pulse {
     animation: box-pulse 3s infinite linear;
+}
+
+@mixin headline-box {
+    background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+    border: $CYAN solid 0.2rem;
+    @include boxglow;
+    text-align: left;
+    padding-left: 1rem;
+    max-height: 5rem;
+    min-height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+@mixin abilityandbuild {
+    &__name {
+        margin: 0;
+        font-family: "orbitron";
+        text-transform: capitalize;
+    }
+
+    &__clarification {
+        color: $WHITE;
+    }
+
+    &__text {
+        margin-bottom: 0;
+    }
+
+    &__button {
+        appearance: none;
+        background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+        border: $CYAN solid 0.2rem;
+        @include boxglow;
+        text-align: left;
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: left;
+        max-height: auto;
+        background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 3rem;
+        cursor: pointer;
+        transition: 1s;
+        transform: translateX(0);
+        filter: opacity(1);
+
+        &:hover {
+            transform: scale(110%);
+        }
+    }
+}
+
+@mixin blockform-subheader {
+    color: $WHITE;
+    font-family: "Orbitron";
+    font-size: 1.6rem;
 }
 
 @mixin keys-box-pulse {
@@ -99,4 +162,14 @@
             filter: drop-shadow(0 0 0.2rem #78cce2);
         }
     }
+}
+
+@mixin negative-text {
+    background-image: url("../../assets/images/space01.jpg");
+    background-size: cover;
+    text-shadow: none;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }

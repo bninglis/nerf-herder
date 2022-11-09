@@ -55,19 +55,19 @@
 
 @keyframes beam-pulse {
     0% {
-        filter: blur(.2rem);
+        filter: blur(0.2rem);
     }
     25% {
-        filter: blur(.3rem);
+        filter: blur(0.3rem);
     }
     50% {
-        filter: blur(.2rem);
+        filter: blur(0.2rem);
     }
     75% {
-        filter: blur(.1rem);
+        filter: blur(0.1rem);
     }
     100% {
-        filter: blur(.2rem);
+        filter: blur(0.2rem);
     }
 }
 
@@ -85,18 +85,18 @@
 
 @keyframes source-entry {
     0% {
-        transform: scale(0) translate(-50%, -50%);
-        transform-origin: top left;
+        filter: blur(7rem);
+        transform: translate(-50%, -50%) scale(0.01);
         // left: 50%;
     }
-    90% {
-        transform: scale(0) translate(-50%, -50%);
-        transform-origin: top left;
+    50% {
+        filter: blur(7rem);
+        transform: translate(-50%, -50%) scale(0.01);
         // left: 50%;
     }
     100% {
-        transform: scale(1) translate(-50%, -50%);
-        transform-origin: top left;
+        filter: blur(1rem);
+        transform: translate(-50%, -50%) scale(1);
         // left: 50%;
     }
 }
@@ -121,8 +121,28 @@
         left: 50%;
         transform: translate(-50%, -50%);
         transform-origin: left;
-        animation: 2.5s source-entry ease-out;
         animation: source-pulse 2s infinite linear;
+
+        &--off {
+            visibility: hidden;
+        }
+    }
+
+    &__backup {
+        position: absolute;
+        width: 5rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: white;
+        filter: blur(1rem);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: center;
+        animation: source-entry 2s ease-out;
+
+        &--off {
+            visibility: hidden;
+        }
     }
 
     &__lights {

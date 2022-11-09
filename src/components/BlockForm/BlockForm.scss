@@ -1,37 +1,259 @@
-.action__pip {
-    max-height: 2rem;
-}
+@use "../../styles/styles" as *;
 
-.special-ability{
-    &__button{
-        transition: 1s;
-        transform: translateX(0);
-        filter: opacity(1);
-        &--selected{
-            z-index: 10;
-            transform: translateX(-200%);
-            filter: opacity(0);
-        }
-    }
-}
-
-.starter-form{
+.starter-form {
     transition: 1s;
     transform: translateX(0);
-    &--hidden{
-        transform: translateX(100%)
+    padding: 2rem;
+    &--hidden {
+        transform: translateX(100%);
     }
 }
 
-.builds{
-    &__button{
+.intro {
+    margin-top: 2rem;
+    color: $WHITE;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    &__reset {
+        cursor: pointer;
+        width: 100%;
+        @include headline-box;
+    }
+
+    &__playbook {
+        background-image: url("../../assets/images/space01.jpg");
+        text-transform: capitalize;
+        width: 100%;
+        @include negative-text;
+        margin: 0;
+    }
+
+    &__tagline {
+        font-family: "turret road";
+        font-size: 1.6rem;
+    }
+}
+
+.starting-ability {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    &__block {
+        width: 100%;
+        background-color: $CYAN;
+        @include boxglow;
+        @include headline-box;
+        background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+    }
+
+    &__headline {
+        @include negative-text;
+    }
+
+    &__subheader {
+        @include blockform-subheader;
+    }
+
+    &__description {
+        color: $WHITE;
+    }
+}
+
+.actions {
+    display: flex;
+
+    &__subheader {
+        @include blockform-subheader;
+    }
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    width: 50%;
+
+    &:first-of-type {
+        border-right: $CYAN solid 0.2rem;
+    }
+
+    &__pip {
+        max-height: 2rem;
+        min-height: 2rem;
+    }
+
+    &__name {
+        margin-left: 1rem;
+        padding-right: 1rem;
+        font-family: "turret road";
+        color: $CYAN;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.special-abilities {
+    &__block {
+        margin-top: 1rem;
+        @include headline-box;
+    }
+
+    &__headline {
+        @include negative-text;
+    }
+
+    &__subheader {
+        @include blockform-subheader;
+    }
+
+    &__builds {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        color: $WHITE;
+    }
+}
+
+.ability-list {
+    list-style-type: none;
+    appearance: none;
+    padding-inline: 0;
+}
+
+@keyframes ability-select {
+    0% {
+        transform: translate(0);
+        filter: opacity(100%);
+    }
+    100% {
+        transform: translateX(-200%);
+        filter: opacity(0);
+    }
+}
+
+@keyframes build-select {
+    0% {
+        transform: translate(0);
+        filter: opacity(100%);
+    }
+    100% {
+        transform: translateX(-600%);
+        filter: opacity(0);
+    }
+}
+
+.special-ability {
+    @include abilityandbuild;
+    &--selected {
+        z-index: 10;
+        transform: scale(110%) translateX(-300%);
+        filter: opacity(0);
+    }
+    &__button {
+        &:nth-of-type(2n) {
+            background: none;
+            outline: none;
+            box-shadow: none;
+            color: $CYAN;
+        }
+
+        &:nth-of-type(2n):hover {
+            transform: scale(110%);
+            outline: $CYAN solid 0.2rem;
+            @include pathglow;
+        }
+
+        &--selected {
+            z-index: 10;
+            animation: ability-select 1s;
+        }
+    }
+    // &__button {
+    //     appearance: none;
+    //     background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+    //     border: $CYAN solid 0.2rem;
+    //     @include boxglow;
+    //     text-align: left;
+    //     padding-left: 1rem;
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     justify-content: left;
+    //     max-height: auto;
+    //     background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+    //     width: 100%;
+    //     padding: 1rem;
+    //     margin-bottom: 3rem;
+    //     cursor: pointer;
+
+    //     &:nth-of-type(2n) {
+    //         background: none;
+    //         border: none;
+    //         box-shadow: none;
+    //         color: $CYAN;
+    //     }
+
+    //     &:nth-of-type(2n):hover {
+    //         transform: scale(110%);
+    //         border: $CYAN solid 0.2rem;
+    //         @include pathglow;
+    //     }
+
+    //     &:hover {
+    //         transform: scale(110%);
+    //     }
+    // }
+}
+
+.builds {
+    appearance: none;
+    padding-inline: 0;
+    margin-inline: 0;
+    width: 100%;
+    justify-content: space-between;
+    @include abilityandbuild;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &__button {
+        width: calc(50% - 1.5rem);
+        display: flex;
         transition: 1s;
         transform: translateX(0);
         filter: opacity(1);
-        &--selected{
+        &--selected {
             z-index: 10;
-            transform: translateX(-600%);
-            filter: opacity(0);
+            animation: build-select 1s;
         }
+
+        &:first-of-type {
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: $CYAN;
+            margin-right: 3rem;
+        }
+
+        &:first-of-type:hover {
+            transform: scale(110%);
+            border: $CYAN solid 0.2rem;
+            @include pathglow;
+        }
+
+        &:last-of-type {
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: $CYAN;
+        }
+
+        &:last-of-type:hover {
+            transform: scale(110%);
+            border: $CYAN solid 0.2rem;
+            @include pathglow;
+        }
+    }
+
+    &__description {
+        text-transform: capitalize;
     }
 }

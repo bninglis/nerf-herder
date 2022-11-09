@@ -1,6 +1,9 @@
 @use "../../styles/styles" as *;
 
 .header {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
     background-color: rgba($SEA, 0.5);
     display: flex;
     align-items: center;

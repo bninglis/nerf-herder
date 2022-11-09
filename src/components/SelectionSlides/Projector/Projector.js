@@ -1,6 +1,8 @@
 import "./Projector.scss";
+import { useState } from "react";
 
 export default function Projector({ projectorPosition, handleNextStage }) {
+    const [sourceStart, setSourceStart] = useState(false);
     return (
         <div className="projector__container" onTransitionEnd={handleNextStage}>
             <div
@@ -15,12 +17,22 @@ export default function Projector({ projectorPosition, handleNextStage }) {
                         }`}
                     ></div>
                 </div>
-                <div className="projector__source"></div>
+                <div
+                    className={!sourceStart ? "projector__source--off" : "projector__source"}
+                ></div>
+                <div
+                    className={!!sourceStart ? "projector__backup--off" : "projector__backup"}
+                ></div>
             </div>
             <div
                 className={`projector__circles${
                     !!projectorPosition ? " projector__circles--position2" : ""
                 }`}
+                onAnimationEnd={() => {
+                    setTimeout(() => {
+                        setSourceStart(true);
+                    }, 500);
+                }}
             >
                 <div
                     className={`projector__ellipse${

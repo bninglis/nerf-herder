@@ -9,6 +9,7 @@ export default function BlockForm({
     handleItemSelection,
     handleChangePlaybook,
 }) {
+    console.log(refData);
     const [whichPutAway, setWhichPutAway] = useState(null);
     const {
         character_questions,
@@ -56,55 +57,58 @@ export default function BlockForm({
         return <p>Please wait</p>;
     }
     return (
-        <div
-            className={`starter-form${!!whichPutAway ? " starter-form--hidden" : ""}`}
-            onTransitionEnd={handleNextStage}
-        >
+        <div className={`starter-form${!!whichPutAway ? " starter-form--hidden" : ""}`}>
+            {/* <button className="intro__reset" onClick={handleChangePlaybook}>
+                <h2 className="intro__playbook">{playbook}</h2>
+            </button>
             <div className="intro">
-                <button onClick={handleChangePlaybook}>
-                    <h2>{playbook}</h2>
-                </button>
-                <h3>{tagline}</h3>
+                <h3 className="intro__tagline">{tagline}</h3>
                 <p>{overview}</p>
                 <p>{character_questions}</p>
                 <p>
-                    <span>{xp_gain}</span>
+                    <span className="bold">{xp_gain}</span>
                     {xp_advice}
                 </p>
-            </div>
+            </div> */}
             <div className="starting-features">
-                <h2>Starting Features</h2>
+                <div className="starting-ability__block">
+                    <h2 className="starting-ability__headline">Starting Features</h2>
+                </div>
                 <div className="starting-ability">
-                    <h3>Starting Ability</h3>
-                    <div>
-                        <h4>{starting_ability}</h4>
-                        <p>
-                            {starting_ability_summary}
-                            <span> {starting_ability_clarification}</span>
+                    {/* <div>
+                        <h3 className="starting-ability__subheader">Starting Ability</h3>
+                        <h4 className="starting-ability__ability">{starting_ability}</h4>
+                        <p className="starting-ability__description">
+                            <span className="bold"> {starting_ability_summary} </span>
+                            {starting_ability_clarification}
                         </p>
-                    </div>
-                    <div className="actions">
-                        <h3>Actions</h3>
-                        <div className="action">
-                            <img className="action__pip" src={pipFilled} alt="" />
-                            <img className="action__pip" src={pipFilled} alt="" />
-                            <img className="action__pip" src={pipEmpty} alt="" />
-                            <h4>{actionWords[0]}</h4>
-                        </div>
-                        <div className="action">
-                            <img className="action__pip" src={pipFilled} alt="" />
-                            <img className="action__pip" src={pipEmpty} alt="" />
-                            <img className="action__pip" src={pipEmpty} alt="" />
-                            <h4>{actionWords[1]}</h4>
+                    </div> */}
+                    <div className="actions__container">
+                        <h3 className="actions__subheader">Actions</h3>
+                        <div className="actions">
+                            <div className="action">
+                                <img className="action__pip" src={pipFilled} alt="" />
+                                <img className="action__pip" src={pipFilled} alt="" />
+                                <img className="action__pip" src={pipEmpty} alt="" />
+                                <h4 className="action__name">{actionWords[0]}</h4>
+                            </div>
+                            <div className="action">
+                                <img className="action__pip" src={pipFilled} alt="" />
+                                <img className="action__pip" src={pipEmpty} alt="" />
+                                <img className="action__pip" src={pipEmpty} alt="" />
+                                <h4 className="action__name">{actionWords[1]}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="special-abilities">
-                <h2>Special Ability</h2>
-                <div className="starting-ability">
-                    <h3>Choose a Special Ability</h3>
-                    <p>
+                <div className="special-abilities__block">
+                    <h2 className="special-abilities__headline">Special Ability</h2>
+                </div>
+                <div className="special-abilities__guidelines">
+                    <h3 className="special-abilities__subheader">Choose a Special Ability</h3>
+                    <p className="special-abilities__builds">
                         or if you want some guidance when you assign your four starting action dots
                         and special ability, use one of the templates at the bottom
                     </p>
@@ -134,12 +138,16 @@ export default function BlockForm({
                                             starting_ability_clarification
                                         );
                                     }}
+                                    onAnimationEnd={handleNextStage}
                                 >
                                     <li className="special-ability" key={`i${ability.id}`}>
-                                        <h4>{ability.name}</h4>
-                                        <p className="special-ability__description">
+                                        <h4 className="special-ability__name">{ability.name}</h4>
+                                        <p className="special-ability__description special-ability__text">
                                             {ability.description}
-                                            <span> {ability.clarification}</span>
+                                        </p>
+                                        <p className="special-ability__clarification special-ability__text">
+                                            {" "}
+                                            {ability.clarification}
                                         </p>
                                     </li>
                                 </button>
@@ -171,6 +179,7 @@ export default function BlockForm({
                                             build.actionsArray
                                         );
                                     }}
+                                    onAnimationEnd={handleNextStage}
                                     key={`b${build.id}`}
                                     id={build.id}
                                     className={`builds__button${
@@ -178,9 +187,11 @@ export default function BlockForm({
                                     }`}
                                 >
                                     <li key={`i${build.id}`}>
-                                        <h4>{build.build_name}</h4>
-                                        <p>{build.buildString}</p>
-                                        <p>{build.special_ability}</p>
+                                        <h4 className="builds__name">{build.build_name}</h4>
+                                        <p className="builds__description">{build.buildString}</p>
+                                        <p className="builds__clarification">
+                                            {build.special_ability}
+                                        </p>
                                     </li>
                                 </button>
                             );
