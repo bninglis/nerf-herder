@@ -1,0 +1,64 @@
+@use "../../../styles/styles" as *;
+
+.actions-form {
+    @include box-border;
+    @include boxglow;
+    margin: 1rem;
+    padding: 1rem;
+
+    &__text {
+        color: $WHITE;
+    }
+
+    &__subheader {
+        color: $WHITE;
+        font-family: "orbitron";
+    }
+
+    &__action {
+        @include box-border;
+        @include boxglow;
+        padding: 1rem;
+        margin: 1rem;
+    }
+}
+
+.pip {
+    fill: $CYAN;
+    @include pathglow;
+    margin-right: 0.5rem;
+
+    &__button {
+        cursor: pointer;
+    }
+}
+
+.action {
+    &__name {
+        color: $WHITE;
+        text-transform: capitalize;
+        margin: 0;
+        margin-bottom: .5rem;
+        font-size: 1.4rem;
+    }
+    &__description {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: $CYAN;
+        font-family: "orbitron";
+        font-size: 1rem;
+    }
+    &__clarification {
+        color: $WHITE;
+        font-size: 1rem;
+    }
+
+    &__text {
+        padding: 1rem;
+    }
+
+    &__points {
+        display: flex;
+        justify-content: center;
+    }
+}

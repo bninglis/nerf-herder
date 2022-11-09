@@ -15,10 +15,12 @@ html,body {
 ul {
     appearance: none;
     list-style-type: none;
+    padding-inline: 0;
 }
 
 li {
     list-style: none;
+    padding-inline: 0;
 }
 
 button {

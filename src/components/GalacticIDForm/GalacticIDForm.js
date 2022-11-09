@@ -62,14 +62,14 @@ export default function GalacticIDForm({
                 incompleteSections={incompleteSections}
                 characterData={characterData}
             /> */}
-            <PeopleSection
+            {/* <PeopleSection
                 incompleteSections={incompleteSections}
                 characterData={characterData}
                 friends={friends}
                 handleSubmitPerson={handleSubmitPerson}
                 formErrors={formErrors}
                 refData={refData}
-            />
+            /> */}
             <ActionsForm
                 actions={actions}
                 characterData={characterData}

@@ -78,31 +78,37 @@ export default function ActionsForm({
     if (incompleteSections.actions === true) {
         return (
             <div
-                className={`"actions-form"${
+                className={`actions-form${
                     formErrors.actions === true ? " actions-form--error" : ""
                 }`}
             >
                 <div>
                     <div>
                         <h2>Assign 4 action pips:</h2>
-                        <p>
+                        <p className="actions-form__text">
                             Assign one that you feel relates to your heritage, one that you feel
                             relates to your background, and two as you desire. Action pips cannot
                             exceed two per action for new characters.
                         </p>
                         <div>
-                            <h3>Pips Remaining:</h3>
+                            <h3 className="actions-form__subheader">Pips Remaining:</h3>
                             <div>
                                 {points.pointsPoolMap &&
                                     points.pointsPoolMap.map((value, index) => {
                                         if (value === "unspent") {
                                             return (
-                                                <img
-                                                    src={pipFilled}
-                                                    alt="filled pip icon"
+                                                <svg
                                                     className="pip pip--filled"
                                                     key={`poolpip${index}`}
-                                                />
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 606.9 509.94"
+                                                >
+                                                    <g id="Layer_2" data-name="Layer 2">
+                                                        <g id="Layer_1-2" data-name="Layer 1">
+                                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
                                             );
                                         } else {
                                             return (
