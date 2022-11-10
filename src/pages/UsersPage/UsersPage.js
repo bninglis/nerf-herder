@@ -83,21 +83,23 @@ export default function UsersPage({ setSendState }) {
                     {userCharacters &&
                         userCharacters.map((character) => {
                             return (
-                                <div key={character.id}>
+                                <div className="character-item" key={character.id}>
                                     <button
+                                        className="character-item__edit"
                                         onClick={(e) => {
                                             handleLoadCharacter(e, character.id);
                                         }}
                                     >
                                         <div>
-                                            <h3>
+                                            <h3 className="character-item__name">
                                                 {character.first_name} {character.last_name}
                                             </h3>
-                                            <h4>{character.alias}</h4>
-                                            <h5>{character.playbook}</h5>
+                                            <h4 className="character-item__alias">{character.alias}</h4>
+                                            <h5 className="character-item__playbook">{character.playbook}</h5>
                                         </div>
                                     </button>
                                     <button
+                                        className="character-item__delete"
                                         onClick={(e) => {
                                             handleDeleteCharacter(
                                                 e,
@@ -115,22 +117,41 @@ export default function UsersPage({ setSendState }) {
                     <div>
                         <UserActions userChoice={userChoice} setLoggedInUser={setLoggedInUser} />
                         <button
+                            className="users__button users__button--login"
                             onClick={(e) => {
                                 handleChoose(e, "login");
                             }}
                         >
+                            {" "}
+                            <div className="users__space-text--background"></div>
+                            <h3 className="users__space-text">Login</h3>
                             Login
                         </button>
                         <button
+                            className="users__button users__button--create"
                             onClick={(e) => {
                                 handleChoose(e, "create");
                             }}
                         >
+                            {" "}
+                            <div className="users__space-text--background"></div>
+                            <h3 className="users__space-text">Create User</h3>
                             Create User
                         </button>
-                        <Link to={"/character"}>
-                            <button>Create a New Spacer</button>
-                        </Link>
+                        <div className="new__fix">
+                            <Link className="new__link" to={"/character"}>
+                                <button
+                                    className="users__button users__button--spacer"
+                                    onClick={(e) => {
+                                        handleChoose(e, "create");
+                                    }}
+                                >
+                                    {" "}
+                                    <div className="users__space-text--background"></div>
+                                    <h3 className="users__space-text">Create New Spacer</h3>
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

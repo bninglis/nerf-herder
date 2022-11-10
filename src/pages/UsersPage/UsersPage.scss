@@ -51,8 +51,75 @@
         height: 10rem;
         @include anim-box-pulse;
 
+        &--spacer {
+        }
+
         &:hover {
             transform: scale(110%);
+        }
+    }
+}
+
+.new {
+    &__link {
+        line-height: 0;
+        position: absolute;
+
+        &__fix {
+            position: relative;
+        }
+    }
+}
+
+.character-item {
+    font-family: "orbitron";
+    display: flex;
+    flex-direction: column;
+
+    &__edit {
+        @include better-box;
+        margin-bottom: 1rem;
+        transform: scale(100%);
+        transition: 0.2s;
+
+        &:hover {
+            transform: scale(110%);
+            transition: 0.2s;
+        }
+    }
+
+    &__name {
+        font-size: 2.2rem;
+        margin: 0.5rem;
+    }
+
+    &__alias {
+        color: $WHITE;
+        font-family: "turret road";
+        font-size: 2rem;
+        margin: 0.5rem;
+    }
+
+    &__playbook {
+        color: $WHITE;
+        font-family: "turret road";
+        text-transform: capitalize;
+        font-size: 2rem;
+        margin: 0.5rem;
+    }
+
+    &__delete {
+        color: $CYAN;
+        font-family: "orbitron";
+        font-weight: 900;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        transform: scale(100%);
+        transition: 0.2s;
+
+        &:hover {
+            transform: scale(110%);
+            transition: 0.2s;
         }
     }
 }

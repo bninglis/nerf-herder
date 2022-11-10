@@ -14,14 +14,14 @@ export default function DeleteModal({ isDeleteVisible, setIsDeleteVisible, apiUr
     };
     if (!!isDeleteVisible.toggle) {
         return (
-            <div>
-                <div>
-                    <h2>
+            <div className="delete__background">
+                <div className="delete__window">
+                    <h2 className="delete__text">
                         Are you sure you want to delete {isDeleteVisible.character.first}{" "}
                         {isDeleteVisible.character.last}?
                     </h2>
-                    <button onClick={handleDelete}>OK</button>
-                    <button onClick={handleBackOut}>Cancel</button>
+                    <button className="delete__button" onClick={handleDelete}>OK</button>
+                    <button className="delete__button" onClick={handleBackOut}>Cancel</button>
                 </div>
             </div>
         );

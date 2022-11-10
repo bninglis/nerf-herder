@@ -5,6 +5,8 @@
     top: 8rem;
     height: calc(100% - 8rem);
     width: 100vw;
+    display: flex;
+    justify-content: center;
     &__container {
         background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
             url("../../assets/images/space01.jpg");
@@ -16,6 +18,17 @@
         right: 0;
         background-size: cover;
         background-position: center;
-        overflow:visible;
+        overflow: visible;
     }
+}
+
+.desktop-boundary {
+    width: 100%;
+    max-width: 102rem;
+}
+
+.slidebox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

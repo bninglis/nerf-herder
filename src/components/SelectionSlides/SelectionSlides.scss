@@ -10,6 +10,7 @@
     top: 10rem;
     bottom: 0;
     animation: 4s beam-entry ease-out;
+    max-width: 60rem;
 
     &__button{
         max-height: 15rem;

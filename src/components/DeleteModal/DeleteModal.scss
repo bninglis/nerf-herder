@@ -1,0 +1,33 @@
+@use "../../styles/styles" as *;
+
+.delete {
+    &__window {
+        @include better-box;
+        padding: 2rem;
+        display: flex;
+    }
+    &__background {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba($DARK, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 500;
+    }
+
+    &__button {
+        font-family: "orbitron";
+        color: $BLACK;
+        font-size: 1.8rem;
+        margin: 0 1rem;
+    }
+
+    &__text {
+        max-width: 32rem;
+        color: $BLACK;
+    }
+}
