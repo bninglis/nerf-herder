@@ -1,0 +1,30 @@
+@use "../../styles/styles" as *;
+
+.users {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__submit {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        font-family: "turret road";
+        font-weight: bold;
+        color: $CYAN;
+
+        &:hover {
+            transform: scale(110%);
+        }
+    }
+
+    &__input {
+        min-width: 22rem;
+    }
+}

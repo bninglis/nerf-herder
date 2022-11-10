@@ -15,6 +15,10 @@
     padding-left: 1rem;
     padding-right: 1rem;
 
+    &__text {
+        margin-bottom: 1rem;
+    }
+
     &__reset {
         cursor: pointer;
         width: 100%;
@@ -61,6 +65,10 @@
 
 .actions {
     display: flex;
+    @include tablet-plus {
+        flex-direction: column;
+        margin-right: 1rem;
+    }
 
     &__subheader {
         @include blockform-subheader;
@@ -73,8 +81,14 @@
     padding-left: 1rem;
     width: 50%;
 
+    @include tablet-plus {
+        justify-content: left;
+    }
+
     &:first-of-type {
-        border-right: $CYAN solid 0.2rem;
+        @include mobile {
+            border-right: $CYAN solid 0.2rem;
+        }
     }
 
     &__pip {
@@ -90,27 +104,64 @@
         color: $CYAN;
         width: 100%;
         text-align: center;
+        @include tablet-plus {
+            text-align: left;
+            padding-left: 1rem;
+            padding-top: 0.7rem;
+        }
     }
 }
 
 .special-abilities {
+    display: flex;
+    flex-direction: column;
+    @include tablet-plus {
+        margin-top: -10rem;
+    }
     &__block {
         margin-top: 1rem;
-        @include headline-box;
+        @include better-box;
+        padding-left: 1rem;
+        display: flex;
+        @include tablet-plus {
+            justify-content: right;
+            padding-right: 3rem;
+            align-self: flex-end;
+            max-width: 50%;
+            min-width: 50%;
+            margin-bottom: 2rem;
+        }
     }
 
     &__headline {
         @include negative-text;
     }
 
+    &__guidelines {
+        @include tablet-plus {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    }
+
     &__subheader {
         @include blockform-subheader;
+        @include tablet-plus {
+            text-align: right;
+            margin-right: 3rem;
+        }
     }
 
     &__builds {
         margin-left: 1rem;
         margin-right: 1rem;
         color: $WHITE;
+        @include tablet-plus {
+            text-align: right;
+            width: 50%;
+            margin-right: 2rem;
+        }
     }
 }
 
@@ -118,6 +169,11 @@
     list-style-type: none;
     appearance: none;
     padding-inline: 0;
+    @include tablet-plus {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 }
 
 @keyframes ability-select {
@@ -143,66 +199,112 @@
 }
 
 .special-ability {
-    @include abilityandbuild;
-    &--selected {
-        z-index: 10;
-        transform: scale(110%) translateX(-300%);
-        filter: opacity(0);
+    &__name {
+        margin: 0;
+        font-family: "orbitron";
+        text-transform: capitalize;
     }
+
+    &__clarification {
+        color: $WHITE;
+    }
+
+    &__text {
+        margin-bottom: 0;
+    }
+
     &__button {
+        appearance: none;
+        background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+        @include mobile {
+            border: $CYAN solid 0.2rem;
+        }
+        @include boxglow;
+        text-align: left;
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: left;
+        max-height: auto;
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 3rem;
+        cursor: pointer;
+        transition: 1s;
+        transform: translateX(0);
+        filter: opacity(1);
+        @include tablet-plus {
+            max-width: calc(50% - 0.5rem);
+        }
+
         &:nth-of-type(2n) {
-            background: none;
-            outline: none;
-            box-shadow: none;
-            color: $CYAN;
+            @include mobile {
+                background: none;
+                outline: none;
+                box-shadow: none;
+                color: $CYAN;
+            }
         }
 
         &:nth-of-type(2n):hover {
-            transform: scale(110%);
-            outline: $CYAN solid 0.2rem;
-            @include pathglow;
+            @include mobile {
+                transform: scale(110%);
+                outline: $CYAN solid 0.2rem;
+                @include pathglow;
+            }
+        }
+
+        &:nth-of-type(4n - 2) {
+            @include tablet-plus {
+                background: none;
+                outline: none;
+                box-shadow: none;
+                color: $CYAN;
+            }
+        }
+
+        &:nth-of-type(4n - 2):hover {
+            @include tablet-plus {
+                transform: scale(110%);
+                outline: $CYAN solid 0.2rem;
+                @include pathglow;
+            }
+        }
+
+        &:nth-of-type(4n - 1) {
+            @include tablet-plus {
+                background: none;
+                outline: none;
+                box-shadow: none;
+                color: $CYAN;
+            }
+        }
+
+        &:nth-of-type(4n - 1):hover {
+            @include tablet-plus {
+                transform: scale(110%);
+                outline: $CYAN solid 0.2rem;
+                @include pathglow;
+            }
         }
 
         &--selected {
             z-index: 10;
             animation: ability-select 1s;
         }
+
+        &:hover {
+            transform: scale(110%);
+        }
     }
-    // &__button {
-    //     appearance: none;
-    //     background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
-    //     border: $CYAN solid 0.2rem;
-    //     @include boxglow;
-    //     text-align: left;
-    //     padding-left: 1rem;
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     justify-content: left;
-    //     max-height: auto;
-    //     background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
-    //     width: 100%;
-    //     padding: 1rem;
-    //     margin-bottom: 3rem;
-    //     cursor: pointer;
-
-    //     &:nth-of-type(2n) {
-    //         background: none;
-    //         border: none;
-    //         box-shadow: none;
-    //         color: $CYAN;
-    //     }
-
-    //     &:nth-of-type(2n):hover {
-    //         transform: scale(110%);
-    //         border: $CYAN solid 0.2rem;
-    //         @include pathglow;
-    //     }
-
-    //     &:hover {
-    //         transform: scale(110%);
-    //     }
-    // }
+    &--selected {
+        z-index: 10;
+        transform: scale(110%) translateX(-300%);
+        filter: opacity(0);
+    }
+    &__button {
+    }
 }
 
 .builds {
@@ -215,42 +317,58 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    @include tablet-plus {
+        flex-wrap: nowrap;
+    }
     &__button {
         width: calc(50% - 1.5rem);
         display: flex;
         transition: 1s;
         transform: translateX(0);
         filter: opacity(1);
+
+        @include tablet-plus {
+            width: 20%;
+        }
+
         &--selected {
             z-index: 10;
             animation: build-select 1s;
         }
 
         &:first-of-type {
-            background: none;
-            border: none;
-            box-shadow: none;
-            color: $CYAN;
-            margin-right: 3rem;
+            @include mobile {
+                background: none;
+                border: none;
+                box-shadow: none;
+                color: $CYAN;
+                margin-right: 3rem;
+            }
         }
 
         &:first-of-type:hover {
-            transform: scale(110%);
-            border: $CYAN solid 0.2rem;
-            @include pathglow;
+            @include mobile {
+                transform: scale(110%);
+                border: $CYAN solid 0.2rem;
+                @include pathglow;
+            }
         }
 
         &:last-of-type {
-            background: none;
-            border: none;
-            box-shadow: none;
-            color: $CYAN;
+            @include mobile {
+                background: none;
+                border: none;
+                box-shadow: none;
+                color: $CYAN;
+            }
         }
 
         &:last-of-type:hover {
-            transform: scale(110%);
-            border: $CYAN solid 0.2rem;
-            @include pathglow;
+            @include mobile {
+                transform: scale(110%);
+                border: $CYAN solid 0.2rem;
+                @include pathglow;
+            }
         }
     }
 

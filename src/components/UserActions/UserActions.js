@@ -37,17 +37,20 @@ export default function UserActions({ userChoice, setLoggedInUser }) {
     if (userChoice === "login") {
         return (
             <div>
-                <h2>Welcome Back</h2>
+                <h2 className="users__title">Welcome Back</h2>
                 <div>
-                    <form onSubmit={handleLoginUser}>
+                    <form className="users__form" onSubmit={handleLoginUser}>
                         <label htmlFor="usernameLogin">Username:</label>
                         <input
+                            className="users__input"
                             type="text"
                             name="usernameLogin"
                             value={enteredUsername}
                             onChange={handleUsernameEntry}
                         />
-                        <button type="submit">Submit</button>
+                        <button className="users__submit" type="submit">
+                            Submit
+                        </button>
                     </form>
                 </div>
             </div>
@@ -55,19 +58,20 @@ export default function UserActions({ userChoice, setLoggedInUser }) {
     } else if (userChoice === "create") {
         return (
             <div>
-                <h2>Create a Username:</h2>
-                <div>
-                    <form onSubmit={handleCreateUser}>
-                        <label htmlFor="usernameCreate">Username:</label>
-                        <input
-                            type="text"
-                            name="usernameCreate"
-                            value={enteredUsername}
-                            onChange={handleUsernameEntry}
-                        />
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
+                <h2 className="users__title">Create a Username:</h2>
+                <form className="users__form" onSubmit={handleCreateUser}>
+                    <label htmlFor="usernameCreate">Username:</label>
+                    <input
+                        className="users__input"
+                        type="text"
+                        name="usernameCreate"
+                        value={enteredUsername}
+                        onChange={handleUsernameEntry}
+                    />
+                    <button className="users__submit" type="submit">
+                        Submit
+                    </button>
+                </form>
             </div>
         );
     }

@@ -43,85 +43,95 @@ export default function UsersPage({ setSendState }) {
 
     if (!user) {
         return (
-            <div>
-                <Header />
-                <UserActions userChoice={userChoice} setLoggedInUser={setLoggedInUser} />
-                <button
-                    onClick={(e) => {
-                        handleChoose(e, "login");
-                    }}
-                >
-                    Login
-                </button>
-                <button
-                    onClick={(e) => {
-                        handleChoose(e, "create");
-                    }}
-                >
-                    Create User
-                </button>
+            <div className="users__container">
+                <div className="users">
+                    <UserActions userChoice={userChoice} setLoggedInUser={setLoggedInUser} />
+                    <div className="users__clickables">
+                        <button
+                            className="users__button users__button--login"
+                            onClick={(e) => {
+                                handleChoose(e, "login");
+                            }}
+                        >
+                            {" "}
+                            <div className="users__space-text--background"></div>
+                            <h3 className="users__space-text">Login</h3>
+                        </button>
+                        <button
+                            className="users__button users__button--create"
+                            onClick={(e) => {
+                                handleChoose(e, "create");
+                            }}
+                        >
+                            {" "}
+                            <div className="users__space-text--background"></div>
+                            <h3 className="users__space-text">Create User</h3>
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     } else {
         return (
-            <div>
-                <Header />
-                <DeleteModal
-                    isDeleteVisible={isDeleteVisible}
-                    setIsDeleteVisible={setIsDeleteVisible}
-                    apiUrl={apiUrl}
-                />
-                {userCharacters &&
-                    userCharacters.map((character) => {
-                        return (
-                            <div key={character.id}>
-                                <button
-                                    onClick={(e) => {
-                                        handleLoadCharacter(e, character.id);
-                                    }}
-                                >
-                                    <div>
-                                        <h3>
-                                            {character.first_name} {character.last_name}
-                                        </h3>
-                                        <h4>{character.alias}</h4>
-                                        <h5>{character.playbook}</h5>
-                                    </div>
-                                </button>
-                                <button
-                                    onClick={(e) => {
-                                        handleDeleteCharacter(
-                                            e,
-                                            character.id,
-                                            character.first_name,
-                                            character.last_name
-                                        );
-                                    }}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        );
-                    })}
-                <div>
-                    <UserActions userChoice={userChoice} setLoggedInUser={setLoggedInUser} />
-                    <button
-                        onClick={(e) => {
-                            handleChoose(e, "login");
-                        }}
-                    >
-                        Login
-                    </button>
-                    <button
-                        onClick={(e) => {
-                            handleChoose(e, "create");
-                        }}
-                    >
-                        Create User
-                    </button>
-                    <Link to={"/character"}>
-                        <button>Create a New Spacer</button>
-                    </Link>
+            <div className="users__container">
+                <div className="users">
+                    <DeleteModal
+                        isDeleteVisible={isDeleteVisible}
+                        setIsDeleteVisible={setIsDeleteVisible}
+                        apiUrl={apiUrl}
+                    />
+                    {userCharacters &&
+                        userCharacters.map((character) => {
+                            return (
+                                <div key={character.id}>
+                                    <button
+                                        onClick={(e) => {
+                                            handleLoadCharacter(e, character.id);
+                                        }}
+                                    >
+                                        <div>
+                                            <h3>
+                                                {character.first_name} {character.last_name}
+                                            </h3>
+                                            <h4>{character.alias}</h4>
+                                            <h5>{character.playbook}</h5>
+                                        </div>
+                                    </button>
+                                    <button
+                                        onClick={(e) => {
+                                            handleDeleteCharacter(
+                                                e,
+                                                character.id,
+                                                character.first_name,
+                                                character.last_name
+                                            );
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    <div>
+                        <UserActions userChoice={userChoice} setLoggedInUser={setLoggedInUser} />
+                        <button
+                            onClick={(e) => {
+                                handleChoose(e, "login");
+                            }}
+                        >
+                            Login
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                handleChoose(e, "create");
+                            }}
+                        >
+                            Create User
+                        </button>
+                        <Link to={"/character"}>
+                            <button>Create a New Spacer</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         );

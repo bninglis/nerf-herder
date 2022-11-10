@@ -125,11 +125,14 @@ export default function HistoryForm({
                         placeholder="Please enter here..."
                         value={fieldSubmission}
                     ></textarea>
-                    <button type="submit" className={`choices__submit choices__submit--${section}`}>
-                        <h3 className="choices__button-text">
-                            Select
-                        </h3>
-                    </button>
+                    <div className="choices__final">
+                        <button
+                            type="submit"
+                            className={`choices__submit choices__submit--${section}`}
+                        >
+                            <h3 className="choices__button-text">Select</h3>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

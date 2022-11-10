@@ -1,15 +1,26 @@
-import "./LinkOrName.scss"
+import "./LinkOrName.scss";
 import { Link } from "react-router-dom";
 
-export default function LinkOrName() {
+export default function LinkOrName({ isVisible }) {
     const username = localStorage.getItem("username");
-    if (!username) {
-        return <div>
-            <Link to="/user">Login</Link>
-        </div>
-    } else {
-        <div>
-            <p>Welcome, {username}</p>
-        </div>
+    if (!!isVisible) {
+        console.log(true);
+        if (!username) {
+            console.log("no user");
+            return (
+                <div className="drawer__contents">
+                    <Link className="drawer__login" to="/user">
+                        Login
+                    </Link>
+                </div>
+            );
+        } else {
+            console.log("welcome");
+            return (
+                <div className="drawer__contents">
+                    <p className="drawer__welcome">Welcome, {username}</p>
+                </div>
+            );
+        }
     }
 }

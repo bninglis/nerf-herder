@@ -2,6 +2,14 @@
 
 .people {
     padding: 1rem;
+    @include tablet-plus {
+        padding: 3rem;
+    }
+
+    &__intro{
+        margin: 0 30%;
+    }
+
     &__list {
         list-style-type: none;
         padding-inline: 0;

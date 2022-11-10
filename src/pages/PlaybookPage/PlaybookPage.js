@@ -5,7 +5,7 @@ import GalacticIDForm from "../../components/GalacticIDForm/GalacticIDForm";
 import CharacterSheet from "../../components/CharacterSheet/CharacterSheet";
 import Projector from "../../components/SelectionSlides/Projector/Projector";
 import Header from "../../components/Header/Header";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 const testData = {
@@ -766,6 +766,10 @@ const testCharacter = {
 };
 
 export default function PlaybookPage({ sendState }) {
+    const idRef = useRef(null);
+    const idScrollDestination = idRef.current;
+    const sheetRef = useRef();
+    const sheetScrollDestination = sheetRef.current;
     const isLoadedCharacter = localStorage.getItem("loadCharacter");
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
@@ -774,7 +778,7 @@ export default function PlaybookPage({ sendState }) {
     const [refData, setRefData] = useState(testData);
     const [projectorPosition, setProjectorPosition] = useState(false);
     // const [formStage, setFormStage] = useState(sendState);
-    const [formStage, setFormStage] = useState(3);
+    const [formStage, setFormStage] = useState(2);
     const [characterData, setCharacterData] = useState(testCharacter);
     // const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
     const [incompleteSections, setIncompleteSections] = useState({
@@ -927,7 +931,14 @@ export default function PlaybookPage({ sendState }) {
     };
 
     const handleNextStage = () => {
-        window.scrollTo(0, 0);
+        if (formStage === 1) {
+            idRef.current?.scrollIntoView({ behavior: "smooth" });
+        } else if (formStage === 2) {
+            sheetRef.current?.scrollIntoView({ behavior: "smooth" });
+        } else {
+            window.scrollTo(0, 0);
+        }
+
         setFormStage(formStage + 1);
     };
 
@@ -1116,6 +1127,7 @@ export default function PlaybookPage({ sendState }) {
     } else if (formStage === 2) {
         return (
             <div className="character__container">
+                <div ref={idRef} />
                 <Projector projectorPosition={true} />
                 <div className="character">
                     <GalacticIDForm
@@ -1138,7 +1150,8 @@ export default function PlaybookPage({ sendState }) {
         );
     } else if (formStage === 3 && refData !== null) {
         return (
-            <div className="character__container">
+            <div className="character__container" sheetRef={sheetRef}>
+                <div ref={idRef} />
                 <Projector projectorPosition={true} />
                 <div className="character">
                     <CharacterSheet

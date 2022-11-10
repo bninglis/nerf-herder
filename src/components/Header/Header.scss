@@ -2,26 +2,84 @@
 
 .header {
     position: fixed;
-    z-index: 100;
+    z-index: 5;
     width: 100%;
+    top: 0;
     height: 8rem;
     background-color: rgba($SEA, 0.5);
     display: flex;
     align-items: center;
     justify-content: space-between;
     border: 0.2rem solid $CYAN;
-    padding: 2rem;
+    padding: 0 0 0 2rem;
     @include boxglow;
     @include anim-box-pulse;
     user-select: none;
 
-    &__menu-icon {
+    &__link {
+        text-decoration: none;
+    }
+
+    &__title {
+        margin: 0;
+    }
+}
+
+.menu {
+    position: relative;
+
+    &__container {
+        height: 10rem;
+        width: 8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__icon {
         height: 3rem;
         fill: $CYAN;
         @include pathglow;
     }
 
-    &__title {
-        margin: 0;
+    &__drawer {
+        position: absolute;
+        width: auto;
+        height: 0.0001rem;
+        // overflow: hidden;
+        top: 7.6rem;
+        right: -0.2rem;
+        min-height: 6rem;
+
+        // &--visible {
+        //     overflow: visible;
+        // }
+    }
+
+    &__slidein {
+        position: absolute;
+        width: 15rem;
+        height: 0.0001rem;
+        top: 0rem;
+        right: -0.2rem;
+        z-index: -1;
+        border-width: 0.1rem;
+        @include box-border;
+        @include boxglow;
+        @include anim-box-pulse;
+        background-color: $ERROR;
+        border-top: none;
+        // display: none;
+        @include better-box;
+        transition: 0.5s linear;
+        transform: scaleY(00%);
+        transform-origin: 100% 0;
+
+        &--visible {
+            display: flex;
+            height: 6rem;
+            transition: 0.5s linear;
+            transform: scaleY(100%);
+        }
     }
 }

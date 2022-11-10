@@ -11,9 +11,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    @include tablet-plus {
+        max-width: 20%;
+        margin: 1rem;
+    }
 
     &:nth-of-type(2n) {
-        margin-left: 1rem;
+        @include mobile {
+            margin-left: 1rem;
+        }
     }
 
     &--hidden {

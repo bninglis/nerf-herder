@@ -1,13 +1,5 @@
 @use "../../../styles/styles" as *;
 
-.id-card {
-    &__edit {
-        &--hidden {
-            display: none;
-        }
-    }
-}
-
 .intro__ability {
     color: $CYAN;
     font-family: "orbitron";
@@ -27,6 +19,25 @@
     padding: 2rem;
     display: flex;
     position: relative;
+
+    &__container {
+        @include tablet-plus {
+            width: 100%;
+            display: flex;
+            justify-content: right;
+            padding-right: 1rem;
+        }
+    }
+
+    @include tablet-plus {
+        width: calc(50% - 2rem);
+    }
+
+    &__edit {
+        &--hidden {
+            display: none;
+        }
+    }
 
     &__basic-info {
         width: 40%;

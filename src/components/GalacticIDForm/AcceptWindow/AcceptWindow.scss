@@ -1,9 +1,15 @@
+@use "../../../styles/styles" as *;
+
 .accept-id {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
+    @include tablet-plus {
+        width: calc(50% - 2rem);
+        margin-top: -20rem;
+    }
 
     &__title {
         text-align: center;

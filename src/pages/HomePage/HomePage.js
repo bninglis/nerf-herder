@@ -21,7 +21,6 @@ export default function HomePage() {
     return (
         <>
             <div className="home-container">
-                <Header />
                 <h2 className="home splash__tagline splash__tagline--upper">Head out,</h2>
                 <h2 className="home splash__tagline splash__tagline--lower">into the black</h2>
                 <div className="splash__actions">

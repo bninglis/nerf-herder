@@ -15,11 +15,37 @@
         font-family: "orbitron";
     }
 
+    &__list {
+        @include tablet-plus {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+
     &__action {
         @include box-border;
         @include boxglow;
         padding: 1rem;
         margin: 1rem;
+        @include tablet-plus {
+            max-width: calc(33.33% - 3rem);
+        }
+    }
+
+    &__hud {
+        @include tablet-plus {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 2rem;
+        }
+    }
+
+    &__submit {
+        @include better-box;
+        padding: 1rem;
+        font-family: "Orbitron";
     }
 }
 

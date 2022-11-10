@@ -63,10 +63,10 @@ export default function BlockForm({
                 <h2 className="intro__playbook">{playbook}</h2>
             </button>
             <div className="intro">
-                <h3 className="intro__tagline">{tagline}</h3>
-                <p>{overview}</p>
-                <p>{character_questions}</p>
-                <p>
+                <h3 className="intro__tagline intro__text">{tagline}</h3>
+                <p className="intro__overview intro__text">{overview}</p>
+                <p className="intro__questions intro__text">{character_questions}</p>
+                <p className="intro__xp intro__text">
                     <span className="bold">{xp_gain}</span>
                     {xp_advice}
                 </p>

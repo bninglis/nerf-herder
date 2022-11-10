@@ -90,41 +90,51 @@ export default function ActionsForm({
                             relates to your background, and two as you desire. Action pips cannot
                             exceed two per action for new characters.
                         </p>
-                        <div>
-                            <h3 className="actions-form__subheader">Pips Remaining:</h3>
-                            <div>
-                                {points.pointsPoolMap &&
-                                    points.pointsPoolMap.map((value, index) => {
-                                        if (value === "unspent") {
-                                            return (
-                                                <svg
-                                                    className="pip pip--filled"
-                                                    key={`poolpip${index}`}
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 606.9 509.94"
-                                                >
-                                                    <g id="Layer_2" data-name="Layer 2">
-                                                        <g id="Layer_1-2" data-name="Layer 1">
-                                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z" />
+                        <div className="actions-form__hud">
+                            <div className="actions-form__pool">
+                                <h3 className="actions-form__subheader">Pips Remaining:</h3>
+                                <div>
+                                    {points.pointsPoolMap &&
+                                        points.pointsPoolMap.map((value, index) => {
+                                            if (value === "unspent") {
+                                                return (
+                                                    <svg
+                                                        className="pip pip--filled"
+                                                        key={`poolpip${index}`}
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 606.9 509.94"
+                                                    >
+                                                        <g id="Layer_2" data-name="Layer 2">
+                                                            <g id="Layer_1-2" data-name="Layer 1">
+                                                                <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z" />
+                                                            </g>
                                                         </g>
-                                                    </g>
-                                                </svg>
-                                            );
-                                        } else {
-                                            return (
-                                                <img
-                                                    src={pipEmpty}
-                                                    alt="filled pip icon"
-                                                    className="pip pip--empty"
-                                                    key={`poolpip${index}`}
-                                                />
-                                            );
-                                        }
-                                    })}
+                                                    </svg>
+                                                );
+                                            } else {
+                                                return (
+                                                    <img
+                                                        src={pipEmpty}
+                                                        alt="filled pip icon"
+                                                        className="pip pip--empty"
+                                                        key={`poolpip${index}`}
+                                                    />
+                                                );
+                                            }
+                                        })}
+                                </div>
                             </div>
+                            <button
+                                className="actions-form__submit"
+                                onClick={(e) => {
+                                    handleSubmitActions(e, points.current, points.pointsPool);
+                                }}
+                            >
+                                Submit Action Selection
+                            </button>
                         </div>
                     </div>
-                    <ul>
+                    <ul className="actions-form__list">
                         {actions &&
                             actions.map((action) => {
                                 let array = [];
@@ -157,14 +167,7 @@ export default function ActionsForm({
                             })}
                     </ul>
                     <div>
-                        <button
-                            className="actions__submit"
-                            onClick={(e) => {
-                                handleSubmitActions(e, points.current, points.pointsPool);
-                            }}
-                        >
-                            Submit Action Selection
-                        </button>
+                        <div className="actions-form__final"></div>
                     </div>
                 </div>
             </div>

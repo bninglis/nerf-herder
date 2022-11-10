@@ -71,11 +71,7 @@
     }
 
     &__elaboration {
-        text-align: center;
         color: $WHITE;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-bottom: 1rem;
     }
 }
 
@@ -112,7 +108,6 @@
         align-items: center;
         justify-content: left;
         max-height: auto;
-        background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
         width: 100%;
         padding: 1rem;
         margin-bottom: 3rem;
@@ -216,10 +211,45 @@
 
 @mixin negative-text {
     background-image: url("../../assets/images/space01.jpg");
-    background-size: cover;
+    background-size: 75%;
     text-shadow: none;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
 }
+
+@mixin negative-text-users {
+    background-image: url("../../assets/images/space02.jpg"),
+        linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
+    background-size: 25%;
+    text-shadow: none;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+@mixin mobile {
+    @media screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+        @content;
+    }
+}
+
+@mixin tablet-plus {
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 1280px) {
+        @content;
+    }
+} ;

@@ -6,6 +6,14 @@
     display: flex;
     padding: 1rem;
     margin-bottom: 2rem;
+
+    @include tablet-plus {
+        max-width: calc(50% - 2rem);
+
+        &:first-of-type {
+            max-width: 100%;
+        }
+    }
 }
 
 .choices {
@@ -95,18 +103,31 @@
         color: $WHITE;
         font-size: 1rem;
         margin-bottom: 1rem;
+        @include tablet-plus {
+            font-size: 1.4rem;
+        }
     }
 
     &__elaboration {
         font-family: "orbitron";
         color: $WHITE;
         font-weight: 800;
+        @include tablet-plus {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
     &__field {
         &--error {
             @include error-state;
         }
+    }
+
+    &__final {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     &__details {
@@ -130,6 +151,9 @@
         background: linear-gradient(115.3deg, #78cce2 0%, #4e7388 100%);
         border: $CYAN solid 0.2rem;
         @include boxglow;
+        @include tablet-plus {
+            max-width: 10rem;
+        }
     }
 
     &__button-text {
