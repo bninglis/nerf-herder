@@ -10,6 +10,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ArrowButton from "./ArrowButton/ArrowButton";
 
+// the hologram slides are created by having four class suffixes, one for the focused element, the ones
+// before and after, and all others.The before and after classes are set to the appropriate side for the
+// transition to trigger, and the others are set to display: none;
+
 export default function SelectionSlides({
     handleSelectPlaybook,
     handleNextStage,

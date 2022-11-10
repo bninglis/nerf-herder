@@ -3,6 +3,8 @@ import pipFilled from "../../assets/icons/pip-filled.svg";
 import pipEmpty from "../../assets/icons/pip-empty.svg";
 import { useState } from "react";
 
+
+// I used the svg paths instead of the files so that the glow effect would fallow the path
 export default function BlockForm({
     refData,
     handleNextStage,
