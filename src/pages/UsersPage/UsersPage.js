@@ -10,12 +10,15 @@ export default function UsersPage({ setSendState }) {
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
+
     const navigate = useNavigate();
     const [userChoice, setUserChoice] = useState("");
     const user = localStorage.getItem("users_id");
     const [userCharacters, setUserCharacters] = useState(null);
     const [isDeleteVisible, setIsDeleteVisible] = useState({ toggle: false, character: "" });
     const [loggedInUser, setLoggedInUser] = useState("");
+
+
     useEffect(() => {
         if (!!user) {
             axios.get(`${apiUrl}/users/user/${user}/characters`).then((response) => {
@@ -23,9 +26,13 @@ export default function UsersPage({ setSendState }) {
             });
         }
     }, [isDeleteVisible, user]);
+
+
     const handleChoose = (e, choice) => {
         setUserChoice(choice);
     };
+
+
     const handleLoadCharacter = (e, id) => {
         axios.get(`${apiUrl}/users/characters/${id}`).then((response) => {
             setSendState(3);
@@ -37,9 +44,11 @@ export default function UsersPage({ setSendState }) {
         });
     };
 
+
     const handleDeleteCharacter = (e, id, first, last) => {
         setIsDeleteVisible({ toggle: true, character: { id: id, first: first, last: last } });
     };
+
 
     if (!user) {
         return (
