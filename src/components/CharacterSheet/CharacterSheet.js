@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import LoginDisplay from "./LoginDisplay/LoginDisplay";
 import { useNavigate } from "react-router-dom";
 
-export default function CharacterSheet({ characterData, refData, setFormStage, setCharacterData }) {
+export default function CharacterSheet({ characterData, refData, setCharacterData }) {
     const navigate = useNavigate();
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
@@ -42,8 +42,6 @@ export default function CharacterSheet({ characterData, refData, setFormStage, s
     const [loginDisplayToggle, setLoginDisplayToggle] = useState(false);
     const [characterSubmission, setCharacterSubmission] = useState(null);
 
-    console.log(characterData);
-
     const makeMappingArray = (array) => {
         let tempObject = {};
         array.forEach((item) => {
@@ -61,6 +59,7 @@ export default function CharacterSheet({ characterData, refData, setFormStage, s
     };
     const mappingArray = makeMappingArray(actionsArray);
     const isLoaded = localStorage.getItem("loadCharacter");
+
     useEffect(() => {
         let newId = null;
         if (!!isLoaded) {
@@ -122,19 +121,19 @@ export default function CharacterSheet({ characterData, refData, setFormStage, s
             submissionKeys.forEach((key) => {
                 localStorage.setItem(key, characterSubmission[key]);
             });
-            localStorage.setItem("loadCharacter", true);
+        } else {
+            axios.post(`${apiUrl}/users/characters`, characterSubmission).then((response) => {
+                let tempUser = [localStorage.getItem("users_id"), localStorage.getItem("username")];
+                localStorage.clear();
+                localStorage.setItem("users_id", tempUser[0]);
+                localStorage.setItem("username", tempUser[1]);
+                navigate("/user");
+            });
         }
-        axios.post(`${apiUrl}/users/characters`, characterSubmission).then((response) => {
-            let tempUser = [localStorage.getItem("users_id"), localStorage.getItem("username")];
-            localStorage.clear();
-            localStorage.setItem("users_id", tempUser[0]);
-            localStorage.setItem("username", tempUser[1]);
-            navigate("/user");
-        });
     };
 
     const handleMakeChanges = () => {
-        setFormStage(2);
+        navigate("/idform");
     };
 
     return (

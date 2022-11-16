@@ -7,6 +7,7 @@ import stitchImage from "../../assets/images/stitch.png";
 import pilotImage from "../../assets/images/pilot.png";
 import mysticImage from "../../assets/images/mystic.png";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import ArrowButton from "./ArrowButton/ArrowButton";
 
@@ -14,16 +15,12 @@ import ArrowButton from "./ArrowButton/ArrowButton";
 // before and after, and all others.The before and after classes are set to the appropriate side for the
 // transition to trigger, and the others are set to display: none;
 
-export default function SelectionSlides({
-    handleSelectPlaybook,
-    handleNextStage,
-    apiUrl,
-    setProjectorPosition,
-}) {
+export default function SelectionSlides({ handleSelectPlaybook, apiUrl, setProjectorPosition }) {
     const [currentPlaybook, setCurrentPlaybook] = useState(0);
     const [isSelected, setIsSelected] = useState(false);
     const [playbooks, setPlaybooks] = useState();
     const [isHovered, setIsHovered] = useState({ back: false, next: false });
+    const { introToggle } = useParams();
 
     const imageArray = [
         mechanicImage,
@@ -64,7 +61,7 @@ export default function SelectionSlides({
 
     return (
         <>
-            <div className="slides">
+            <div className={`slides${introToggle==="true" ? " slides--intro" : ""}`}>
                 <button
                     className="slides__button slides__button--back"
                     onClick={handleBack}
@@ -101,12 +98,7 @@ export default function SelectionSlides({
                                         className="playbook-overview__selector"
                                         onClick={(e) => {
                                             handleHideSelector();
-                                            handleSelectPlaybook(
-                                                e,
-                                                currentPlaybook,
-                                                playbooks[currentPlaybook].id,
-                                                playbooks[currentPlaybook].playbook
-                                            );
+                                            handleSelectPlaybook(e, playbooks[currentPlaybook].id);
                                         }}
                                     >
                                         <img

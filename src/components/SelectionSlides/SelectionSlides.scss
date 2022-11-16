@@ -9,8 +9,11 @@
     overflow: hidden;
     top: 10rem;
     bottom: 0;
-    animation: 4s beam-entry ease-out;
     max-width: 60rem;
+
+    &--intro{
+        animation: 4s beam-entry ease-out;
+    }
 
     &__button{
         max-height: 15rem;

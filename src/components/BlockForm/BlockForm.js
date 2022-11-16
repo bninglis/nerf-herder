@@ -1,8 +1,5 @@
 import "./BlockForm.scss";
-import pipFilled from "../../assets/icons/pip-filled.svg";
-import pipEmpty from "../../assets/icons/pip-empty.svg";
 import { useState } from "react";
-
 
 // I used the svg paths instead of the files so that the glow effect would fallow the path
 export default function BlockForm({
@@ -11,7 +8,6 @@ export default function BlockForm({
     handleItemSelection,
     handleChangePlaybook,
 }) {
-    console.log(refData);
     const [whichPutAway, setWhichPutAway] = useState(null);
     const {
         character_questions,
@@ -50,17 +46,16 @@ export default function BlockForm({
         setWhichPutAway(e.currentTarget.id);
     };
 
-    
     const actionsArray = starting_actions.split(",");
     const actions1 = actionsArray[0].split(" ");
     const actions2 = actionsArray[1].split(" ");
     const actionWords = [actions1[0], actions2[1]];
 
-    while (!starting_actions) {
+    while (!refData) {
         return <p>Please wait</p>;
     }
     return (
-        <div className={`starter-form${!!whichPutAway ? " starter-form--hidden" : ""}`}>
+        <div className="starter-form">
             <button className="intro__reset" onClick={handleChangePlaybook}>
                 <h2 className="intro__playbook">{playbook}</h2>
             </button>
@@ -97,9 +92,7 @@ export default function BlockForm({
                                 >
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_1-2" data-name="Layer 1">
-                                            <path
-                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z"
-                                            />
+                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z" />
                                         </g>
                                     </g>
                                 </svg>
@@ -110,9 +103,7 @@ export default function BlockForm({
                                 >
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_1-2" data-name="Layer 1">
-                                            <path
-                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z"
-                                            />
+                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z" />
                                         </g>
                                     </g>
                                 </svg>
@@ -123,9 +114,7 @@ export default function BlockForm({
                                 >
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_1-2" data-name="Layer 1">
-                                            <path
-                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z"
-                                            />
+                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z" />
                                         </g>
                                     </g>
                                 </svg>
@@ -139,9 +128,7 @@ export default function BlockForm({
                                 >
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_1-2" data-name="Layer 1">
-                                            <path
-                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z"
-                                            />
+                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l-.28,12.75L309.83,101.35H297.07V0ZM309.83,0V101.35L95.89,458.92H511.4l-.69-12.75h59.05Z" />
                                         </g>
                                     </g>
                                 </svg>
@@ -152,9 +139,7 @@ export default function BlockForm({
                                 >
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_1-2" data-name="Layer 1">
-                                            <path
-                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z"
-                                            />
+                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z" />
                                         </g>
                                     </g>
                                 </svg>
@@ -165,9 +150,7 @@ export default function BlockForm({
                                 >
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_1-2" data-name="Layer 1">
-                                            <path
-                                                d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z"
-                                            />
+                                            <path d="M577.18,458.92H29.72L0,509.94H606.9Zm-540-12.75h59l200.9-344.82V0ZM309.83,0V101.35L510.71,446.17h59.05Z" />
                                         </g>
                                     </g>
                                 </svg>

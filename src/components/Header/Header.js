@@ -15,33 +15,35 @@ export default function Header() {
     return (
         <>
             <div className="header">
-                <Link className="header__link" to="/">
-                    <h1 className="header__title">Nerf Herder</h1>
-                </Link>
-                <div
-                    className="menu__container"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    onMouseOver={handleMouseEnter}
-                >
-                    <button
-                        className="menu"
+                <div className="desktop-header">
+                    <Link className="header__link" to="/">
+                        <h1 className="header__title">Nerf Herder</h1>
+                    </Link>
+                    <div
+                        className="menu__container"
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                         onMouseOver={handleMouseEnter}
                     >
-                        <MenuSVG isVisible={isVisible} />
-                    </button>
-                    <div className={`menu__drawer${isVisible ? " menu__drawer--visible" : ""}`}>
-                        <div
-                            className={`menu__slidein${
-                                !!isVisible ? " menu__slidein--visible" : ""
-                            }`}
+                        <button
+                            className="menu"
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                             onMouseOver={handleMouseEnter}
                         >
-                            <LinkOrName isVisible={isVisible} />
+                            <MenuSVG isVisible={isVisible} />
+                        </button>
+                        <div className={`menu__drawer${isVisible ? " menu__drawer--visible" : ""}`}>
+                            <div
+                                className={`menu__slidein${
+                                    !!isVisible ? " menu__slidein--visible" : ""
+                                }`}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                onMouseOver={handleMouseEnter}
+                            >
+                                <LinkOrName isVisible={isVisible} />
+                            </div>
                         </div>
                     </div>
                 </div>

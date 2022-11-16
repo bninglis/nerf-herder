@@ -9,7 +9,7 @@
     background-color: rgba($SEA, 0.5);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border: 0.2rem solid $CYAN;
     padding: 0 0 0 2rem;
     @include boxglow;
@@ -82,4 +82,14 @@
             transform: scaleY(100%);
         }
     }
+}
+
+.desktop-header {
+    width: 100%;
+    max-width: 102rem;
+    height: 7.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }

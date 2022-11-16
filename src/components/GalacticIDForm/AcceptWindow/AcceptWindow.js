@@ -1,6 +1,8 @@
 import "./AcceptWindow.scss";
+import { useCookies } from "react-cookie";
 
 export default function AcceptWindow({ handleNextStage, incompleteSections }) {
+    const [cookies, setCookie] = useCookies(["characterData"]);
     if (
         incompleteSections.name === false &&
         incompleteSections.history.heritages === false &&

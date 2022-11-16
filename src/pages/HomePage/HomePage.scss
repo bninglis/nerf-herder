@@ -17,10 +17,8 @@
         &--lower {
             display: flex;
             text-align: right;
-            justify-content: right;
             bottom: 20rem;
-            width: 100%;
-            margin-right: 0;
+            margin-left: 60rem;
             padding-right: 5rem;
         }
     }
@@ -46,7 +44,7 @@
 
     &__actions {
         margin-left: 2rem;
-        position: fixed;
+        position: absolute;
         bottom: 5rem;
     }
 
@@ -104,4 +102,13 @@
     right: 0;
     background-size: cover;
     background-position: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+.desktop-boundary {
+    width: 100%;
+    height: 100%;
+    max-width: 102rem;
+    position: relative;
 }

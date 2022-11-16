@@ -4,10 +4,14 @@ import { useState } from "react";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import PlaybookPage from "./pages/PlaybookPage/PlaybookPage";
+import BlockFormPage from "./pages/BlockFormPage/BlockFormPage";
 import UsersPage from "./pages/UsersPage/UsersPage";
+import GalacticIDFormPage from "./pages/GalacticIDFormPage/GalacticIDFormPage";
+import CharacterSheetPage from "./pages/CharacterSheetPage/CharacterSheetPage";
 
 function App() {
-    const [sendState, setSendState] = useState(0);
+    const [refData, setRefData] = useState(null);
+    const [characterData, setCharacterData] = useState({ friend: { id: "" }, rival: { id: "" } });
     return (
         <>
             <BrowserRouter>
@@ -15,8 +19,47 @@ function App() {
                 <div className="page-container">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/character" element={<PlaybookPage sendState={sendState} />} />
-                        <Route path="/user" element={<UsersPage setSendState={setSendState} />} />
+                        <Route
+                            path="/playbook/:introToggle"
+                            element={
+                                <PlaybookPage
+                                    characterData={characterData}
+                                    setCharacterData={setCharacterData}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/:id/introform"
+                            element={
+                                <BlockFormPage
+                                    refData={refData}
+                                    setRefData={setRefData}
+                                    characterData={characterData}
+                                    setCharacterData={setCharacterData}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/idform"
+                            element={
+                                <GalacticIDFormPage
+                                    refData={refData}
+                                    characterData={characterData}
+                                    setCharacterData={setCharacterData}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/final"
+                            element={
+                                <CharacterSheetPage
+                                    refData={refData}
+                                    characterData={characterData}
+                                    setCharacterData={setCharacterData}
+                                />
+                            }
+                        />
+                        <Route path="/user" element={<UsersPage />} />
                     </Routes>
                 </div>
             </BrowserRouter>

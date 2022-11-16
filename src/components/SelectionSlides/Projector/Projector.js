@@ -1,10 +1,25 @@
 import "./Projector.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function Projector({ projectorPosition, handleNextStage }) {
+export default function Projector({ projectorPosition, selectedID }) {
+    const [introToggle, setIntroToggle] = useState(false);
+    const { introToggle: paramsToggle } = useParams();
+    const navigate = useNavigate();
     const [sourceStart, setSourceStart] = useState(false);
+    const handleGoToForm = () => {
+        navigate(`/${selectedID}/introform`);
+    };
+    useEffect(() => {
+        if (paramsToggle === "true") {
+            setIntroToggle(true);
+        } else {
+            setIntroToggle(false);
+        }
+    }, []);
+    if(paramsToggle)
     return (
-        <div className="projector__container" onTransitionEnd={handleNextStage}>
+        <div className="projector__container" onTransitionEnd={handleGoToForm}>
             <div
                 className={`projector__lights${
                     !!projectorPosition ? " projector__lights--position2" : ""
@@ -14,14 +29,18 @@ export default function Projector({ projectorPosition, handleNextStage }) {
                     <div
                         className={`projector__beam${
                             !!projectorPosition ? " projector__beam--position2" : ""
-                        }`}
+                        }${introToggle ? " projector__beam--intro" : ""}`}
                     ></div>
                 </div>
                 <div
-                    className={!sourceStart ? "projector__source--off" : "projector__source"}
+                    className={`${!sourceStart ? "projector__source--off" : "projector__source"}${
+                        introToggle ? " projector__source--intro" : ""
+                    }`}
                 ></div>
                 <div
-                    className={!!sourceStart ? "projector__backup--off" : "projector__backup"}
+                    className={`${!!sourceStart ? "projector__backup--off" : "projector__backup"} ${
+                        introToggle ? " projector__backup--intro" : ""
+                    }`}
                 ></div>
             </div>
             <div
@@ -37,47 +56,47 @@ export default function Projector({ projectorPosition, handleNextStage }) {
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--1--position2" : ""
-                    } projector__ellipse--1`}
+                    } projector__ellipse--1${introToggle ? " projector__ellipse--1--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--2--position2" : ""
-                    } projector__ellipse--2`}
+                    } projector__ellipse--2${introToggle ? " projector__ellipse--2--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--3--position2" : ""
-                    } projector__ellipse--3`}
+                    } projector__ellipse--3${introToggle ? " projector__ellipse--3--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--4--position2" : ""
-                    } projector__ellipse--4`}
+                    } projector__ellipse--4${introToggle ? " projector__ellipse--4--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--5--position2" : ""
-                    } projector__ellipse--5`}
+                    } projector__ellipse--5${introToggle ? " projector__ellipse--5--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--6--position2" : ""
-                    } projector__ellipse--6`}
+                    } projector__ellipse--6${introToggle ? " projector__ellipse--6--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--7--position2" : ""
-                    } projector__ellipse--7`}
+                    } projector__ellipse--7${introToggle ? " projector__ellipse--7--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--8--position2" : ""
-                    } projector__ellipse--8`}
+                    } projector__ellipse--8${introToggle ? " projector__ellipse--8--intro" : ""}`}
                 ></div>
                 <div
                     className={`projector__ellipse${
                         !!projectorPosition ? " projector__ellipse--9--position2" : ""
-                    } projector__ellipse--9`}
+                    } projector__ellipse--9${introToggle ? " projector__ellipse--9--intro" : ""}`}
                 ></div>
             </div>
         </div>

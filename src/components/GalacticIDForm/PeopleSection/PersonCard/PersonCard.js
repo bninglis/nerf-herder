@@ -9,7 +9,7 @@ export default function PersonCard({
     selectedPeople,
     friend,
     rival,
-    portraitValue
+    portraitValue,
 }) {
     return (
         <li
@@ -33,13 +33,17 @@ export default function PersonCard({
                         person.name,
                         person.description,
                         person.elaboration,
-                        `portraits/portrait${portraitValue}.png`
+                        `/portraits/portrait${portraitValue}.png`
                     );
                 }}
             >
                 Friend
             </button>
-            <img className="person__portrait" src={`portraits/portrait${portraitValue}.png`} alt={`portrait of ${person.name}`} />
+            <img
+                className="person__portrait"
+                src={`/portraits/portrait${portraitValue}.png`}
+                alt={`portrait of ${person.name}`}
+            />
             <h4 className="person__name">{person.name}</h4>
             <p className="person__job">{person.description}</p>
             <p className="person__elaboration">{person.elaboration}</p>
@@ -54,7 +58,7 @@ export default function PersonCard({
                         person.name,
                         person.description,
                         person.elaboration,
-                        `portraits/portrait${portraitValue}.png`
+                        `/portraits/portrait${portraitValue}.png`
                     );
                 }}
             >

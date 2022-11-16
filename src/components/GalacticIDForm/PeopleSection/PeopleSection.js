@@ -138,12 +138,12 @@ export default function PeopleSection({
                                 incompleteSections={incompleteSections}
                                 selectedPeople={selectedPeople}
                                 friend={
-                                    characterData.friend.id === undefined
+                                    characterData.friend?.id === undefined
                                         ? ""
                                         : characterData.friend.id
                                 }
                                 rival={
-                                    characterData.rival.id === undefined
+                                    characterData.rival?.id === undefined
                                         ? ""
                                         : characterData.rival.id
                                 }

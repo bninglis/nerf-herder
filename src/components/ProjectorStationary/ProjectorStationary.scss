@@ -1,6 +1,6 @@
-@use "../../../styles/styles" as *;
+@use "../../styles/styles.scss" as *;
 
-.projector {
+.stationary {
     &__container {
         position: fixed;
         top: 8rem;
@@ -17,10 +17,7 @@
         // background: radial-gradient(at bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
         clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
         transform-origin: 50% 100%;
-
-        &--intro {
-            animation: 3s beam-entry ease-out;
-        }
+        transition: 2s;
 
         &--position2 {
             transform: scaleY(-30%);
@@ -33,87 +30,7 @@
             animation: beam-pulse 3s infinite linear;
         }
     }
-}
 
-@keyframes source-pulse {
-    0% {
-        filter: blur(1rem);
-    }
-    25% {
-        filter: blur(1.2rem);
-    }
-    50% {
-        filter: blur(1rem);
-    }
-    75% {
-        filter: blur(0.8rem);
-    }
-    100% {
-        filter: blur(1rem);
-    }
-}
-
-@keyframes beam-pulse {
-    0% {
-        filter: blur(0.2rem);
-    }
-    25% {
-        filter: blur(0.3rem);
-    }
-    50% {
-        filter: blur(0.2rem);
-    }
-    75% {
-        filter: blur(0.1rem);
-    }
-    100% {
-        filter: blur(0.2rem);
-    }
-}
-
-@keyframes beam-entry {
-    0% {
-        clip-path: polygon(50% 100%, 50% 0%, 50% 0%);
-    }
-    95% {
-        clip-path: polygon(50% 100%, 50% 0%, 50% 0%);
-    }
-    100% {
-        clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-    }
-}
-
-@keyframes source-entry {
-    0% {
-        filter: blur(7rem);
-        transform: translate(-50%, -50%) scale(0.01);
-        // left: 50%;
-    }
-    50% {
-        filter: blur(7rem);
-        transform: translate(-50%, -50%) scale(0.01);
-        // left: 50%;
-    }
-    100% {
-        filter: blur(1rem);
-        transform: translate(-50%, -50%) scale(1);
-        // left: 50%;
-    }
-}
-
-@keyframes projector-entry {
-    0% {
-        transform: scale(100%) translatey(10rem) translateX(-50%);
-    }
-    75% {
-        transform: scale(100%) translatey(10rem) translateX(-50%);
-    }
-    100% {
-        transform: scale(100%) translatey(0rem) translateX(-50%);
-    }
-}
-
-.projector {
     &__source {
         position: absolute;
         width: 5rem;
@@ -124,12 +41,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
         transform-origin: left;
-
-        &--intro {
-            animation: source-pulse 2s infinite linear;
-        }
+        animation: source-pulse 2s infinite linear;
+        transition: 2s;
 
         &--off {
+            transition: 2s;
             visibility: hidden;
         }
     }
@@ -144,14 +60,9 @@
         left: 50%;
         transform: translate(-50%, -50%);
         transform-origin: center;
-        animation: source-pulse 2s infinite linear;
 
         &--off {
             visibility: hidden;
-        }
-
-        &--intro {
-            animation: source-entry 2s ease-out;
         }
     }
 
@@ -161,6 +72,7 @@
         left: 50%;
         transform: translate(-50%);
         bottom: 5rem;
+        transition: 2s;
 
         &--position2 {
             bottom: calc(100% - 3rem);
@@ -173,7 +85,7 @@
         height: 13rem;
         left: 50%;
         transform: translate(-50%, -6rem);
-        transition: 1s;
+        transition: 2s;
         bottom: -12rem;
 
         &--position2 {
@@ -187,7 +99,7 @@
         border-radius: 50%;
         position: absolute;
         transform: scaleY(100%) translateY(2rem);
-        transition: 1s;
+        transition: 2s;
 
         &--1 {
             width: 18rem;
@@ -195,10 +107,6 @@
             top: 0rem;
             left: 50%;
             transform: translate(-50%);
-
-            &--intro {
-                animation: 2s projector-entry ease-out;
-            }
 
             &--position2 {
                 transition: 2s;
@@ -213,10 +121,6 @@
             left: 50%;
             transform: translate(-50%);
 
-            &--intro {
-                animation: 1.8s projector-entry ease-out;
-            }
-
             &--position2 {
                 transition: 2s;
                 transform: translate(-50%) scaleY(-100%);
@@ -229,10 +133,6 @@
             top: 0.325rem;
             left: 50%;
             transform: translate(-50%);
-
-            &--intro {
-                animation: 1.6s projector-entry ease-out;
-            }
 
             &--position2 {
                 transition: 2s;
@@ -247,10 +147,6 @@
             left: 50%;
             transform: translate(-50%);
 
-            &--intro {
-                animation: 1.4s projector-entry ease-out;
-            }
-
             &--position2 {
                 transition: 2s;
                 transform: translate(-50%) scaleY(-100%);
@@ -263,10 +159,6 @@
             top: 1.5rem;
             left: 50%;
             transform: translate(-50%);
-
-            &--intro {
-                animation: 1.2s projector-entry ease-out;
-            }
 
             &--position2 {
                 transition: 2s;
@@ -281,10 +173,6 @@
             left: 50%;
             transform: translate(-50%);
 
-            &--intro {
-                animation: 1s projector-entry ease-out;
-            }
-
             &--position2 {
                 transition: 2s;
                 transform: translate(-50%) scaleY(-100%);
@@ -297,10 +185,6 @@
             top: 5.25rem;
             left: 50%;
             transform: translate(-50%);
-
-            &--intro {
-                animation: 0.8s projector-entry ease-out;
-            }
 
             &--position2 {
                 transition: 2s;
@@ -315,10 +199,6 @@
             left: 50%;
             transform: translate(-50%);
 
-            &--intro {
-                animation: 0.6s projector-entry ease-out;
-            }
-
             &--position2 {
                 transition: 2s;
                 transform: translate(-50%) scaleY(-100%);
@@ -331,10 +211,6 @@
             top: 9.125rem;
             left: 50%;
             transform: translate(-50%);
-
-            &--intro {
-                animation: 0.4s projector-entry ease-out;
-            }
 
             &--position2 {
                 transition: 2s;

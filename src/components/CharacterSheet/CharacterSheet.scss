@@ -35,6 +35,13 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        // max-width: 54rem;
+    }
+
+    &__action {
+        @media screen and (min-width: 715px) {
+            width: 16.66666%;
+        }
     }
 
     &__item-text {
