@@ -2,6 +2,7 @@ import "./PeopleSection.scss";
 import PersonCard from "./PersonCard/PersonCard";
 import PersonDetails from "./PersonDetails/PersonDetails";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function PeopleSection({
     incompleteSections,
@@ -10,6 +11,8 @@ export default function PeopleSection({
     handleSubmitPerson,
     formErrors,
 }) {
+    const [cookies, setCookies] = useCookies("characterData");
+
     const randomPortrait = () => {
         return String(Math.floor(Math.random() * 99) + 3).padStart(2, "0");
     };
@@ -20,18 +23,34 @@ export default function PeopleSection({
         randomPortrait(),
         randomPortrait(),
     ]);
-    const isLoaded = localStorage.getItem("loadCharacter");
+    const isLoaded = !!cookies.characterData?.friend;
+
     const [selectedPeople, setSelectedPeople] = useState({ friend: false, rival: false });
     const [peopleStories, setPeopleStories] = useState({ friend: "", rival: "" });
     useEffect(() => {
         if (!!isLoaded) {
-            let tempPeople = null;
+            const friendPortraitValue = characterData.friend.portraitPath
+            .replace("/portraits/portrait", "")
+            .replace(".png", "");
+        const rivalPortraitValue = characterData.rival.portraitPath
+            .replace("/portraits/portrait", "")
+            .replace(".png", "");
             const friend = friends.find((person) => {
-                return person.name === localStorage.getItem("close_friend");
+                return person.name === characterData.friend.name;
+            });
+            const friendIndex = friends.findIndex((person) => {
+                return person.name === characterData.friend.name;
             });
             const rival = friends.find((person) => {
-                return person.name === localStorage.getItem("rival");
+                return person.name === characterData.rival.name;
             });
+            const rivalIndex = friends.findIndex((person) => {
+                return person.name === characterData.rival.name;
+            });
+            const tempPortraitVals = portraitValues;
+            tempPortraitVals.splice(friendIndex, 1, friendPortraitValue);
+            tempPortraitVals.splice(rivalIndex, 1, rivalPortraitValue);
+            setPortraitValues(tempPortraitVals);
             setSelectedPeople({
                 ...selectedPeople,
                 friend: {
@@ -39,17 +58,19 @@ export default function PeopleSection({
                     name: friend.name,
                     description: friend.description,
                     elaboration: friend.elaboration,
+                    portraitPath: characterData.friend.portraitPath,
                 },
                 rival: {
                     id: rival.id,
                     name: rival.name,
                     description: rival.description,
                     elaboration: rival.elaboration,
+                    portraitPath: characterData.rival.portraitPath,
                 },
             });
             setPeopleStories({
-                friend: localStorage.getItem("close_friend_story"),
-                rival: localStorage.getItem("rival_story"),
+                friend: characterData.friend_story,
+                rival: characterData.rival_story,
             });
         }
     }, []);

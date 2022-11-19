@@ -1,12 +1,12 @@
 import "./LinkOrName.scss";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function LinkOrName({ isVisible }) {
-    const username = localStorage.getItem("username");
+    const [cookies, setCookies] = useCookies(["username"])
+    const username = cookies.username
     if (!!isVisible) {
-        console.log(true);
         if (!username) {
-            console.log("no user");
             return (
                 <div className="drawer__contents">
                     <Link className="drawer__login" to="/user">
@@ -15,10 +15,11 @@ export default function LinkOrName({ isVisible }) {
                 </div>
             );
         } else {
-            console.log("welcome");
             return (
                 <div className="drawer__contents">
-                    <p className="drawer__welcome">Welcome, {username}</p>
+                    <Link className="drawer__login" to="/user">
+                        <p className="drawer__welcome">{username}</p>
+                    </Link>
                 </div>
             );
         }

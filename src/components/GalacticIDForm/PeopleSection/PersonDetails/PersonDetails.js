@@ -1,5 +1,4 @@
 import "./PersonDetails.scss";
-import { useState } from "react";
 
 export default function PersonDetails({
     relationship,
@@ -51,7 +50,8 @@ export default function PersonDetails({
                                         relationship,
                                         selectedPeople[relationship]["id"],
                                         selectedPeople[relationship]["name"],
-                                        peopleStories[relationship]
+                                        peopleStories[relationship],
+                                        selectedPeople[relationship]["portraitPath"]
                                     );
                                 }}
                             >

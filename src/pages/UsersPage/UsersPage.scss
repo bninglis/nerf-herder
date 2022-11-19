@@ -8,6 +8,11 @@
     align-items: center;
     justify-content: center;
 
+    &__characters{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     &__container {
         background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
             url("../../assets/images/space02.jpg");
@@ -75,6 +80,7 @@
     font-family: "orbitron";
     display: flex;
     flex-direction: column;
+    margin: 1rem;
 
     &__edit {
         @include better-box;

@@ -1,5 +1,4 @@
 import "./IDCard.scss";
-import { useState } from "react";
 
 export default function IDCard({
     characterData,
@@ -10,7 +9,6 @@ export default function IDCard({
 }) {
     const { playbook, abilityName, heritage, background, vice, friend, rival, actionsStrings } =
         characterData;
-    console.log(characterData);
     return (
         <>
             <div className="starter-form">
@@ -68,7 +66,7 @@ export default function IDCard({
                             </p>
                             <div className="id-card__heritage">
                                 <p className="id-card__text">Heritage:</p>
-                                <p className="id-card__text">
+                                <p className="id-card__text id-card__text--type">
                                     {!heritage ? "Blank" : `${heritage}`}
                                 </p>
                                 <button

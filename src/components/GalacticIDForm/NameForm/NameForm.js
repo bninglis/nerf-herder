@@ -1,6 +1,7 @@
 import "./NameForm.scss";
 import RandomButton from "./RandomButton/RandomButton";
 import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 export default function NameForm({
     handleNameSubmit,
@@ -17,7 +18,8 @@ export default function NameForm({
         alias: false,
         look: false,
     });
-    const isLoaded = localStorage.getItem("loadCharacter");
+    const [cookies] = useCookies(["characterData"]);
+    const characterData = cookies.characterData;
     const initialNameValues = { first: "", last: "", alias: "", look: "" };
     const [nameFormValues, setNameFormValues] = useState(initialNameValues);
     const handleMouseEnter = (e, input) => {
@@ -27,12 +29,12 @@ export default function NameForm({
         setRandomHovers({ ...randomHovers, [input]: false });
     };
     useEffect(() => {
-        if (!!isLoaded) {
+        if (!!characterData.firstName) {
             const formFromLoaded = {
-                first: localStorage.getItem("first_name"),
-                last: localStorage.getItem("last_name"),
-                alias: localStorage.getItem("alias"),
-                look: localStorage.getItem("look"),
+                first: characterData.firstName,
+                last: characterData.lastName,
+                alias: characterData.alias,
+                look: characterData.look,
             };
             setNameFormValues(formFromLoaded);
         }

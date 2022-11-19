@@ -13,9 +13,7 @@ export default function GalacticIDFormPage() {
     const characterDataInit = cookies.characterData;
     const [characterData, setCharacterData] = useState(characterDataInit);
     const refData = JSON.parse(sessionStorage.getItem("refData"));
-    console.log("new refData: ", refData);
     const navigate = useNavigate();
-    console.log(characterData);
     const [incompleteSections, setIncompleteSections] = useState({
         name: true,
         history: {
@@ -122,12 +120,12 @@ export default function GalacticIDFormPage() {
         }
     };
 
-    const handleSubmitPerson = (e, relationship, id, person, story) => {
+    const handleSubmitPerson = (e, relationship, id, person, story, portrait) => {
         e.preventDefault();
         if (story !== "") {
             setCharacterData({
                 ...characterData,
-                [relationship]: { name: person, id: id },
+                [relationship]: { name: person, id: id, portraitPath: portrait },
                 [`${relationship}_story`]: story,
             });
             let tempSections = incompleteSections;

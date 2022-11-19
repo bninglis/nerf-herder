@@ -8,13 +8,15 @@ export default function HistoryForm({
     formErrors,
     characterData,
 }) {
-    const isLoaded = localStorage.getItem("loadCharacter");
-    const [selectedOption, setSelectedOption] = useState(0);
-    const [fieldSubmission, setFieldSubmission] = useState("");
     let singularSection = section.split("");
     singularSection.pop();
     singularSection = singularSection.join("");
+    const isLoaded = !!characterData[singularSection];
+    const loadedOption = characterData[singularSection];
+    const [selectedOption, setSelectedOption] = useState(0);
+    const [fieldSubmission, setFieldSubmission] = useState("");
     const data = historyData[section];
+
     const handleClickOption = (e, index) => {
         setSelectedOption(index);
     };
@@ -23,9 +25,15 @@ export default function HistoryForm({
     };
     useEffect(() => {
         if (!!isLoaded) {
+            const loadedIndex = data.findIndex((item) => {
+                const itemType = item.type.toLowerCase();
+                return itemType === loadedOption.toLowerCase();
+            });
             setFieldSubmission(characterData[`${singularSection}_story`]);
+            setSelectedOption(loadedIndex);
         }
     }, []);
+
     return (
         <div className={`history history--${section}`}>
             <div className="choices">

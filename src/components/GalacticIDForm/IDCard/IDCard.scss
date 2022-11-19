@@ -57,6 +57,10 @@
         margin-block-end: 0;
         color: $WHITE;
         margin: 0;
+
+        &--type {
+            text-transform: capitalize;
+        }
     }
 
     &__playbook {

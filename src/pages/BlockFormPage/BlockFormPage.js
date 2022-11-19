@@ -20,7 +20,6 @@ export default function PlaybookPage() {
     useEffect(() => {
         setCharacterData({ ...characterData, playbooks_id: paramsID });
         axios.get(`${apiUrl}/ref/${paramsID}`).then((response) => {
-            console.log(response.data);
             setRefData(response.data);
             const actionsUsable = response.data.playbook[0].starting_actions.split(" ");
             setCharacterData({
@@ -59,7 +58,6 @@ export default function PlaybookPage() {
             buildArrayTwos.concat(buildArrayOnes),
         ];
     };
-    console.log(refData);
 
     const handleNextStage = () => {
         setCookie("characterData", characterData, {

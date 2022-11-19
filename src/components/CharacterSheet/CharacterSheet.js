@@ -6,9 +6,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import LoginDisplay from "./LoginDisplay/LoginDisplay";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function CharacterSheet({ characterData, refData, setCharacterData }) {
     const navigate = useNavigate();
+    const [cookies, setCookies, removeCookies] = useCookies(
+        "characterData",
+        "username",
+        "users_id"
+    );
     const BACKEND_URL = process.env.REACT_APP_URL;
     const BACKEND_PORT = process.env.REACT_APP_PORT;
     const apiUrl = `${BACKEND_URL}${BACKEND_PORT}`;
@@ -33,7 +39,7 @@ export default function CharacterSheet({ characterData, refData, setCharacterDat
         startingAbilitySummary,
         startingAbilityClarification,
     } = characterData;
-    const userId = localStorage.getItem("users_id");
+    const userId = cookies.users_id;
     const { playbook: playbookArray, items } = refData;
     const playbook = playbookArray[0];
     const actionsArray = Object.entries(actionsObject);
@@ -58,24 +64,11 @@ export default function CharacterSheet({ characterData, refData, setCharacterDat
         return tempObject;
     };
     const mappingArray = makeMappingArray(actionsArray);
-    const isLoaded = localStorage.getItem("loadCharacter");
 
     useEffect(() => {
         let newId = null;
-        if (!!isLoaded) {
-            const special = refData.special_abilities.find((ability) => {
-                return ability.id === localStorage.getItem("special_abilities_id");
-            });
-            setCharacterData({
-                ...characterData,
-                startingAbility: refData.playbook[0].starting_ability,
-                startingAbilitySummary: refData.playbook[0].starting_ability_summary,
-                startingAbilityClarification: refData.playbook[0].starting_ability_clarification,
-                abilityName: special.name,
-                abilityDescription: special.description,
-                abilityClarification: special.clarification,
-            });
-            newId = localStorage.getItem("id");
+        if (!!characterData.users_id) {
+            newId = characterData.users_id;
         } else {
             newId = uuid();
         }
@@ -89,9 +82,11 @@ export default function CharacterSheet({ characterData, refData, setCharacterDat
             backgrounds_id: characterData.backgrounds_id,
             background_story: characterData.background_story,
             close_friend: characterData.friend.name,
+            close_friend_portrait: characterData.friend.portraitPath,
             close_friend_story: characterData.friend_story,
             rival: characterData.rival.name,
             rival_story: characterData.rival_story,
+            rival_portrait: characterData.rival.portraitPath,
             vices_id: characterData.vices_id,
             vice_story: characterData.vice_story,
             first_name: characterData.firstName,
@@ -117,16 +112,9 @@ export default function CharacterSheet({ characterData, refData, setCharacterDat
     const handleSave = () => {
         if (!userId) {
             setLoginDisplayToggle(!loginDisplayToggle);
-            const submissionKeys = Object.keys(characterSubmission);
-            submissionKeys.forEach((key) => {
-                localStorage.setItem(key, characterSubmission[key]);
-            });
         } else {
             axios.post(`${apiUrl}/users/characters`, characterSubmission).then((response) => {
-                let tempUser = [localStorage.getItem("users_id"), localStorage.getItem("username")];
-                localStorage.clear();
-                localStorage.setItem("users_id", tempUser[0]);
-                localStorage.setItem("username", tempUser[1]);
+                removeCookies("characterData", { path: "/" });
                 navigate("/user");
             });
         }
