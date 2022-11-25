@@ -10,7 +10,6 @@ import GalacticIDFormPage from "./pages/GalacticIDFormPage/GalacticIDFormPage";
 import CharacterSheetPage from "./pages/CharacterSheetPage/CharacterSheetPage";
 
 function App() {
-    const [refData, setRefData] = useState(null);
     const [loadCharacterData, setLoadCharacterData] = useState(null);
     return (
         <>

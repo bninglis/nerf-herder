@@ -7,7 +7,7 @@ export default function Histories({
     formErrors,
     incompleteSections,
     characterData,
-}) {
+}) { // eslint-disable-next-line
     const historyArray = Object.keys(incompleteSections.history).map((key) => {
         if (incompleteSections["history"][key] === true) {
             return key;
@@ -20,7 +20,7 @@ export default function Histories({
     ) {
         return (
             <div className="histories">
-                {historyArray &&
+                {historyArray && // eslint-disable-next-line
                     historyArray.map((section) => {
                         if (!!section) {
                             return (

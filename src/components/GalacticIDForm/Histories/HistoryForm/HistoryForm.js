@@ -32,6 +32,7 @@ export default function HistoryForm({
             setFieldSubmission(characterData[`${singularSection}_story`]);
             setSelectedOption(loadedIndex);
         }
+         // eslint-disable-next-line
     }, []);
 
     return (

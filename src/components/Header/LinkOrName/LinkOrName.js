@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export default function LinkOrName({ isVisible }) {
-    const [cookies, setCookies] = useCookies(["username"])
+    const [cookies] = useCookies(["username"])
     const username = cookies.username
     if (!!isVisible) {
         if (!username) {

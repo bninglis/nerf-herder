@@ -16,6 +16,7 @@ export default function Projector({ projectorPosition, selectedID }) {
         } else {
             setIntroToggle(false);
         }
+         // eslint-disable-next-line
     }, []);
     if(paramsToggle)
     return (

@@ -15,6 +15,7 @@ export default function PlaybookPage() {
     const [projectorPosition, setProjectorPosition] = useState(true);
     const [characterData, setCharacterData] = useState();
     const [refData, setRefData] = useState();
+     // eslint-disable-next-line
     const [cookies, setCookie] = useCookies(["characterData", "refData"]);
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export default function PlaybookPage() {
                 playbook: response.data.playbook[0].playbook,
             });
         });
+         // eslint-disable-next-line
     }, []);
 
     const generateActionsStrings = (array1, array2) => {

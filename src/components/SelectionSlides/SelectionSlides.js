@@ -36,6 +36,7 @@ export default function SelectionSlides({ handleSelectPlaybook, apiUrl, setProje
         axios.get(`${apiUrl}/ref`).then((response) => {
             setPlaybooks(response.data);
         });
+         // eslint-disable-next-line
     }, []);
 
     const handleNext = () => {

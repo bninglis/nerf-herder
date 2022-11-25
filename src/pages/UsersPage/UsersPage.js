@@ -125,6 +125,7 @@ export default function UsersPage({ setLoadCharacterData }) {
             sessionStorage.setItem("refData", JSON.stringify(tempRef));
             async function setCharacterCookies(data) {
                 setCookies("characterData", tempCharacterData, { path: "/" });
+                 // eslint-disable-next-line
                 const cookiesDone = await cookies.characterData;
             }
             setCharacterCookies(tempCharacterData);
@@ -139,6 +140,7 @@ export default function UsersPage({ setLoadCharacterData }) {
                 setUserCharacters(response.data);
             });
         }
+         // eslint-disable-next-line
     }, [isDeleteVisible, user]);
 
     const handleChoose = (e, choice) => {

@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 
 export default function CharacterSheet({ characterData, refData, setCharacterData }) {
     const navigate = useNavigate();
+    // eslint-disable-next-line
     const [cookies, setCookies, removeCookies] = useCookies(
         "characterData",
         "username",
@@ -108,6 +109,7 @@ export default function CharacterSheet({ characterData, refData, setCharacterDat
             sway: characterData.actionsObject.sway,
             playbook: characterData.playbook,
         });
+        // eslint-disable-next-line
     }, []);
     const handleSave = () => {
         if (!userId) {

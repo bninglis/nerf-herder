@@ -11,7 +11,7 @@ export default function PeopleSection({
     handleSubmitPerson,
     formErrors,
 }) {
-    const [cookies, setCookies] = useCookies("characterData");
+    const [cookies] = useCookies("characterData");
 
     const randomPortrait = () => {
         return String(Math.floor(Math.random() * 99) + 3).padStart(2, "0");
@@ -73,6 +73,7 @@ export default function PeopleSection({
                 rival: characterData.rival_story,
             });
         }
+         // eslint-disable-next-line
     }, []);
     const handleSelectFriend = (e, id, name, description, elaboration, portraitPath) => {
         if (id === selectedPeople.rival.id) {

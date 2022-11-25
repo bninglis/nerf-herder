@@ -1,5 +1,4 @@
 import "./PersonCard.scss";
-import { useState } from "react";
 
 export default function PersonCard({
     person,

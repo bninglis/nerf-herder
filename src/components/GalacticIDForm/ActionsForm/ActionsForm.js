@@ -1,6 +1,6 @@
 import "./ActionsForm.scss";
 import Action from "./Action/Action";
-import pipEmpty from "../../../assets/icons/pip-empty.svg";
+import pipEmpty from "../../../assets/icons/pip-empty.svg"; // eslint-disable-next-line
 import pipFilled from "../../../assets/icons/pip-filled.svg";
 import { useState } from "react";
 

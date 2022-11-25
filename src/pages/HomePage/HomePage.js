@@ -1,7 +1,6 @@
 import "./HomePage.scss";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 export default function HomePage() {
     const [isMouseOver, setIsMouseOver] = useState(false);
