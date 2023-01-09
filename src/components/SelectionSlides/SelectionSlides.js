@@ -33,7 +33,7 @@ export default function SelectionSlides({ handleSelectPlaybook, apiUrl, setProje
     ];
 
     useEffect(() => {
-        axios.get(`${apiUrl}/ref`).then((response) => {
+        axios.get(`${apiUrl}ref`).then((response) => {
             setPlaybooks(response.data);
         });
          // eslint-disable-next-line
