@@ -20,7 +20,7 @@ export default function PlaybookPage() {
 
     useEffect(() => {
         setCharacterData({ ...characterData, playbooks_id: paramsID });
-        axios.get(`${apiUrl}/ref/${paramsID}`).then((response) => {
+        axios.get(`${apiUrl}ref/${paramsID}`).then((response) => {
             setRefData(response.data);
             const actionsUsable = response.data.playbook[0].starting_actions.split(" ");
             setCharacterData({

@@ -40,7 +40,7 @@ export default function UsersPage({ setLoadCharacterData }) {
 
     // almost all of this useEffect is for loading opened character data from the server
     function loadAChar(id) {
-        axios.get(`${apiUrl}/users/characters/${id}`).then((response) => {
+        axios.get(`${apiUrl}users/characters/${id}`).then((response) => {
             const tempRef = response.data.refData;
             const rawCharacterData = response.data.characterData;
             let tempCharacterData = null;
@@ -136,7 +136,7 @@ export default function UsersPage({ setLoadCharacterData }) {
 
     useEffect(() => {
         if (!!user) {
-            axios.get(`${apiUrl}/users/user/${user}/characters`).then((response) => {
+            axios.get(`${apiUrl}users/user/${user}/characters`).then((response) => {
                 setUserCharacters(response.data);
             });
         }

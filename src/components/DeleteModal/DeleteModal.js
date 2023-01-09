@@ -4,7 +4,7 @@ import "./DeleteModal.scss";
 export default function DeleteModal({ isDeleteVisible, setIsDeleteVisible, apiUrl }) {
     const handleDelete = () => {
         axios
-            .delete(`${apiUrl}/users/characters/${isDeleteVisible.character.id}`)
+            .delete(`${apiUrl}users/characters/${isDeleteVisible.character.id}`)
             .then((response) => {
                 setIsDeleteVisible({ toggle: false, character: "" });
             });

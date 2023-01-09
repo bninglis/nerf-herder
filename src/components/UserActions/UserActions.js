@@ -15,7 +15,7 @@ export default function UserActions({ userChoice, setUserChoice }) {
     const [setCookies] = useCookies(["users_id", "username"]);
 
     const loginProcess = (username) => {
-        axios.get(`${apiUrl}/users/login/${username}`).then((response) => {
+        axios.get(`${apiUrl}users/login/${username}`).then((response) => {
             setCookies("users_id", response.data[0].id, { path: "/", maxAge: 1200 });
             setCookies("username", response.data[0].username, { path: "/", maxAge: 1200 });
             navigate("/user");
@@ -34,7 +34,7 @@ export default function UserActions({ userChoice, setUserChoice }) {
         e.preventDefault();
         const newUserObject = { id: newUserId, username: enteredUsername };
         axios
-            .post(`${apiUrl}/users`, newUserObject)
+            .post(`${apiUrl}users`, newUserObject)
             .then((response) => {
                 loginProcess(enteredUsername);
             })

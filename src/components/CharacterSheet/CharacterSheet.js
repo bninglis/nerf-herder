@@ -115,7 +115,7 @@ export default function CharacterSheet({ characterData, refData, setCharacterDat
         if (!userId) {
             setLoginDisplayToggle(!loginDisplayToggle);
         } else {
-            axios.post(`${apiUrl}/users/characters`, characterSubmission).then((response) => {
+            axios.post(`${apiUrl}users/characters`, characterSubmission).then((response) => {
                 removeCookies("characterData", { path: "/" });
                 navigate("/user");
             });
